@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <title>{% if page.title %} {{ page.title }} | {% endif %} AIGP - Association of Indian Go Players</title>
+
+        <link rel="stylesheet" href="/assets/css/main.css"></link>
+        <script type="text/javascript" src="/assets/js/bulma.js"></script>
+
+        <script type="application/ld+json">
+            {
+              "@context": "https://schema.org",
+              "@type": "Organization",
+              "url": "https://aigp.org.in",
+              "logo": "https://aigp.org.in/images/logo.png"
+            }
+        </script>
+
+        <meta property="og:title" content="{% if page.title %} {{page.title}} | {% endif %}AIGP - Association of Indian Go Players" />
+        <meta property="og:image" content="/assets/img/logo.png" />
+        {% if page.description %}
+          <meta property="og:description" content="{{ page.description }}">
+          <meta content="{{ page.description }}" name="description"/>
+        {% else %}
+          <meta name="description" content="Looking for Indians who are interested in the game of Go, and willing to play this wonderful strategy game. Go, also called baduk, weiqi, or igo is a popular strategy game with a very rich history, still in its infancy in India. Help us get bigger!" />
+          <meta property="og:description" content="Looking for Indians who are interested in the game of Go, and willing to play this wonderful strategy game. Go, also called baduk, weiqi, or igo is a popular strategy game with a very rich history, still in its infancy in India. Help us get bigger!" />
+        {% endif %}
+
+        <meta content="go, game, aigp, association, players, iaga, indo amateur go association, kolkata, west bengal, india" name="keywords"/>
+
+        <link rel="shortcut icon" href="<%= image_path('logo.png') %>">
+
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+        <!-- Bulma Version 0.9.0-->
+        <link rel="stylesheet" href="https://unpkg.com/bulma@0.9.0/css/bulma.min.css" />
+        <link rel="stylesheet" href="https://unpkg.com/bulma-modal-fx/dist/css/modal-fx.min.css" />
+    </head>
+    <body>
+        {% include header.html %}
+        {{ content }}
+        {% include footer.html %}
+    </body>
+</html>

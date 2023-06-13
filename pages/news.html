@@ -1,0 +1,276 @@
+---
+title: "News"
+description: "News about the Association of Indian Go Players. The AIGP conducts various tournaments and events. We have weekly meetups."
+---
+        <section class="container">
+            <div class="has-text-centered column is-8 is-offset-2">
+                <h2 class="title is-4">Indian Go News</h2>
+                <h4 class="subtitle is-6">
+                    This page contains information about the state of Go in India, along with any planned events on the AIGP calendar.
+                </h4>
+            </div>
+            <div class="pd-2">
+              <div class="tile is-ancestor is-parent is-vertical">
+                    {% for post in site.posts %}
+                    <article class="tile is-child notification media is-white is-shady">
+                        <div class="columns is-multiline">
+                            <div class="column is-12 has-text-centered">
+                                <h4 class="title is-4">
+                                    {{ post.title }}
+                                </h4>
+                            </div>
+                            <div class="column is-4 has-text-centered">
+                                {% if post.img %}
+                                    <img src="/assets/img/news/{{ post.img }}" style="max-height: 200px;">
+                                {% endif %}
+                            </div>
+                            <div class="column is-8 is-relative">
+                                <em>Date: {{ post.date | date: "%d %b, %Y" }}</em>
+                                <br><br>
+                                {{ post.description }}
+                                <span class="is-pulled-bottom-right">
+                                    <a href="{{ post.url }}" target="_blank">More Information</a>
+                                </span>
+                            </div>
+                        </div>
+                    </article>
+                    {% endfor %}
+
+                    <article class="tile is-child notification media is-white is-shady">
+                        <div class="columns is-multiline">
+                            <div class="column is-12 has-text-centered">
+                                <h4 class="title is-4">
+                                    News Article on AIGP on the Korean Baduk Federation website
+                                </h4>
+                            </div>
+                            <div class="column is-4 has-text-centered">
+                                <%= image_tag "news/kbf_article.png", style: "max-height: 200px" %>
+                            </div>
+                            <div class="column is-8 is-relative">
+                                <em>Date: 8th May, 2023</em>
+                                <br><br>
+                                Our First Indian Go Tournament was featured in the "Baduk News" section of the Korean Baduk Federation's website. You can read the news article using the link below
+                                <br><br>
+                                If that link doesn't work, please find an archive.org link <a href="https://web.archive.org/web/20230509044549/http://www.wbaduk.com/news/news_view.asp?news_no=1923&menu_div=news" target="_blank">here</a>
+                                <br><br>
+                                <span class="is-pulled-bottom-right">
+                                    <a href="http://www.wbaduk.com/news/news_view.asp?news_no=1923&menu_div=news" target="_blank">More Information</a>
+                                </span>
+                            </div>
+                        </div>
+                    </article>
+                    <article class="tile is-child notification media is-white is-shady">
+                        <div class="columns is-multiline">
+                            <div class="column is-12 has-text-centered">
+                                <h4 class="title is-4">
+                                    Delhi and Mumbai meetups with Yeonwoo!
+                                </h4>
+                            </div>
+                            <div class="column is-4 has-text-centered">
+                                <%= image_tag "news/yeonwoo_iit_group.jpeg", style: "max-height: 200px" %>
+                            </div>
+                            <div class="column is-8 is-relative">
+                                <em>Date: 9th March, 2023</em>
+                                <br><br>
+                                We have had a very special guest from Korea visiting and arranged multiple Go community meetups around Yeonwoo's visit
+                                Check out the articles for lots of pictures!
+                                <br><br>
+                                <span class="is-pulled-bottom-right">
+                                    <a href="/pages/yeonwoo_meetups.html" target="_blank">More Information</a>
+                                </span>
+                            </div>
+                        </div>
+                    </article>
+                    <article class="tile is-child notification media is-white is-shady">
+                        <div class="columns is-multiline">
+                            <div class="column is-12 has-text-centered">
+                                <h4 class="title is-4">
+                                    Go Workshop and Tournament Results
+                                </h4>
+                            </div>
+                            <div class="column is-4 has-text-centered">
+                                <%= image_tag "news/meeplecon_news_logo.jpg", style: "max-height: 200px" %>
+                            </div>
+                            <div class="column is-8 is-relative">
+                                <em>Date: 26th Februrary, 2023</em>
+                                <br><br>
+                                The Go workshops held over 2 days of Meeplecon was a big success. Ilia Trullin from Russia won the 19x19 tournament!
+
+                                Check out more pics, vids and the award ceremony inside
+                                <br><br>
+                                <span class="is-pulled-bottom-right">
+                                    <a href="/pages/meeplecon2023_results.html" target="_blank">More Information</a>
+                                </span>
+                            </div>
+                        </div>
+                    </article>
+                    <article class="tile is-child notification media is-white is-shady">
+                        <div class="columns is-multiline">
+                            <div class="column is-12 has-text-centered">
+                                <h4 class="title is-4">
+                                    India's First Open Go Convention and Tournament - Mumbai, 18th and 19th Feb
+                                </h4>
+                            </div>
+                            <div class="column is-4 has-text-centered">
+                                <%= image_tag "meeplecon.jpg", style: "max-height: 200px" %>
+                            </div>
+                            <div class="column is-8 is-relative">
+                                <em>Date: 27th January, 2023</em>
+                                <br><br>
+                                The AIGP is proud to annouce that we are organising India's FIRST Open Go Convention in association with Cluedo and Meeplecon.
+
+                                The convention includes learning sessions the entire day on 18th February, followed by a tournament for all on the 19th of February.
+                                <br><br>
+                                Venue: Dublin Square, Phoenix Marketcity, Mumbai
+                                <span class="is-pulled-bottom-right">
+                                    <a href="/pages/meeplecon.html" target="_blank">More Information</a>
+                                </span>
+                            </div>
+                        </div>
+                    </article>
+                    <article class="tile is-child notification media is-white is-shady">
+                        <div class="columns is-multiline">
+                            <div class="column is-12 has-text-centered">
+                                <h4 class="title is-4">
+                                    Physical Meetup in Kolkata
+                                </h4>
+                            </div>
+                            <div class="column is-4 has-text-centered">
+                                <%= image_tag "news/kolkata20230122.jpg", style: "max-height: 200px" %>
+                            </div>
+                            <div class="column is-8 is-relative">
+                                <em>Date: 22nd January, 2023</em>
+                                <br><br>
+                                With the reduction of COVID in India, we have slowly started having ad-hoc meetups. Karan hosted one such meetup in Kolkata this year.
+                                <span class="is-pulled-bottom-right">
+                                    <a href="/pages/meetups/kolkata20230122.html" target="_blank">More Information</a>
+                                </span>
+                            </div>
+                        </div>
+                    </article>
+                    <article class="tile is-child notification media is-white is-shady">
+                        <div class="columns is-multiline">
+                            <div class="column is-12 has-text-centered">
+                                <h4 class="title is-4">
+                                    Pranjal Srivastava to represent India in the 2022 WAGC
+                                </h4>
+                            </div>
+                            <div class="column is-4 has-text-centered">
+                                <%= image_tag "news/wagc2022.png", style: "max-height: 200px" %>
+                            </div>
+                            <div class="column is-8 is-relative">
+                                <em>Date: 16th November, 2022</em>
+                                <br><br>
+                                Pranjal Srivastava has won the 10-person, 4-round swiss WAGC Indian Representation Selection Tournament 2022. He will be representing India in the WAGC 2022, which will take place online. Congratulations to Pranjal!
+                                <span class="is-pulled-bottom-right">
+                                    <a href="/pages/tournaments/wagc2022.html" target="_blank">More Information</a>
+                                </span>
+                            </div>
+                        </div>
+                    </article>
+                    <article class="tile is-child notification media is-white is-shady">
+                        <div class="columns is-multiline">
+                            <div class="column is-12 has-text-centered">
+                                <h4 class="title is-4">
+                                    Soumya Kundu wins the 9x9 Independence Day Tournament
+                                </h4>
+                            </div>
+                            <div class="column is-4 has-text-centered">
+                                <%= image_tag "news/soumya.jpeg" %>
+                            </div>
+                            <div class="column is-8 is-relative">
+                                <em>Date: 15th August, 2022</em>
+                                <br><br>
+                                To commemorate India's 75th Independence Day, the AIGP conducted a 9x9 tournament. There were 12 participants, and Soumya Kundu defeated everyone else to win the tournament! Congratulations, Soumya!
+                                <span class="is-pulled-bottom-right">
+                                    <a href="https://online-go.com/tournament/93407" target="_blank">More Information</a>
+                                </span>
+                            </div>
+                        </div>
+                    </article>
+                    <article class="tile is-child notification media is-white is-shady">
+                        <div class="columns is-multiline">
+                            <div class="column is-12 has-text-centered">
+                                <h4 class="title is-4">
+                                    Shashwat Chandra to represent India in the 17th KPMC
+                                </h4>
+                            </div>
+                            <div class="column is-4 has-text-centered">
+                                <%= image_tag "news/kpmc2022.png", style: "max-height: 200px" %>
+                            </div>
+                            <div class="column is-8 is-relative">
+                                <em>Date: 26th July, 2022</em>
+                                <br><br>
+                                Congrats to Shashwat Chandra from Bangalore, Karnataka for winning the KPMC Indian Representative Selection Tournament, held from 22nd to 27th July, 2022. This year, the KPMC tournament will be held in-person in South Korea, and Shashwat Chandra will be representing India there. The decider match, between Karan Rawat and Shashwat Chandra was a nail-biter, and Shashwat won by a tiny 1.5 point margin to claim the victory.
+
+                                <span class="is-pulled-bottom-right">
+                                    <a href="/pages/tournaments/kpmc2022.html">More Information</a>
+                                </span>
+                            </div>
+                        </div>
+                    </article>
+                    <article class="tile is-child notification media is-white is-shady">
+                        <div class="columns is-multiline">
+                            <div class="column is-12 has-text-centered">
+                                <h4 class="title is-4">
+                                    16 year old Pranjal Srivastava to represent India at 16th KPMC
+                                </h4>
+                            </div>
+                            <div class="column is-4">
+                                <%= image_tag "news/kpmc_img.png" %>
+                            </div>
+                            <div class="column is-8 is-relative">
+                                <em>Date: 27th June, 2021</em>
+                                <br><br>
+                                Congrats to Pranjal Srivastava, a 16 year old from Bangalore, Karnataka, who defeated 5 others to win the KPMC Indian Representation Selection Tournament, held in June 2021. Pranjal will now go ahead and represent India at the 16th Korean Prime-Minister Cup, 2021.
+                                <span class="is-pulled-bottom-right">
+                                    <a href="/pages/tournaments/kpmc2021.html">More Information</a>
+                                </span>
+                            </div>
+                        </div>
+                    </article>
+                    <article class="tile is-child notification media is-white is-shady">
+                        <div class="columns is-multiline">
+                            <div class="column is-12 has-text-centered">
+                                <h4 class="title is-4">
+                                    Indian participants at the Durham Go Tournament, 2021
+                                </h4>
+                            </div>
+                            <div class="column is-4 has-text-centered">
+                                <%= image_tag "https://durhamgo.club/logo.png" %>
+                            </div>
+                            <div class="column is-8 is-relative">
+                                <em>Date: 20th June, 2021</em>
+                                <br><br>
+                                The Durham Go Tournament for the year 2021 was held by the British Go Association from 19th to 20th of June, 2021. It was held online this year. The AIGP had one representative in this tournament, Shashwat Chandra, who finished the tournament ranked #14, out of 69 participants.
+
+                                <span class="is-pulled-bottom-right">
+                                    <a href="https://www.britgo.org/news/2021/durham">More Information</a>
+                                </span>
+                            </div>
+                        </div>
+                    </article>
+                    <article class="tile is-child notification media is-white is-shady">
+                        <div class="columns is-multiline">
+                            <div class="column is-12 has-text-centered">
+                                <h4 class="title is-4">
+                                    Indian participants at the 48th Paris International Tournament, 2021
+                                </h4>
+                            </div>
+                            <div class="column is-4 has-text-centered">
+                                <%= image_tag "https://paris2021.jeudego.org/img/Affiche_2021_255_360.png", style: "max-height: 150px" %>
+                            </div>
+                            <div class="column is-8 is-relative">
+                                <em>Date: 5th April, 2021</em>
+                                <br><br>
+                                The 48th Paris International Tournament was conducted by the European Go Federation from 3rd to 5th of April, 2021. It was held on the Online Go Server (OGS). The AIGP had one representative in this tournament, Karan Rawat, who finished the tournament ranked #74, out of 175 participants.
+
+                                <span class="is-pulled-bottom-right">
+                                    <a href="https://paris2021.jeudego.org/#/presentation">More Information</a>
+                                </span>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>

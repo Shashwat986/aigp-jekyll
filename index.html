@@ -1,0 +1,177 @@
+---
+# Feel free to add content and custom Front Matter to this file.
+# To modify the layout, see https://jekyllrb.com/docs/themes/#overriding-theme-defaults
+
+layout: home
+---
+
+        <div class="box cta">
+            <p class="has-text-centered">
+                The AIGP represents the Go playing community in India. We welcome all Go players in India to join us and participate in our events.
+            </p>
+        </div>
+        <section class="container">
+            <div class="columns is-mobile">
+              <% 1.upto(8) do |i| %>
+              <div class="column <%= i > 4 ? 'is-hidden-mobile' : '' %>">
+                <%= image_tag "home/home_#{i}.jpeg" %>
+              </div>
+              <% end %>
+            </div>
+        </section>
+        <section class="container">
+            <div class="columns">
+                <div class="column is-8">
+                    <article class="card is-white">
+                        <div class="card-header">
+                            <p class="card-header-title">
+                                Become a Member
+                            </p>
+                        </div>
+                        <div class="card-content">
+                            <p style="margin-bottom: 1rem;">
+                                Join the AIGP and meet like-minded Go players across India!
+                            </p>
+                            <form action="https://gmail.us6.list-manage.com/subscribe/post?u=4fd58232bb8466eaa9cb5ce1b&amp;id=477349c5a7" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+                              <div class="field is-horizontal">
+                                <div class="field-label is-normal">
+                                  <label class="label">Name</label>
+                                </div>
+                                <div class="field-body">
+                                  <input type="text" value="" name="NAME" class="required input is-rounded" id="mce-NAME">
+                                </div>
+                              </div>
+                              <div class="field is-horizontal">
+                                <div class="field-label is-normal">
+                                  <label class="label">Email</label>
+                                </div>
+                                <div class="field-body">
+                                  <input type="email" value="" name="EMAIL" class="required email input is-rounded" id="mce-EMAIL">
+                                </div>
+                              </div>
+                              <div class="field is-horizontal">
+                                <div class="field-label is-normal">
+                                  <label class="label">Rank</label>
+                                </div>
+                                <div class="field-body">
+                                  <div class="control">
+                                    <div class="select is-rounded">
+                                      <select name="MMERGE6" id="mce-MMERGE6">
+                                        <option>Newbie</option>
+                                        <option>Know the rules</option>
+                                        <option>30k to 15k</option>
+                                        <option>15k to 5k</option>
+                                        <option>5k to 1k</option>
+                                        <option>1d+</option>
+                                      </select>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                              <div id="mce-responses" class="clear">
+                                <div class="response has-text-danger" id="mce-error-response" style="display:none"></div>
+                                <div class="response has-text-success" id="mce-success-response" style="display:none"></div>
+                              </div>
+              <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+                              <div style="position: absolute; left: -5000px;" aria-hidden="true">
+                                <input type="text" name="b_4fd58232bb8466eaa9cb5ce1b_477349c5a7" tabindex="-1" value="">
+                              </div>
+                              <div class="field is-horizontal">
+                                <div class="field-label">
+                                  <!-- Left empty for spacing -->
+                                </div>
+                                <div class="field-body">
+                                  <div class="control">
+                                    <input type="submit" name="subscribe" value="Submit" class="button is-success" id="mc-embedded-subscribe">
+                                  </div>
+                                </div>
+                              </div>
+                            </form>
+                            <script type='text/javascript' src='//s3.amazonaws.com/downloads.mailchimp.com/js/mc-validate.js'></script><script type='text/javascript'>(function($) {window.fnames = new Array(); window.ftypes = new Array();fnames[0]='EMAIL';ftypes[0]='email';fnames[1]='NAME';ftypes[1]='text';fnames[3]='ADDRESS';ftypes[3]='address';fnames[4]='PHONE';ftypes[4]='phone';fnames[5]='BIRTHDAY';ftypes[5]='birthday';fnames[6]='MMERGE6';ftypes[6]='text';}(jQuery));var $mcj = jQuery.noConflict(true);</script>
+                        </div>
+                    </article>
+                </div>
+                <div class="column is-4">
+                    <div class="">
+                        <div class="card">
+                            <div class="card-content">
+                                <div class="content">
+                                    <p class="title has-text-centered is-5">Association Activities</p>
+                                    <ul class="has-box">
+                                        <li>Weekly Sessions on Saturdays at 6.30pm</li>
+                                        <li>Active Telegram Community</li>
+                                        <li>Community Outreach to increase Go's popularity within India</li>
+                                        <li>Increase India's visibility at International Go events</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="container">
+            <div class="columns">
+                <div class="column is-8">
+                    <div class="columns is-multiline">
+                        <div class="column is-4">
+                            <div class="card is-shady is-marginless">
+                                <div class="card-image has-text-centered">
+                                    <a href="<%= url_for('pages/learn.html') %>">
+                                        <i class="fa fa-book"></i>
+                                    </a>
+                                </div>
+                                <div class="card-content">
+                                    <div class="content">
+                                        <h4>Learn Go</h4>
+                                        <p>
+                                            The AIGP provides many resources for interested visitors to learn Go. Here, we provide a regularly-updated list of resources for players of all levels, from beginners to active amateurs.
+                                        </p>
+                                        <%= link_to "Learn More", "/pages/learn.html" %>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="column is-4">
+                            <div class="card is-shady is-marginless">
+                                <div class="card-image has-text-centered">
+                                    <a href="<%= url_for('pages/community.html') %>">
+                                        <i class="fa fa-commenting-o"></i>
+                                    </a>
+                                </div>
+                                <div class="card-content">
+                                    <div class="content">
+                                        <h4>Join our Community</h4>
+                                        <p>
+                                            We are active on many platforms, and you can reach out to us on any of them. We also have recordings of all our weekly sessions, which can be found here.
+                                        </p>
+                                        <%= link_to "Learn More", "/pages/community.html" %>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="column is-4">
+                            <div class="card is-shady is-marginless">
+                                <div class="card-image has-text-centered">
+                                    <a href="<%= url_for('pages/contact.html') %>">
+                                        <i class="fa fa-map-marker"></i>
+                                    </a>
+                                </div>
+                                <div class="card-content">
+                                    <div class="content">
+                                        <h4>Meet Us</h4>
+                                        <p>
+                                            Currently, due to COVID-19, we aren't having any physical sessions, but our players are spread across the globe, and we'd be happy to meet any interested Go lovers.
+                                        </p>
+                                        <%= link_to "Learn More", "/pages/contact.html" %>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="column is-4 has-text-centered">
+                  <iframe class="is-inline-block" src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2Findiabaduk%2F&tabs=timeline&width=340&height=500&small_header=true&adapt_container_width=true&hide_cover=false&show_facepile=false" width="340" height="500" style="border:none;overflow:hidden;margin:auto 0 auto auto;display:block" scrolling="no" frameborder="0"></iframe>
+                </div>
+            </div>
+        </section>
