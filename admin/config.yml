@@ -13,6 +13,6 @@ collections:
       - {label: "Publish Date", name: "date", widget: "datetime"}
       - {label: "Featured Image", name: "img", widget: "image"}
       - {label: "Description", name: "description", widget: "string"}
-      - {label: "External URL", name: "external_url", widget: "string", optional: true}
-      - {label: "Sidebar", name: "sidebar", widget: "markdown", optional: true}
-      - {label: "Body", name: "body", widget: "markdown", optional: true}
+      - {label: "External URL", name: "external_url", widget: "string", required: false}
+      - {label: "Sidebar", name: "sidebar", widget: "markdown", required: false}
+      - {label: "Body", name: "body", widget: "markdown", required: false}
