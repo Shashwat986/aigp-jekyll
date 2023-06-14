@@ -30,7 +30,7 @@ description: "News about the Association of Indian Go Players. The AIGP conducts
                                 {{ post.description }}
                                 <br><br>
                                 <span class="is-pulled-bottom-right">
-                                    {% if post.external_url %}
+                                    {% if post.external_url and post.external_url != "" %}
                                     <a href="{{ post.external_url }}" target="_blank">More Information</a>
                                     {% else %}
                                     <a href="{{ post.url }}" target="_blank">More Information</a>
