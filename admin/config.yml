@@ -1,7 +1,6 @@
 backend:
-  name: github
-  repo: Shashwat986/aigp-jekyll
-  # branch: master # Branch to update (optional; defaults to master)
+  name: git-gateway
+  branch: master # Branch to update (optional; defaults to master)
 media_folder: "assets/img/news"
 collections:
   - name: "news" # Used in routes, e.g., /admin/collections/blog
