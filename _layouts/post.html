@@ -7,6 +7,11 @@ layout: home
             </div>
             <div class="pd-2">
                 <div class="columns is-multiline">
+                    {% if page.external_url %}
+                        <div class="column is-12 has-text-centered">
+                            <a href="{{ page.external_url }}" target="_blank">More Information</a>
+                        </div>
+                    {% endif %}
                     <div class="column is-3 content">
                       {{ page.sidebar | markdownify }}
                     </div>

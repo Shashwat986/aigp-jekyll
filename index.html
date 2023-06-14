@@ -12,11 +12,11 @@ layout: home
         </div>
         <section class="container">
             <div class="columns is-mobile">
-              <% 1.upto(8) do |i| %>
-              <div class="column <%= i > 4 ? 'is-hidden-mobile' : '' %>">
-                <%= image_tag "home/home_#{i}.jpeg" %>
-              </div>
-              <% end %>
+            {% for i in (1..8) %}
+                <div class="column {% if i > 4 %}is-hidden-mobile{% endif %}">
+                    <img src="/assets/img/home/home_{{ i }}.jpeg">
+                </div>
+            {% endfor %}
             </div>
         </section>
         <section class="container">

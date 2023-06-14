@@ -13,5 +13,6 @@ collections:
       - {label: "Publish Date", name: "date", widget: "datetime"}
       - {label: "Featured Image", name: "img", widget: "image"}
       - {label: "Description", name: "description", widget: "string"}
+      - {label: "External URL", name: "external_url", widget: "string"}
       - {label: "Sidebar", name: "sidebar", widget: "markdown"}
       - {label: "Body", name: "body", widget: "markdown"}
