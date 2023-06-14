@@ -10,5 +10,46 @@
 <body>
   <!-- Include the script that builds the page and powers Decap CMS -->
   <script src="https://unpkg.com/netlify-cms@^2.0.0/dist/netlify-cms.js"></script>
+  <script>
+    var PostPreview = createClass({
+      render: function() {
+        var entry = this.props.entry;
+        var image = entry.getIn(['data', 'img']);
+        var bg = image && this.props.getAsset(image);
+        return h('div', {},
+          h('div', {className: "notification media is-shady"},
+            h('div', {className: "columns is-multiline is-mobile"},
+                h('div', {className: 'column is-12'},
+                    h('h4', {className: 'title is-4 has-text-centered'}, entry.getIn(['data', 'title']))
+                ),
+                h('div', {className: 'column is-4'},
+                    h('img', {src: bg.toString()}, null)
+                ),
+                h('div', {className: 'column is-8'},
+                    h('em', {}, "Date: " + entry.getIn(['data', 'date'])),
+                    h('br', {}, null),
+                    h('br', {}, null),
+                    h('p', {}, entry.getIn(['data', 'description'])),
+                    h('br', {}, null),
+                    h('br', {}, null),
+                    h('a', {target: "_blank", href: entry.getIn(['data', 'external_url']), className: "is-pulled-right"}, "More Information")
+                )
+            )
+          ),
+          h('div', {className: "columns is-mobile"},
+            h('div', {className: 'column is-4'},
+                h('div', {"className": "text"}, this.props.widgetFor('sidebar'))
+            ),
+            h('div', {className: 'column is-8'},
+                h('div', {"className": "text"}, this.props.widgetFor('body'))
+            )
+          )
+        );
+      }
+    });
+
+    CMS.registerPreviewTemplate("news", PostPreview);
+    CMS.registerPreviewStyle("https://unpkg.com/bulma@0.9.0/css/bulma.min.css")
+  </script>
 </body>
 </html>
