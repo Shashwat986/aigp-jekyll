@@ -25,22 +25,24 @@
                 h('div', {className: 'column is-4'},
                     h('img', {src: bg.toString()}, null)
                 ),
-                h('div', {className: 'column is-8'},
+                h('div', {className: 'column is-8 content'},
                     h('em', {}, "Date: " + entry.getIn(['data', 'date'])),
                     h('br', {}, null),
                     h('br', {}, null),
                     h('p', {}, entry.getIn(['data', 'description'])),
                     h('br', {}, null),
                     h('br', {}, null),
-                    h('a', {target: "_blank", href: entry.getIn(['data', 'external_url']), className: "is-pulled-right"}, "More Information")
+                    (entry.getIn(['data', 'external_url']) && entry.getIn(['data', 'external_url']) != "") ?
+                        h('a', {target: "_blank", href: entry.getIn(['data', 'external_url']), className: "is-pulled-right"}, "More Information") :
+                        h('u', {className: 'is-pulled-right'}, "More Information")
                 )
             )
           ),
           h('div', {className: "columns is-mobile"},
-            h('div', {className: 'column is-4'},
+            h('div', {className: 'column is-4 content'},
                 h('div', {"className": "text"}, this.props.widgetFor('sidebar'))
             ),
-            h('div', {className: 'column is-8'},
+            h('div', {className: 'column is-8 content'},
                 h('div', {"className": "text"}, this.props.widgetFor('body'))
             )
           )
