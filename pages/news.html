@@ -21,13 +21,14 @@ description: "News about the Association of Indian Go Players. The AIGP conducts
                             </div>
                             <div class="column is-4 has-text-centered">
                                 {% if post.img %}
-                                    <img src="/assets/img/news/{{ post.img }}" style="max-height: 200px;">
+                                    <img src="{{ post.img }}" style="max-height: 200px;">
                                 {% endif %}
                             </div>
                             <div class="column is-8 is-relative">
                                 <em>Date: {{ post.date | date: "%d %b, %Y" }}</em>
                                 <br><br>
                                 {{ post.description }}
+                                <br><br>
                                 <span class="is-pulled-bottom-right">
                                     <a href="{{ post.url }}" target="_blank">More Information</a>
                                 </span>
