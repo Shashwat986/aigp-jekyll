@@ -3,12 +3,12 @@ layout: home
 ---
         <section class="container">
             <div class="has-text-centered column is-8 is-offset-2">
-                <h2 class="title is-4">Delhi and Mumbai meetups with Yeonwoo</h2>
+                <h2 class="title is-4">{{ page.title }}</h2>
             </div>
             <div class="pd-2">
                 <div class="columns is-multiline">
                     <div class="column is-3 content">
-                      {{ page.sidebar }}
+                      {{ page.sidebar | markdownify }}
                     </div>
                     <div class="column is-9 content">
                         {{ content }}
