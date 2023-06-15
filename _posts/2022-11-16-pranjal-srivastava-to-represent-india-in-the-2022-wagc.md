@@ -34,3 +34,4 @@ sidebar: |-
 | 10       | Shailesh Kumar          | 0.0    |
 
 Detailed standings can be found [here](https://swissonlinetournament.com/Tournament/Rating/bf9b1c6822a74c1d819e661f67be3fe2)
+

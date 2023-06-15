@@ -21,3 +21,4 @@ Shashwat Chandra defeated all other opponents to represent India in the [17th Ko
 | 2        | Karan Rawat               | 1.0    |
 | 3        | Syed Aslah Ahmad Faizi    | 0.0    |
 | 4        | Anmol Agrawal             | 0.0    |
+

@@ -18,3 +18,4 @@ sidebar: |-
 <img src="/assets/img/meetups/kolkata20230122/img-7.jpg">
 <img src="/assets/img/meetups/kolkata20230122/img-8.jpg">
 <img src="/assets/img/meetups/kolkata20230122/img-9.jpg">
+

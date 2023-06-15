@@ -56,3 +56,4 @@ Phoenix Kurla Mall, Dublin Square
 The tournament has no entry fees but an [entry ticket to the convention](https://insider.in/meeplecon-indias-first-and-only-boardgaming-convention-feb18-2023/event) is required.
 <br>
 After taking an entry ticket, [click here](https://meeplecon.in/go-tournament/) to register for the tournament.
+

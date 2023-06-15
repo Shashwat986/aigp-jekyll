@@ -29,3 +29,4 @@ Pranjal Srivastava defeated all other opponents to represent India in the [16th 
 #### Recording of Finals
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/8kR3tVkDDMQ" title="YouTube video player" frameborder="0" style="max-width: 100%;" allowfullscreen></iframe>
+
