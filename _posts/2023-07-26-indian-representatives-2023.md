@@ -1,6 +1,6 @@
 ---
 title: Indian representation in KPMC 2023 and AWC 2023
-date: 2023-07-26T11:57:37.772Z
+date: 2023-07-26T12:28:10.915Z
 img: /assets/img/news/whatsapp-image-2023-07-26-at-5.30.53-pm.jpeg
 description: Find out about Indian representatives at international tournaments!
 sidebar: ""
