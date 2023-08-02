@@ -7,7 +7,7 @@ description: Find out about the Mumbai monthly meetups and our brand new
 ---
 ## Mumbai Meetups lead the way!
 
-30th July marked the half year anniverary of the Mumbai Monthly Go Meetups!!
+30th July marked the half year anniversary of the Mumbai Monthly Go Meetups!!
 
 Every meetup introduces Go to 10-20 new people every month with a few of them already on the verge of becoming SDKs!
 
@@ -24,3 +24,5 @@ Here are a few more pics of the meetup last week
 ![](/assets/img/news/whatsapp-image-2023-08-02-at-5.48.18-pm.jpeg)
 
 ![](/assets/img/news/whatsapp-image-2023-08-02-at-5.48.18-pm-1-.jpeg)
+
+![](/assets/img/news/whatsapp-image-2023-08-02-at-5.48.19-pm.jpeg)
