@@ -5,7 +5,9 @@ img: /assets/img/news/whatsapp-image-2023-08-02-at-5.48.17-pm.jpeg
 description: Find out about the Mumbai monthly meetups and our brand new
   "Challenge of the Month"
 ---
-30th July marked the half year anniverary of the Mumbao Monthly Go Meetups!!
+## Mumbai Meetups lead the way!
+
+30th July marked the half year anniverary of the Mumbai Monthly Go Meetups!!
 
 Every meetup introduces Go to 10-20 new people every month with a few of them already on the verge of becoming SDKs!
 
@@ -13,9 +15,7 @@ Kolkata and Delhi have meetups every few months too.
 
 If you would like to join our next meetup, send us a message for information, Invites are public and announced on our telegram and beginners' group
 
-
-
-In other news, AIGP has started a monthly challenge series.
+## AIGP's monthly challenge series
 
 For August 2023, whoever plays the most games on OGS will receive a prize!
 
