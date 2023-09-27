@@ -4,6 +4,7 @@ date: 2023-09-27T11:06:25.631Z
 img: /assets/img/news/photo1694526887.jpeg
 description: Join our monthly challenges which help you get better, faster,
   stronger & harder to beat
+sidebar: '![](/assets/img/news/photo1694526887.jpeg "Nihon Kiin keychain")'
 ---
 AIGP held an August challenge for all of it's members
 
