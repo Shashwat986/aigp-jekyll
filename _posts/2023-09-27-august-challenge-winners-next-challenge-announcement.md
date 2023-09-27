@@ -2,7 +2,8 @@
 title: August challenge winners & next challenge announcement
 date: 2023-09-27T11:06:25.631Z
 img: /assets/img/news/photo1694526887.jpeg
-description: August challenge winners & next challenge announcement
+description: Join our monthly challenges which help you get better, faster,
+  stronger & harder to beat
 ---
 AIGP held an August challenge for all of it's members
 
