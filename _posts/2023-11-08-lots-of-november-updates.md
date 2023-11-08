@@ -13,9 +13,13 @@ sidebar: |-
   * 1st prize - Suhas(shadowwolf7886) wins a gomagic.org coupon
   * 2nd prize - Tigran(humveereuin) wins a Nihon Kiin deck of tsumego playing cards
   * 3rd prize - Anirudh(baba73) wins a Nihon Kiin keychain
+
+
 * WAGC India selection tournament and the quarterly DDK tournament was conducted in October
 
   * Qualifiers - https://online-go.com/tournament/108696
   * Finals - https://online-go.com/game/58503952
   * DDK tournament - https://online-go.com/tournament/108697
+
+
 * Mumbai, Kolkata, Delhi and Bangalore held Go workshops in October
