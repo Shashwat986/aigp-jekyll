@@ -6,7 +6,7 @@ img: /assets/img/news/screenshot-2024-05-09-at-5.55.28-pm.png
 description: AIGP has been invited by the Korean Baduk Federation to participate
   in the Korea Prime Minister Cup 2024.
 ---
-
+AIGP has been invited by the Korean Baduk Federation to participate in the Korea Prime Minister Cup 2024.
 
 ## When
 
