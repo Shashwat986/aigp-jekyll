@@ -15,7 +15,7 @@ AIGP has been invited by the Korean Baduk Federation to participate in the Korea
 
 ## How
 
-Please signup by 12th May 2023 at <https://forms.gle/BJEjdtJAnwF8V3s9A>
+Please signup by 12th May 2024 at <https://forms.gle/BJEjdtJAnwF8V3s9A>
 
 ## Eligibility Criteria
 
