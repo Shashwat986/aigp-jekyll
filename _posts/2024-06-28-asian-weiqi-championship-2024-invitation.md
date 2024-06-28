@@ -7,6 +7,7 @@ description: Apply to represent India in Asian Weiqi Championship by Chinese
 sidebar: "![﻿AWC 2024 POSTER](assets/img/news/awc2024p.jpg)"
 ---
 # Asian Weiqi Championship 2024
+
 ![﻿AWC 2024 BANNER](assets/img/news/awc2024l.jpg)
 
 ### What?
@@ -22,7 +23,7 @@ sidebar: "![﻿AWC 2024 POSTER](assets/img/news/awc2024p.jpg)"
 
 ### <u>Where?</u>
 
-**[Yike Weiqi](https://yikewq.web.app/) Online Platform**
+**[Yike Weiqi](https://yikewq.web.app/) Online Platform.**
 
 ### <u>Eligibility Requirements*</u>
 
