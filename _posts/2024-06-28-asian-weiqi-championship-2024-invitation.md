@@ -6,8 +6,8 @@ description: Apply to represent India in Asian Weiqi Championship by Chinese
   WeiQi Association
 sidebar: "![﻿](assets/img/news/awc2024p.jpg)"
 ---
-![﻿](assets/img/news/awc2024l.jpg)
 # Asian Weiqi Championship 2024
+![﻿](assets/img/news/awc2024l.jpg)
 
 ### What?
 
