@@ -23,7 +23,7 @@ sidebar: "![﻿AWC 2024 POSTER](assets/img/news/awc2024p.jpg)"
 
 ### <u>Where?</u>
 
-**[Yike Weiqi](https://yikewq.web.app/) Online Platform.**
+**[Yike Weiqi](https://yikewq.web.app/) Online Platform**
 
 ### <u>Eligibility Requirements*</u>
 
