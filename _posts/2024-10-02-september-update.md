@@ -6,6 +6,12 @@ description: We Had a few successful Meetups at the Kolkata Baduk Club this
   September. Our Quarterly Tournament has also been very successful, it will end
   on 2nd week of October. There's an event happening on 6th October in
   Bangalore. Click more information to view all images.
+sidebar: |-
+  ![](/assets/img/news/whatsapp-image-2024-10-03-at-2.32.19-pm.jpeg)
+
+  <hr>
+
+  ![](/assets/img/news/whatsapp-image-2024-10-03-at-2.32.19-pm.jpeg)
 ---
 ![Kolkata Baduk Cup Meetup September](/assets/img/news/screenshot-from-2024-10-02-18-19-39.png "Kolkata Baduk Cup Meetup September")
 
