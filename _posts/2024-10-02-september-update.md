@@ -18,3 +18,5 @@ sidebar: |-
 ![Quarterly Tournament Standings Division 1](/assets/img/news/screenshot-from-2024-10-02-18-16-41.png "Quarterly Tournament Standings Division 1")
 
 ![Quarterly Tournament Standings Division 2](/assets/img/news/screenshot-from-2024-10-02-18-15-58.png "Quarterly Tournament Standings Division 2")
+
+C﻿heck the [Beginner's Go Game Guide](https://weiqi.soumyak4.in)
