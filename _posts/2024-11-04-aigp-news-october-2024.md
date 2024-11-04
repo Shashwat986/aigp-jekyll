@@ -5,7 +5,7 @@ img: /assets/img/news/2nd-bangalore.jpeg
 description: October has been quite busy for the Indian Baduk Scene. The first
   quarterly national tournament held online finished. We also had multiple
   offline workshops, tournaments and club meetups.
-external_url: https://weiqi.soumyak4.in
+external_url: ""
 sidebar: >
   **W﻿in a chance to represent India at the 2024 Under-16 Asian Peace Student
   Baduk Championship held in South Korea**
