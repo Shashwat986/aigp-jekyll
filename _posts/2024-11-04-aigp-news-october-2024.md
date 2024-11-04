@@ -13,7 +13,9 @@ sidebar: >
 
   ![2nd Bangalore Go Game Workshop and Tournament](/assets/img/news/2nd-bangalore.jpeg "2nd Bangalore Go Game Workshop and Tournament")
 ---
-![](/assets/img/news/bangalore-venue.jpeg)
+![Venue of the Bangalore Baduk Event](/assets/img/news/bangalore-venue.jpeg "Venue of the Bangalore Baduk Event")
+
+Venue of the Bangalore Baduk Event
 
 First things first, here are the results from the Quarterly Tournament:
 [SDK Division](https://leago.gg/event/trsjeft/standings/t/51a3xa3z07/r/10), [DDK Division](https://leago.gg/event/trsjeft/standings/t/r6ok25q2nt/r/10)
