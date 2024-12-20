@@ -25,6 +25,8 @@ The event will feature Go as one of the key mind sports, providing a wonderful o
 
 Interested players should **[Register Here](https://forms.gle/GcDch6VeTxiAEHo38)**
 
+**R﻿egistration Deadline: 15th January 2025**
+
 **Let’s bring our Go expertise to the international stage and make India proud!**
 
 *We look forward to your participation!*
