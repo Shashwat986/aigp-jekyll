@@ -1,6 +1,6 @@
 ---
 title: Represent India at the International Humanitarian Games 2025
-date: 2024-12-20T05:07:48.355Z
+date: 2024-12-20T07:15:58.637Z
 img: https://upload.wikimedia.org/wikipedia/en/thumb/4/41/Flag_of_India.svg/1024px-Flag_of_India.svg.png
 description: We are excited to announce that the Association of Indian Go
   Players (AIGP) has been invited to participate in the International
