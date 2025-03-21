@@ -25,3 +25,9 @@ A﻿nd yeah, **3 countries** did come together for a mini go meet-up.
 Latest Standings for AIGP 2025 Q1 Tournament:
 
 ![AIGP Quarterly Tournament ](/assets/img/news/screenshot-from-2025-03-21-05-30-35.png)
+
+M﻿ore pics:
+
+![](/assets/img/news/whatsapp-image-2025-03-11-at-10.07.47-am.jpeg)
+
+![](/assets/img/news/whatsapp-image-2025-03-11-at-10.07.43-am.jpeg)
