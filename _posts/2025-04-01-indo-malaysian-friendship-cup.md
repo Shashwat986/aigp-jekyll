@@ -17,7 +17,8 @@ sidebar: "![](/assets/img/news/indo-mal.jpeg)"
 1. **Opening Ceremony (12:30pm IST; 3 pm MYT)**: A 30-minute ceremony to welcome all participants and set the stage for the event, everyone should join the Google Meet. 
 2. **First Round (1pm IST; 3:30 pm MYT)**: Matches will commence immediately after the opening ceremony. 
 3. **Second Round (4pm IST; 6:30 pm MYT)**: Matches will commence immediately after the pairings are done. 
-4. **Closing Ceremony (7pm IST; 9.30 pm MYT)**: A 30-minute ceremony where we congratulate all winners, and end the session, along with dignitaries from both ends. (additional stages and breaks will be informed at a later stage)
+4. **Closing Ceremony (7pm IST; 9.30 pm MYT)**: A 30-minute ceremony where we congratulate all winners, and end the session, along with dignitaries from both ends. 
+5. Additional stages and breaks will be informed at a later stage.
 
 **Tournament Details -** 
 
