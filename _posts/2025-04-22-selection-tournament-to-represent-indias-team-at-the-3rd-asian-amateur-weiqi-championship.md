@@ -10,7 +10,6 @@ description: "Register ASAP. Read the full post for more information. "
 * **What** - 3rd Asian Amateur Weiqi Championship
 * **Host** - CWA(Chinese Weiqi Association)
 * **When(Online)** - May 21-25 , 2025 from 5PM onwards (IST)
-* **Final Round(Offline in Shenzhen)** - August 28 - September 2, 2025
 
 **Selection Tournament Info:**
 
@@ -19,7 +18,7 @@ description: "Register ASAP. Read the full post for more information. "
 * **Eligibility Criteria:**
 
   * **Male** - 15Kyu+
-  * **Female** - Knows how to play on 19x19
+  * **Female** - 20Kyu+
 
 #### [Register Here](https://forms.gle/Kpk8ByKeq5f5S2dS9)
 
