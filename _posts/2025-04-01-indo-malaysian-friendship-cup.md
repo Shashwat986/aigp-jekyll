@@ -6,6 +6,14 @@ description: We proudly present to you the first International Weiqi/Baduk
   Friendship Cup hosted by India. More details shared in the post. Register Now.
 sidebar: "![](/assets/img/news/indo-mal.jpeg)"
 ---
+**Event Video -**
+
+<iframe width="100%" height="500" src="https://www.youtube.com/embed/xJk43GJGLcQ"
+title="YouTube video player"
+frameborder="0"
+allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+allowfullscreen></iframe>
+
 **Event Details -**
 
 1. **Format**: Two rounds (6v6) pitting teams from India and Malaysia against each other. 
