@@ -8,7 +8,11 @@ sidebar: "![](/assets/img/news/indo-mal.jpeg)"
 ---
 **Event Video -**
 
-[Live Stream of the Event](https://youtu.be/xJk43GJGLcQ?si=x6bt4GcwEwQXb-Kv)
+<iframe width="100%" height="500" src="https://www.youtube.com/embed/xJk43GJGLcQ"
+title="YouTube video player"
+frameborder="0"
+allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+allowfullscreen></iframe>
 
 **Event Details -**
 
