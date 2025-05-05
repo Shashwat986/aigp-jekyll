@@ -3,8 +3,11 @@ title: Selection tournament to represent India's team at the 3rd Asian Amateur
   Weiqi Championship
 date: 2025-04-22T07:13:28.718Z
 img: /assets/img/news/leago-avatar.png
-description: "Register ASAP. Read the full post for more information. "
+description: "Read the full post for more information. "
 ---
+**C﻿heck the Results [here](https://online-go.com/tournament/128125)** <br>
+W﻿e have selected the top 4 male players and the top female player to represent us in the upcoming team event.
+
 **Main Event Info:**
 
 * **What** - 3rd Asian Amateur Weiqi Championship
