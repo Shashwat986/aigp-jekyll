@@ -7,3 +7,4 @@ description: Mr. Sarthak Wadhwani, one of our mentors who represented us in
   Arts, Bennett University.
 external_url: https://www.instagram.com/aigpindia
 ---
+![](/assets/img/news/whatsapp-image-2025-05-06-at-8.40.58-pm.jpeg)
