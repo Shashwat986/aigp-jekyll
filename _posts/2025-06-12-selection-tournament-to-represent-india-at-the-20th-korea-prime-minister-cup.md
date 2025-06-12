@@ -1,6 +1,6 @@
 ---
 title: Selection tournament to represent India at the 20th Korea Prime Minister Cup
-date: 2025-06-12T05:45:54.151Z
+date: 2025-06-12T06:10:21.700Z
 img: /assets/img/news/screenshot-from-2025-06-12-05-40-21.png
 description: Register now
 ---
@@ -23,5 +23,6 @@ description: Register now
    * ﻿**Nationality** : Indian
 
 [Register Here](https://forms.gle/kMCJXcVz37wHx64Q8)
+Accommodation & Travel Costs will be **Borne by AIGP(ToC)**
 
 ***Registration closes on 20th June 12PM IST***
