@@ -1,6 +1,6 @@
 ---
 title: Selection tournament to represent India at the 20th Korea Prime Minister Cup
-date: 2025-06-11T23:45:54.151Z
+date: 2025-06-12T05:45:54.151Z
 img: /assets/img/news/screenshot-from-2025-06-12-05-40-21.png
 description: Register now
 ---
