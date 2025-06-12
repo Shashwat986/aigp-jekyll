@@ -23,6 +23,6 @@ description: Register now
    * ﻿**Nationality** : Indian
 
 [Register Here](https://forms.gle/kMCJXcVz37wHx64Q8)
-*Accommodation & Travel Costs will be Borne* by AIGP*
+Accommodation & Travel Costs will be **Borne by AIGP(ToC)**
 
 ***Registration closes on 20th June 12PM IST***
