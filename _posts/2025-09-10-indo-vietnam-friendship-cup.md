@@ -31,11 +31,7 @@ There will be 8 players from each country, split into four brackets:
 
 **Game Settings -**
 
-* **Time**: 40 minutes main time with three 1‑minute byo-yomi periods (40m + 1m x 3). 
-* **Rules**: Japanese rules (no handicap, komi set at 6.5). 
-* **Platform**: Games will be played on [OGS](https://online-go.com) 
-
-  * Games will be played in “Disable Analysis” mode.  
+![](/assets/img/news/screenshot-from-2025-09-11-13-40-29.png)
 
 **Schedule** - 
 
