@@ -1,10 +1,10 @@
 ---
 title: Indo-Vietnam Friendship Cup
 date: 2025-09-10T14:40:02.797Z
-img: /assets/img/news/indo-mal.jpeg
+img: /assets/img/news/india-vietnam-2025.png
 description: We proudly present to you the 2nd International Weiqi/Baduk
   Friendship Cup hosted by India. More details shared in the post. Register Now.
-sidebar: "![](/assets/img/news/indo-mal.jpeg)"
+sidebar: "![](/assets/img/news/india-vietnam-2025.png)"
 ---
 **Event Details -**
 
