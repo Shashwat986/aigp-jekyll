@@ -48,11 +48,11 @@ Elimination Round:
 
 R﻿ound 2:
 
-*﻿ This was a round-robin round between the top 3 players.
-*﻿ Results:
-  *﻿ Winner: Soumya Kanti Kundu (2 wins)
-  *﻿ Runner-up: S﻿uhas Sontakki (1 win)
- ﻿ * Third Place: B﻿hanu Chandra (0 wins)
+- This was a round-robin round between the top 3 players.
+- Results
+- Winner: Soumya Kanti Kundu (2 wins)
+- Runner-up: S﻿uhas Sontakki (1 win)
+- Third Place: B﻿hanu Chandra (0 wins)
 
 ### Result
 
