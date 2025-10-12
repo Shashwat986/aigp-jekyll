@@ -1,5 +1,5 @@
 ---
-title: Indo-Vietnam Friendship Cup
+title: India-Vietnam Friendship Cup
 date: 2025-09-10T14:40:02.797Z
 img: /assets/img/news/india-vietnam-2025.png
 description: We proudly present to you the 2nd International Weiqi/Baduk
@@ -29,13 +29,15 @@ There will be 8 players from each country, split into four brackets:
 * Bracket 3: Two players ranked 11 - 16 kyu
 * Bracket 3: Two players ranked 17 - 22 kyu 
 
-**Game Settings -**
-
-![](/assets/img/news/screenshot-from-2025-09-11-13-40-29.png)
+![](/assets/img/news/india-vietnam-1-.png "Players")
 
 **Schedule** - 
 
-* Player Selection by: **26th September, 2025** 
 * Tournament Date: **11th October, 2025**
 
-**[R﻿egister Here](https://forms.gle/rzNGKKxfsywn1t3p7)**
+**Final Result** -
+
+* R1: **India:6, Vietnam:2**
+* R2: **India:5, Vietnam:3**
+
+<iframe height="250" width="450" src="https://www.youtube.com/embed/zjDRmNU_-Uo?si=2KRbol27uHo3ok1b" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
