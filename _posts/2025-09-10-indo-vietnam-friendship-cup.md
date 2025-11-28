@@ -41,3 +41,7 @@ There will be 8 players from each country, split into four brackets:
 * R2: **India:5, Vietnam:3**
 
 <iframe height="250" width="450" src="https://www.youtube.com/embed/zjDRmNU_-Uo?si=2KRbol27uHo3ok1b" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
+![](/assets/img/news/whatsapp-image-2025-11-02-at-3.06.43-pm.jpeg)
+
+Gifts received by the Hanoi Go Club while our Vice President Mr. Karan Rawat visited.
