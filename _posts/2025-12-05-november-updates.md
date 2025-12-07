@@ -17,3 +17,7 @@ W﻿e had meetups at Bangalore & Kolkata.
 ![](/assets/img/news/whatsapp-image-2025-11-30-at-2.04.27-pm.jpeg)
 
 ![](/assets/img/news/whatsapp-image-2025-11-10-at-7.44.41-pm.jpeg)
+
+O﻿ur Vice-President Mr. Karan Rawat visited Vietnam and personally handed over the gifts from the India-Vietnam Friendship Cup.
+
+![](/assets/img/news/whatsapp-image-2025-11-02-at-3.06.43-pm-vv.jpeg)
