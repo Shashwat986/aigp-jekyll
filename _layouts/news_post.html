@@ -1,0 +1,39 @@
+---
+layout: default
+bodyClass: "page-news-post"
+---
+
+<div class="container pb-6 pt-6 pt-md-10 pb-md-10">
+  <div class="row justify-content-center">
+    <div class="col-12 col-md-8">
+      <div class="news-post">
+        <h1 class="title">{{page.title}}</h1>
+        {% if page.date %}
+        <p class="text-muted">{{ page.date | date: "%B %d, %Y" }}</p>
+        {% endif %}
+
+        {% assign archive_categories = page.categories %}
+        {% if archive_categories == nil or archive_categories.size == 0 %}
+          {% if page.category %}
+            {% assign archive_categories = page.category | split: "," %}
+          {% endif %}
+        {% endif %}
+
+        {% if archive_categories.size > 0 %}
+        <div class="mb-4">
+          {% for category in archive_categories %}
+          {% assign category_slug = category | slugify %}
+          <a href="{{ '/categories/' | append: category_slug | append: '/' | relative_url }}" class="badge badge-secondary">{{ category }}</a>
+          {% endfor %}
+        </div>
+        {% endif %}
+
+        {% if page.image %}
+        <img src="{{ page.image | relative_url }}" alt="{{ page.title }}" class="img-fluid mb-4">
+        {% endif %}
+
+        <div class="content">{{content}}</div>
+      </div>
+    </div>
+  </div>
+</div>

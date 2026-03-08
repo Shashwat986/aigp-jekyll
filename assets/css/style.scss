@@ -1,0 +1,233 @@
+---
+---
+
+@use "bootstrap-shim" as *;
+
+// Libraries
+@use "libraries/hamburgers/hamburgers";
+
+// Components
+@use "components/type";
+@use "components/page";
+@use "components/header";
+@use "components/footer";
+@use "components/sub-footer";
+@use "components/logo";
+@use "components/main-menu";
+@use "components/main-menu-mobile";
+@use "components/hamburger";
+@use "components/buttons";
+@use "components/call";
+@use "components/title";
+@use "components/content";
+@use "components/intro";
+@use "components/intro-image";
+@use "components/strip";
+@use "components/feature";
+@use "components/social";
+
+// Pages
+@use "pages/page-home";
+
+// Theme Colors (CSS Variables)
+:root, [data-bs-theme="light"] {
+  --bg-color: #{$white};
+  --text-color: #{$black};
+  --heading-color: #{$black};
+  --secondary-text-color: #{$steel};
+  --card-bg: #f3f1f2;
+  --header-bg: #{$white};
+  --footer-bg: #{$primary};
+  --link-color: #{$primary};
+  --border-color: #e9e2e4;
+  --call-bg: #{$white-offset};
+}
+
+html.dark, [data-bs-theme="dark"] {
+  --bg-color: #121212;
+  --text-color: #e0e0e0;
+  --heading-color: #ffffff;
+  --secondary-text-color: #b0b0b0;
+  --card-bg: #1e1e1e;
+  --header-bg: #121212;
+  --footer-bg: #000000;
+  --link-color: #{$secondary};
+  --border-color: #333333;
+  --call-bg: #1e1e1e;
+}
+
+body {
+  font-size: 16px;
+  line-height: 1.2;
+  font-family: $font-family-base;
+  background-color: var(--bg-color) !important;
+  color: var(--text-color) !important;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  @include media-breakpoint-up(md) {
+    font-size: 16px;
+    line-height: 1.3;
+  }
+}
+
+a {
+  color: var(--link-color);
+  &:hover {
+    color: var(--link-color);
+    opacity: 0.8;
+  }
+}
+
+// Global Theme Overrides
+h1, h2, h3, h4, h5, h6 {
+  color: var(--heading-color) !important;
+}
+
+.badge {
+  color: var(--heading-color) !important;
+}
+
+p, span, li, td, th {
+  color: var(--text-color);
+}
+
+.intro {
+  background-color: var(--bg-color) !important;
+  h1, h2 {
+    color: var(--heading-color) !important;
+  }
+  p {
+    color: var(--secondary-text-color) !important;
+  }
+}
+
+.card, .news-card, .team-summary, .feature {
+  background-color: var(--card-bg) !important;
+  color: var(--text-color) !important;
+  border-color: var(--border-color) !important;
+  box-shadow: 0 12px 32px rgba(47, 47, 65, 0.18);
+  h1, h2, h3, h4 {
+    color: var(--heading-color) !important;
+  }
+}
+
+.news-card {
+  border-radius: 20px;
+  overflow: hidden;
+  .news-card-img {
+    display: block;
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    border-radius: inherit;
+  }
+}
+
+.header {
+  background: linear-gradient(110deg, #209cee 0%, #249bd1 100%) !important;
+  border-bottom: 1px solid var(--border-color) !important;
+  .logo img, .logo-mobile img {
+    transition: filter 0.3s ease;
+  }
+}
+
+html.dark .header {
+  background: linear-gradient(50deg, #1877b6 0%, #1b6fa0 100%) !important;
+  .logo img, .logo-mobile img {
+    filter: none;
+  }
+}
+
+.footer {
+  background: linear-gradient(110deg, #209cee 0%, #249bd1 100%) !important;
+  color: $white !important;
+  h1, h2, h3, h4, p, span {
+    color: $white !important;
+  }
+  a {
+    color: $white !important;
+    &:hover {
+      color: $secondary !important;
+    }
+  }
+}
+
+html.dark .footer {
+  background: linear-gradient(110deg, #1877b6 0%, #1b6fa0 100%) !important;
+}
+
+.sub-footer {
+  background-color: var(--footer-bg) !important;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  color: $white !important;
+}
+
+.strip, .strip-white {
+  background-color: var(--bg-color) !important;
+  background-image: none !important;
+}
+
+.strip-grey {
+  background-color: var(--border-color) !important;
+}
+
+.call {
+  background-color: var(--call-bg) !important;
+  color: var(--text-color) !important;
+  border: 1px solid var(--border-color) !important;
+}
+
+.theme-toggle {
+  cursor: pointer;
+  background: none;
+  border: none;
+  color: var(--text-color);
+  padding: 0;
+  margin-right: 15px;
+  display: flex;
+  align-items: center;
+  &:focus {
+    outline: none;
+  }
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+}
+
+.main-menu ul li a {
+  color: var(--text-color);
+}
+
+.main-menu ul li.active a {
+  color: #000000;
+  font-weight: 500;
+}
+
+// Mobile menu overrides
+@media (max-width: 991px) {
+  .main-menu-mobile {
+    background-color: var(--bg-color) !important;
+    li a {
+      color: var(--text-color) !important;
+    }
+  }
+}
+
+
+
+// reCAPTCHA badge styling
+.grecaptcha-badge {
+  bottom: 25px !important;
+  right: 0px !important;
+  z-index: 10000 !important;
+  transform: scale(0.5) !important;
+  width: 70px !important;
+  overflow: hidden !important;
+  transition: width 0.3s ease !important;
+  box-shadow: none !important;
+}
+
+.grecaptcha-badge:hover {
+  width: 256px !important;
+}

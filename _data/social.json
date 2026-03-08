@@ -1,0 +1,33 @@
+[
+  {
+    "name": "Discord",
+    "link": "https://soumyak4.in",
+    "image": "assets/images/social/discord.svg"
+  },
+  {
+    "name": "Twitter",
+    "link": "https://twitch.tv/soumyak4",
+    "image": "assets/images/social/twitter.svg"
+  },
+  {
+      "name": "Facebook",
+      "link": "https://www.facebook.com/IndiaBaduk/",
+      "image": "assets/images/social/facebook.svg"
+  },
+  {
+      "name": "Email",
+      "link": "mailto:contact@aigp.in",
+      "image": "assets/images/social/email.svg"
+  },
+  {
+      "name": "Instagram",
+      "link": "https://instagram.com/aigpindia",
+      "image": "assets/images/social/instagram.svg"
+  },
+  {
+      "name": "YouTube",
+      "link": "https://www.youtube.com/@aigpindia",
+      "image": "assets/images/social/youtube.svg"
+  }
+
+]
