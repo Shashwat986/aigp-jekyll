@@ -1,4 +1,4 @@
-url: "https://aigp.soumyak4.in"
+url: "https://aigp.org.in"
 baseurl: "/"
 permalink: pretty
 title: "AIGP"
@@ -50,6 +50,7 @@ sass:
   style: compressed
   quiet_deps: true
   load_paths:
+    - _sass
     - _sass/bootstrap
 
 plugins:
