@@ -70,6 +70,8 @@ GEM
       safe_yaml (~> 1.0)
       terminal-table (>= 1.8, < 4.0)
       webrick (~> 1.7)
+    jekyll-archives (2.3.0)
+      jekyll (>= 3.6, < 5.0)
     jekyll-environment-variables (1.0.1)
       jekyll (>= 3.0, < 5.x)
     jekyll-paginate-v2 (3.0.0)
@@ -152,6 +154,7 @@ PLATFORMS
   riscv64-linux-android
   riscv64-linux-gnu
   riscv64-linux-musl
+  ruby
   x86-linux-gnu
   x86-linux-musl
   x86_64-darwin
@@ -163,6 +166,7 @@ DEPENDENCIES
   base64 (~> 0.3.0)
   csv (~> 3.3)
   jekyll (~> 4.3.4)
+  jekyll-archives
   jekyll-environment-variables
   jekyll-paginate-v2
   jekyll-seo-tag

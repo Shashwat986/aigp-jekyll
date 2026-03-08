@@ -1,4 +1,4 @@
-url: "https://aigp.org.in"
+url: "https://aigp.soumyak4.in"
 baseurl: "/"
 permalink: pretty
 title: "AIGP"
@@ -49,6 +49,8 @@ pagination:
 sass:
   style: compressed
   quiet_deps: true
+  load_paths:
+    - _sass/bootstrap
 
 plugins:
   - jekyll-environment-variables
