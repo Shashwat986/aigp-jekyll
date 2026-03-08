@@ -70,8 +70,6 @@ GEM
       safe_yaml (~> 1.0)
       terminal-table (>= 1.8, < 4.0)
       webrick (~> 1.7)
-    jekyll-archives (2.3.0)
-      jekyll (>= 3.6, < 5.0)
     jekyll-environment-variables (1.0.1)
       jekyll (>= 3.0, < 5.x)
     jekyll-paginate-v2 (3.0.0)
@@ -80,6 +78,8 @@ GEM
       sass-embedded (~> 1.75)
     jekyll-seo-tag (2.8.0)
       jekyll (>= 3.8, < 5.0)
+    jekyll-sitemap (1.4.0)
+      jekyll (>= 3.7, < 5.0)
     jekyll-watch (2.2.1)
       listen (~> 3.0)
     kramdown (2.5.2)
@@ -152,7 +152,6 @@ PLATFORMS
   riscv64-linux-android
   riscv64-linux-gnu
   riscv64-linux-musl
-  ruby
   x86-linux-gnu
   x86-linux-musl
   x86_64-darwin
@@ -164,10 +163,10 @@ DEPENDENCIES
   base64 (~> 0.3.0)
   csv (~> 3.3)
   jekyll (~> 4.3.4)
-  jekyll-archives
   jekyll-environment-variables
   jekyll-paginate-v2
   jekyll-seo-tag
+  jekyll-sitemap
   webrick (~> 1.8)
 
 BUNDLED WITH
