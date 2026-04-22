@@ -22,3 +22,9 @@ description: "Read the full post for more information. "
 #### [Register Here](https://forms.gle/xqaQKkjaV9GALDdx7)
 
 **Registration closes on 27th March 12PM IST** 
+
+W﻿ishing the best to our players:
+1﻿. Suhas
+2﻿. Bhanu
+3﻿. Malhar
+4﻿. Ruba
