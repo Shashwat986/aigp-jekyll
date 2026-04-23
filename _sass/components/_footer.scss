@@ -1,0 +1,74 @@
+@use "bootstrap-shim" as *;
+
+.footer {
+  background: $footer-background-color;
+  padding-top: 15px;
+  padding-bottom: 15px;
+  .footer-inner {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    @include media-breakpoint-up(sm) {
+      justify-content: space-between;
+      flex-direction: row;
+      align-items: center;
+      text-align: left;
+    }
+  }
+  .footer-logo {
+    display: inline-flex;
+    align-items: center;
+    margin-bottom: 10px;
+    img {
+      display: block;
+      height: auto;
+      max-height: 48px;
+      width: auto;
+    }
+    @include media-breakpoint-up(sm) {
+      margin: 0;
+    }
+  }
+  ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+    li {
+      color: $footer-text-color;
+      font-size: 1rem;
+      a {
+        color: $footer-text-color;
+        text-decoration: none;
+        padding: 12px 0;
+        display: block;
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+    }
+    @include media-breakpoint-up(sm) {
+      height: inherit;
+      display: flex;
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      align-items: center;
+      justify-content: flex-end;
+      li {
+        list-style: none;
+        margin-right: 10px;
+        &:last-of-type {
+          margin-right: 0;
+        }
+        a {
+          display: inline-block;
+          height: 40px;
+          padding: 10px 8px 10px 8px;
+        }
+      }
+    }
+  }
+}

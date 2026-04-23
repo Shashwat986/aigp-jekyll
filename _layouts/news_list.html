@@ -1,0 +1,74 @@
+---
+layout: default
+bodyClass: "page-news"
+---
+
+<div class="intro">
+  <div class="container">
+    <div class="row justify-content-start">
+      <div class="col-12 col-md-7 col-lg-6 order-2 order-md-1">
+        {{ content }}
+      </div>
+      {% if page.intro_image %}
+      <div class="col-12 col-md-5 col-lg-6 order-1 order-md-2 position-relative">
+        <img alt="{{ page.title }}" class="intro-image{% if page.intro_image_absolute %} intro-image-absolute{% endif %}{% if page.intro_image_hide_on_mobile %} intro-image-hide-mobile{% endif %}" src="{{ page.intro_image | relative_url }}" />
+      </div>
+      {% endif %}
+    </div>
+  </div>
+</div>
+
+<div class="container pt-6 pb-6">
+  <div class="row">
+    {% for post in paginator.posts %}
+    <div class="col-12 mb-4">
+      <div class="card news-card">
+        <div class="row g-0">
+          <div class="col-12 col-md-3 d-flex align-items-center">
+            {% if post.img %}
+            <img src="{{ post.img | relative_url }}" alt="{{ post.title }}" class="img-fluid h-70 news-card-img" />
+            {% endif %}
+          </div>
+          <div class="col-12 col-md-9">
+            <div class="card-body d-flex flex-column h-100">
+              <h2 class="card-title">
+                <a href="{{ post.external_url | default: post.url | relative_url }}" {% if post.external_url %}target="_blank"{% endif %}>{{ post.title }}</a>
+              </h2>
+              <h3>
+                {{ post.date | date: "%b %-d, %Y" }}
+              </h3>
+              <p class="card-text">{{ post.description | default: post.excerpt | strip_html | truncate: 200 }}</p>
+              <a href="{{ post.external_url | default: post.url | relative_url }}" class="btn btn-primary mt-auto ms-auto" {% if post.external_url %}target="_blank"{% endif %}>More Info</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+
+  {% if paginator.total_pages > 1 %}
+  <nav aria-label="Page navigation">
+    <ul class="pagination justify-content-center">
+      {% if paginator.previous_page %}
+        <li class="page-item"><a class="page-link" href="{{ paginator.previous_page_path | relative_url }}">Previous</a></li>
+      {% endif %}
+
+      {% for page in (1..paginator.total_pages) %}
+        {% if page == paginator.page %}
+          <li class="page-item active"><span class="page-link">{{ page }}</span></li>
+        {% elsif page == 1 %}
+          <li class="page-item"><a class="page-link" href="{{ '/news/' | relative_url }}">{{ page }}</a></li>
+        {% else %}
+          <li class="page-item"><a class="page-link" href="{{ '/news/page/' | append: page | append: '/' | relative_url }}">{{ page }}</a></li>
+        {% endif %}
+      {% endfor %}
+
+      {% if paginator.next_page %}
+        <li class="page-item"><a class="page-link" href="{{ paginator.next_page_path | relative_url }}">Next</a></li>
+      {% endif %}
+    </ul>
+  </nav>
+  {% endif %}
+</div>
+<br>

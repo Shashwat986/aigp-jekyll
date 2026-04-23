@@ -1,5 +1,26 @@
+# NPM
+node_modules
+npm-debug.log
+
+# Jekyll
 _site
-.sass-cache
-.jekyll-cache
+_site/
+.sass-cache/
+.jekyll-cache/
 .jekyll-metadata
-vendor
+Gemfile.lock
+**/Gemfile.lock
+
+# Vendor
+vendor/
+
+# Temporary files
+jekyll_server.log
+tmp
+.DS_Store
+Desktop.ini
+._*
+Thumbs.db
+.Spotlight-V100
+.Trashes
+.idea
