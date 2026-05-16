@@ -1,0 +1,42 @@
+---
+layout: default
+bodyClass: "page-archive"
+---
+
+{% assign category_name = page.category %}
+{% assign category_slug = category_name | slugify %}
+{% assign category_posts = site.news | where_exp: "item", "item.categories contains category_name" | sort: "date" | reverse %}
+
+<div class="intro">
+  <div class="container">
+    <div class="row justify-content-start">
+      <div class="col-12 col-md-7 col-lg-6">
+        <h1>{{ category_name }}</h1>
+        <p class="lead">Archive for category: {{ category_name }}</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container pt-6 pb-6">
+  <div class="row">
+    {% for post in category_posts %}
+    <div class="col-12 mb-4">
+      <div class="card news-card">
+        <div class="card-body">
+          <h2 class="card-title">
+            <a href="{{ post.external_url | default: post.url | relative_url }}" {% if post.external_url %}target="_blank"{% endif %}>{{ post.title }}</a>
+          </h2>
+          <p class="card-text">{{ post.description | default: post.excerpt | strip_html | truncate: 200 }}</p>
+          <a href="{{ post.external_url | default: post.url | relative_url }}" class="btn btn-primary" {% if post.external_url %}target="_blank"{% endif %}>More Info</a>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+    {% if category_posts == empty %}
+    <div class="col-12">
+      <p>No posts found in this category.</p>
+    </div>
+    {% endif %}
+  </div>
+</div>

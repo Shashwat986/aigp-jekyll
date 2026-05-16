@@ -1,0 +1,27 @@
+@forward "theme";
+@use "theme" as *;
+@use "bootstrap-variables" as *;
+
+// Bootstrap 5.3.2 (legacy @import stack isolated behind a module)
+@import "functions";
+@import "variables";
+@import "variables-dark";
+@import "maps";
+@import "mixins";
+@import "utilities";
+
+@import "root";
+@import "reboot";
+@import "type";
+@import "images";
+@import "containers";
+@import "grid";
+@import "tables";
+@import "forms";
+@import "buttons";
+@import "card";
+@import "pagination";
+@import "badge";
+
+@import "helpers";
+@import "utilities/api";

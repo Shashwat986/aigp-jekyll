@@ -1,0 +1,39 @@
+main:
+  - name: "Home"
+    url: "/"
+    weight: 1
+  - name: "News"
+    url: "/news/"
+    weight: 3
+  - name: "Learn"
+    url: "/learn/"
+    weight: 2
+  - name: "Community"
+    url: "/community/"
+    weight: 4
+  - name: "Contact"
+    url: "/contact/"
+    weight: 5
+
+footer:
+  - name: "Home"
+    url: "/"
+    weight: 1
+  - name: "News"
+    url: "/news/"
+    weight: 3
+  - name: "Learn"
+    url: "/learn/"
+    weight: 2
+  - name: "Community"
+    url: "/community/"
+    weight: 4
+  - name: "Contact"
+    url: "/contact/"
+    weight: 5
+  - name: "Tournaments"
+    url: "https://leago.gg/aigp/events"
+    weight: 6
+  - name: "Players"
+    url: "https://leago.gg/aigp/ratings"
+    weight: 7
