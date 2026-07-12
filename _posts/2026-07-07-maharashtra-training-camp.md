@@ -11,6 +11,10 @@ sidebar: >-
 
   <iframe width="200" height="100" src="https://www.youtube.com/embed/2m4yfklSzRI?si=7i_QpWaLZMnU1XGo" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 ---
+It was held in **Nashik, Maharashtra, India**, from **3–5 July 2026**, bringing together Go (Baduk/Weiqi) players and enthusiasts from across the state. 
+Organized by the **Go Game Association of Maharashtra**, the camp featured beginner-friendly lessons, practical gameplay, strategy training, opening principles, tactical exercises, and game reviews. 
+Participants learned the fundamentals of the **Game of Go**, improved their strategic thinking, and some started their journey to become Go Trainers.
+
 <iframe width="400" height="200" src="https://www.youtube.com/embed/2m4yfklSzRI?si=7i_QpWaLZMnU1XGo" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
 ![](/assets/img/news/whatsapp-image-2026-07-05-at-2.13.43-pm.jpeg)
@@ -31,8 +35,6 @@ sidebar: >-
 
 N﻿EWS articles:\
 <https://www.prasidhipramukh.in/2026/07/blog-post_441.html>
-
-
 
 ![](/assets/img/news/whatsapp-image-2026-07-05-at-7.41.32-am.jpeg)
 
