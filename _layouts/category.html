@@ -23,12 +23,24 @@ bodyClass: "page-archive"
     {% for post in category_posts %}
     <div class="col-12 mb-4">
       <div class="card news-card">
-        <div class="card-body">
-          <h2 class="card-title">
-            <a href="{{ post.external_url | default: post.url | relative_url }}" {% if post.external_url %}target="_blank"{% endif %}>{{ post.title }}</a>
-          </h2>
-          <p class="card-text">{{ post.description | default: post.excerpt | strip_html | truncate: 200 }}</p>
-          <a href="{{ post.external_url | default: post.url | relative_url }}" class="btn btn-primary" {% if post.external_url %}target="_blank"{% endif %}>More Info</a>
+        <div class="row g-0">
+          <div class="col-12 col-md-3 d-flex align-items-center">
+            {% if post.img %}
+            <img src="{{ post.img | relative_url }}" alt="{{ post.title }}" class="img-fluid h-70 news-card-img" />
+            {% endif %}
+          </div>
+          <div class="col-12 col-md-9">
+            <div class="card-body d-flex flex-column h-100">
+              <h2 class="card-title">
+                <a href="{{ post.external_url | default: post.url | relative_url }}" {% if post.external_url %}target="_blank"{% endif %}>{{ post.title }}</a>
+              </h2>
+              <h3>
+                {{ post.date | date: "%b %-d, %Y" }}
+              </h3>
+              <p class="card-text">{{ post.description | default: post.excerpt | strip_html | truncate: 200 }}</p>
+              <a href="{{ post.external_url | default: post.url | relative_url }}" class="btn btn-primary mt-auto ms-auto" {% if post.external_url %}target="_blank"{% endif %}>More Info</a>
+            </div>
+          </div>
         </div>
       </div>
     </div>

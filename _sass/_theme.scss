@@ -24,3 +24,9 @@ $footer-background-color: $primary;
 $footer-text-color: $white;
 $sub-footer-background-color: color.adjust($primary, $lightness: -10%);
 $sub-footer-text-color: $white;
+
+// Utilities
+.h-70 {
+  height: 200px;
+  object-fit: cover;
+}
