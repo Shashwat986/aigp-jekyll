@@ -3,7 +3,7 @@ local_backend: true
 
 backend:
   name: git-gateway
-  branch: main # Branch to update (optional; defaults to master)
+  branch: soumyak4 # Branch to update (optional; defaults to master)
 media_folder: "assets/images/news"
 public_folder: "/assets/images/news"
 collections:
