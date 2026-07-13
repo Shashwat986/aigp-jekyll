@@ -6,6 +6,7 @@ gem "jekyll-seo-tag"
 gem "jekyll-paginate-v2"
 gem "jekyll-sitemap"
 gem "jekyll-environment-variables"
+gem 'jekyll-archives'
 
 gem "csv", "~> 3.3"
 
