@@ -11,7 +11,8 @@
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <link href="{{ '/assets/css/style.css' | relative_url }}" rel="stylesheet">
-  
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/glightbox/dist/css/glightbox.min.css" />
+
   {% seo %}
 
   <script>
@@ -33,6 +34,7 @@
     {% include header.html headerClass='header-extra' %}
     {{content}}
   </div>
+
   {% include footer.html %}
   {% include sub-footer.html %}
   <script type="text/javascript" src="{{ '/assets/js/scripts.js' | relative_url }}"></script>
@@ -40,5 +42,23 @@
   {% include google-analytics.html %}
   <script data-goatcounter="https://aigp.goatcounter.com/count"
         async src="//gc.zgo.at/count.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/glightbox/dist/js/glightbox.min.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // Wrap images inside .content (e.g., blog posts) with a link for Glightbox
+      document.querySelectorAll('.content img').forEach(img => {
+        const src = img.getAttribute('src');
+        if (!src) return;
+        const link = document.createElement('a');
+        link.href = src;
+        link.classList.add('glightbox');
+        img.parentNode.insertBefore(link, img);
+        link.appendChild(img);
+      });
+      const lightbox = GLightbox({
+        selector: '.glightbox'
+      });
+    });
+  </script>
 </body>
 </html>

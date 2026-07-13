@@ -17,7 +17,9 @@ show_call_box: false
 <div class="row row-cols-2 row-cols-md-4 g-2 mb-5">
     {% for i in (1..8) %}
     <div class="col">
-        <img src="{{ '/assets/images/home/home_' | append: i | append: '.jpeg' | relative_url }}" class="img-fluid rounded shadow-sm w-100" style="height: 150px; object-fit: cover;" alt="Home image {{ i }}">
+        <a href="{{ '/assets/images/home/home_' | append: i | append: '.jpeg' | relative_url }}" class="glightbox" data-gallery="home-gallery">
+            <img src="{{ '/assets/images/home/home_' | append: i | append: '.jpeg' | relative_url }}" class="img-fluid rounded shadow-sm w-100" style="height: 150px; object-fit: cover;" alt="Home image {{ i }}">
+        </a>
     </div>
     {% endfor %}
 </div>

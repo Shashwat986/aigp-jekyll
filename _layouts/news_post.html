@@ -29,7 +29,13 @@ bodyClass: "page-news-post"
         {% endif %}
 
         {% if page.image %}
-        <img src="{{ page.image | relative_url }}" alt="{{ page.title }}" class="img-fluid mb-4">
+        {% assign img_url = page.img %}
+{% if img_url != "" %}
+DEBUG: {{ img_url }}
+<a href="{{ img_url }}" class="glightbox" data-gallery="featured-image">
+          <img src="{{ img_url }}" alt="{{ page.title }}" class="img-fluid mb-4">
+        </a>
+{% endif %}
         {% endif %}
 
         <div class="content">{{content}}</div>

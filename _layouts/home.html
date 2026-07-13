@@ -25,7 +25,9 @@ bodyClass: "page-home"
 <div class="container">
   <div class="row justify-content-center">
     <div class="col-12 col-md-10">
-      {{ content }}
+      <div class="page-content">
+        {{ content }}
+      </div>
     </div>
   </div>
 </div>
@@ -39,7 +41,7 @@ bodyClass: "page-home"
       <div class="col-12 col-md-4 mb-3">
         <div class="card news-card h-100">
           {% if item.img %}
-          <a href="{{ item.external_url | default: item.url | relative_url }}" {% if item.external_url %}target="_blank"{% endif %} class="d-block">
+          <a href="{{ item.img | relative_url }}" class="d-block glightbox" data-gallery="news-gallery">
             <img src="{{ item.img | relative_url }}" class="card-img-top" alt="{{ item.title }}">
           </a>
           {% endif %}
