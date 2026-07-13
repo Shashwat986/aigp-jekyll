@@ -16,7 +16,9 @@ collections:
     slug: "{{year}}-{{month}}-{{day}}-{{slug}}" # Filename template, e.g., YYYY-MM-DD-title.md
     preview_path: "news/{{year}}/{{month}}/{{day}}/{{slug}}/"
     sortable_fields: ["date"]
-    sort: "date:desc"
+    sort:
+      - date
+      - desc
     fields: # The fields for each document, usually in front matter
       - {label: "Title", name: "title", widget: "string"}
       - {label: "Publish Date", name: "date", widget: "datetime", format: "YYYY-MM-DD"}
