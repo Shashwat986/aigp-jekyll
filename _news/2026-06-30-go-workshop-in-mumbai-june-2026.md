@@ -1,6 +1,6 @@
 ---
 title: Go Workshop in Mumbai - June 2026
-date: 2026-06-30T11:01:07.376Z
+date: "2026-06-30T11:01:07.376Z"
 img: /assets/images/news/img_20260607_220353.jpg
 description: By Mr. Karan Rawat
 categories:

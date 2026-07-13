@@ -1,6 +1,6 @@
 ---
 title: July Bangalore Go Meetup
-date: 2026-07-12T12:25:16.270Z
+date: "2026-07-12T12:25:16.270Z"
 img: /assets/images/news/whatsapp-image-2026-07-12-at-7.01.15-pm.jpeg
 description: Organised by Mr. Suhas
 categories:

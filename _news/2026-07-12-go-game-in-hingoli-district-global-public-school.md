@@ -1,6 +1,6 @@
 ---
 title: Go game in Hingoli district, Global Public School
-date: 2026-07-10T06:39:09.612Z
+date: "2026-07-10T06:39:09.612Z"
 img: /assets/images/news/whatsapp-image-2026-07-11-at-10.41.51-pm.jpeg
 description: Students were excited after learning and playing Go Game
 categories:

@@ -1,8 +1,8 @@
 ---
 title: Register for the first quarterly tournament of 2026
-date: 2026-02-12T13:37:21.796Z
+date: "2026-02-12T13:37:21.796Z"
 img: https://blob.leago.gg/banners/3e92bb4f-163d-4da6-a3ae-6d1130aa0ae0.png
-description: Compete and win exiting prizes.
+description: The long awaited quarterly tournament is here, sign up ASAP
 categories:
   - Tournament
   - National

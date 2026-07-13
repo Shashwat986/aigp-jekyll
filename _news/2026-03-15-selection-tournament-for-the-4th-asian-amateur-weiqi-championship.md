@@ -1,6 +1,6 @@
 ---
 title: Selection tournament for the 4th Asian Amateur Weiqi Championship
-date: 2026-03-15T03:36:45.617Z
+date: "2026-03-15T03:36:45.617Z"
 img: /assets/images/news/leago-avatar.png
 description: "Read the full post for more information. "
 categories:
