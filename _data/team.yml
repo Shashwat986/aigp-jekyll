@@ -1,0 +1,17 @@
+- name: "Shashwat Chandra"
+  role: "President"
+  image: "/assets/images/shashwat_about.jpeg"
+  bio: "One of India's strongest Go players. Known for his dedication to promoting the game, he has played an important role in inspiring and mentoring the growing Indian Go community."
+  link: "#"
+
+- name: "Karan Rawat"
+  role: "Vice President"
+  image: "/assets/images/karan_about.jpeg"
+  bio: "An active advocate for the growth of Go in India. Through his leadership, tournament organization, and community outreach, he has played an important role in expanding the reach of the game and supporting players across the country."
+  link: "#"
+
+- name: "Soumya Kanti Kundu"
+  role: "Treasurer, Admin, National Tournament Director & Teacher"
+  image: "/assets/images/soumya_about.jpeg"
+  bio: "A Go player, Martial Arts instructor, and developer. He is the creator of multiple Go sites/apps, dedicated to promoting Go through educational resources, tools, and community-driven initiatives, helping make the game more accessible to players in India and beyond."
+  link: "https://soumyak4.in"
