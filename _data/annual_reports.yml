@@ -1,0 +1,59 @@
+reports:
+  - year: "2026"
+    status: In progress
+    summary: Current reporting page for 2026 activity, including public events,
+      official notices, outreach, and representation records.
+    highlights:
+      - Official notices were separated from general news for better public
+        record keeping.
+      - Events moved into an editable collection for CMS-managed updates.
+      - Learning, community, contributor, and review-rule data became easier to
+        maintain.
+    links:
+      - label: Events
+        url: /events/
+  - year: "2025"
+    status: Archive outline
+    summary: Public news records include selection tournaments, friendship cups,
+      outreach, monthly updates, and community activity.
+    highlights:
+      - Association Update notices for international representation were published
+        publicly.
+      - AIGP public news recorded workshops, tournament results, and community
+        activity.
+      - Older updates remain available as public archive entries.
+  - year: "2024"
+    status: Archive outline
+    summary: Public records include international representation notices, online
+      league activity, monthly updates, and tournament-related announcements.
+    highlights:
+      - KPMC and Asian Weiqi Championship related updates were published.
+      - AIGP recorded league, monthly, and international invitation news.
+      - Archive entries preserve source chronology for future annual reporting.
+  - year: "2023"
+    status: Archive outline
+    summary: Public records include meetups, convention activity, international
+      representation, workshops, and monthly community updates.
+    highlights:
+      - Physical meetups, convention reports, and workshop results were
+        documented.
+      - Representative updates and international visibility were recorded.
+      - Monthly challenges and local Go activity were preserved in the news
+        archive.
+  - year: "2022"
+    status: Archive outline
+    summary: Public records include representative announcements and tournament
+      results from the early AIGP archive.
+    highlights:
+      - KPMC and WAGC representation updates were published.
+      - The 9x9 Independence Day tournament result was recorded.
+      - Archive entries help maintain continuity for Indian Go history.
+  - year: "2021"
+    status: Archive outline
+    summary: Public records include international tournament participation and
+      representative announcements.
+    highlights:
+      - Indian participants in the Paris and Durham Go tournaments were recorded.
+      - AIGP published representation news for the 16th Korea Prime Minister Cup.
+      - These entries form the earliest currently published news archive in this
+        repo.

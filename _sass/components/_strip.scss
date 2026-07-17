@@ -19,10 +19,10 @@
   }
 }
 .strip-primary-gradient {
-  background-image: linear-gradient(to right, $primary, $secondary);
+  background-image: linear-gradient(to right, $chakra-blue, $secondary);
 }
 .strip-primary-gradient-top-bottom {
-  background-image: linear-gradient(to bottom, $primary, $secondary);
+  background-image: linear-gradient(to bottom, $chakra-blue, $secondary);
 }
 .strip-primary {
   background-color: $primary;

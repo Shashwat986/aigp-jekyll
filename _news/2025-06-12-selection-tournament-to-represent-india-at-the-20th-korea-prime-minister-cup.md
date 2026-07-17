@@ -1,15 +1,16 @@
 ---
 title: Selection tournament to represent India at the 20th Korea Prime Minister Cup
 date: "2025-06-12"
-img: /assets/images/news/screenshot-from-2025-06-12-05-40-21.png
+img: /assets/images/news/screenshot-from-2025-06-12-05-40-21.webp
+img_alt: "Selection tournament to represent India at the 20th Korea Prime Minister Cup"
 description: Congratulations Soumya for winning the Indian selection tournament!
 categories:
   - Tournament
   - International
   - Selection
   - KPMC
+external_url_label: "More Info"
 ---
-![](/assets/images/news/screenshot-from-2025-06-12-05-40-21.png)
 
 ### **Main Event Info**
 
@@ -45,7 +46,7 @@ P﻿articipants:
 Elimination Round:
 
 * This was a swiss tournament conducted on Online Go Server.
-* Link: [https://online-go.com/tournament/129696](<* https://online-go.com/tournament/129696>)
+* Link: [https://online-go.com/tournament/129696](https://online-go.com/tournament/129696)
 * Results:
   * B﻿hanu Chandra (codepurple)
   * S﻿uhas Sontakki (shadowwolf886) 
@@ -62,4 +63,3 @@ R﻿ound 2:
 ### Result
 
 **Soumya Kanti Kundu** will represent Indian in the 20th Korean Prime Minister's Cup! Congratulations, Soumya.
-

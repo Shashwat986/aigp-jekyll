@@ -1,0 +1,46 @@
+---
+layout: default
+bodyClass: "page-news page-archive"
+---
+
+{% assign category_name = page.category %}
+{% assign category_slug = category_name | slugify %}
+{% assign category_posts = site.news | where_exp: "item", "item.categories contains category_name" | sort: "date" | reverse %}
+{% assign category_description = "News filed under " | append: category_name | append: "." %}
+{% case category_slug %}
+  {% when "tournament" %}
+    {% assign category_description = "Tournament registrations, formats, schedules, results, and event reports from AIGP." %}
+  {% when "workshop" %}
+    {% assign category_description = "Workshops, teaching sessions, school outreach, and beginner learning events." %}
+  {% when "international" %}
+    {% assign category_description = "International Go events, invitations, representation, and cross-country exchanges." %}
+  {% when "selection" %}
+    {% assign category_description = "Selection events and pathways for official representation." %}
+  {% when "results" %}
+    {% assign category_description = "Results and summaries from tournaments, leagues, and friendly events." %}
+  {% when "community" %}
+    {% assign category_description = "Community meetups, clubs, player activity, and local Go updates." %}
+  {% when "meetup" %}
+    {% assign category_description = "Meetups and local playing sessions from the Indian Go community." %}
+{% endcase %}
+
+<div class="container mx-auto px-4 py-12">
+  <div class="w-full mx-auto">
+    <div class="section-heading">
+      <span class="section-eyebrow">News Category</span>
+      <h1 class="section-title">{{ category_name }}</h1>
+      <p class="section-summary">{{ category_description }}</p>
+    </div>
+    <div class="card-grid media-card-list">
+      {% for post in category_posts %}
+        {% include news-card.html post=post %}
+      {% endfor %}
+
+      {% if category_posts == empty %}
+      <div class="official-card official-card__body text-center">
+        <p class="text-[var(--secondary-text-color)]">No posts found in this category.</p>
+      </div>
+      {% endif %}
+    </div>
+  </div>
+</div>

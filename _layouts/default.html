@@ -9,11 +9,34 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <!-- Tailwind browser compiler is pinned until the site moves to compiled CSS. -->
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4.3.2"></script>
+  <style type="text/tailwindcss">
+    @theme {
+      --color-primary: #ff671f;
+      --color-primary-dark: #c94a13;
+      --color-secondary: #138808;
+      --color-brand-black: #1f2533;
+      --color-white-offset: #fff8ef;
+      --color-steel: #5c5a5a;
+      --font-sans: Helvetica, Arial, sans-serif, -apple-system;
+      --font-serif: "Playfair Display", serif, -apple-system;
+    }
+    @custom-variant dark (&:where(.dark, .dark *));
+  </style>
+
   <link href="{{ '/assets/css/style.css' | relative_url }}" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/glightbox/dist/css/glightbox.min.css" />
+  {% assign needs_lightbox_css = page.use_lightbox | default: false %}
+  {% if page.collection == "news" or page.collection == "notices" %}
+    {% assign needs_lightbox_css = true %}
+  {% endif %}
+  {% if needs_lightbox_css %}
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/glightbox@3.3.1/dist/css/glightbox.min.css" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/glightbox@3.3.1/dist/css/glightbox.min.css"></noscript>
+  {% endif %}
 
   {% seo %}
+  {% include structured-data.html %}
 
   <script>
     if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
@@ -24,42 +47,29 @@
         document.documentElement.setAttribute('data-bs-theme', 'light');
     }
   </script>
-  <script src="https://www.google.com/recaptcha/api.js?render={{ site.recaptcha_site_key }}"></script>
-  <script>window.RECAPTCHA_SITE_KEY = "{{ site.recaptcha_site_key }}";</script>
 </head>
 
-<body class='page {{page.bodyClass}}'>
+<body class='page {{ page.bodyClass }} {{ layout.bodyClass }}'>
   {% include main-menu-mobile.html %}
   <div id="wrapper" class="wrapper">
     {% include header.html headerClass='header-extra' %}
-    {{content}}
+    <main id="main-content">
+      {{content}}
+    </main>
   </div>
 
   {% include footer.html %}
   {% include sub-footer.html %}
-  <script type="text/javascript" src="{{ '/assets/js/scripts.js' | relative_url }}"></script>
-  <script type="text/javascript" src="{{ "/assets/js/captcha.js" | relative_url }}"></script>
-  {% include google-analytics.html %}
-  <script data-goatcounter="https://aigp.goatcounter.com/count"
-        async src="//gc.zgo.at/count.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/glightbox/dist/js/glightbox.min.js"></script>
-  <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
   <script>
     document.addEventListener('DOMContentLoaded', function() {
-      // Wrap images inside .content (e.g., blog posts) with a link for Glightbox
-      document.querySelectorAll('.content img').forEach(img => {
-        const src = img.getAttribute('src');
-        if (!src) return;
-        const link = document.createElement('a');
-        link.href = src;
-        link.classList.add('glightbox');
-        img.parentNode.insertBefore(link, img);
-        link.appendChild(img);
-      });
-      const lightbox = GLightbox({
-        selector: '.glightbox'
+      document.querySelectorAll('iframe').forEach(iframe => {
+        iframe.loading = iframe.loading || 'lazy';
+        if (!iframe.getAttribute('title')) {
+          iframe.setAttribute('title', 'Embedded external content');
+        }
       });
     });
   </script>
+  {% include third-party-scripts.html %}
 </body>
 </html>

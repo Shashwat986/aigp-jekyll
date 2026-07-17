@@ -1,0 +1,16 @@
+support_options:
+  - title: "Sponsor A Tournament"
+    summary: "Support prizes, venue costs, player hospitality, streaming, pairing operations, clocks, boards, result reporting, or travel assistance."
+    contact_label: "Discuss Tournament Support"
+    contact_url: "/contact/"
+  - title: "Host A Workshop"
+    summary: "Invite AIGP volunteers to schools, colleges, community spaces, libraries, clubs, or public events."
+    contact_label: "Request Outreach"
+    contact_url: "/outreach/"
+  - title: "Donate Equipment Or Services"
+    summary: "Offer Go sets, clocks, printing, photography, video, accessibility help, translation, web development, design, public documentation, or venue access."
+    contact_label: "Offer Support"
+    contact_url: "/contact/"
+policy:
+  accepts_online_donations: false
+  message: "AIGP does not currently publish a public online donation checkout on this website. Support conversations should start through the contact route so purpose, acknowledgement, and compliance can be confirmed."

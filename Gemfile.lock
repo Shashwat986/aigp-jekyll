@@ -54,17 +54,20 @@ GEM
     http_parser.rb (0.8.1)
     i18n (1.15.2)
       concurrent-ruby (~> 1.0)
-    jekyll (4.3.4)
+    jekyll (4.4.1)
       addressable (~> 2.4)
+      base64 (~> 0.2)
       colorator (~> 1.0)
+      csv (~> 3.0)
       em-websocket (~> 0.5)
       i18n (~> 1.0)
       jekyll-sass-converter (>= 2.0, < 4.0)
       jekyll-watch (~> 2.0)
+      json (~> 2.6)
       kramdown (~> 2.3, >= 2.3.1)
       kramdown-parser-gfm (~> 1.0)
       liquid (~> 4.0)
-      mercenary (>= 0.3.6, < 0.5)
+      mercenary (~> 0.3, >= 0.3.6)
       pathutil (~> 0.9)
       rouge (>= 3.0, < 5.0)
       safe_yaml (~> 1.0)
@@ -84,6 +87,7 @@ GEM
       jekyll (>= 3.7, < 5.0)
     jekyll-watch (2.2.1)
       listen (~> 3.0)
+    json (2.21.1)
     kramdown (2.5.2)
       rexml (>= 3.4.4)
     kramdown-parser-gfm (1.1.0)
@@ -164,14 +168,14 @@ PLATFORMS
 
 DEPENDENCIES
   base64 (~> 0.3.0)
-  csv (~> 3.3)
-  jekyll (~> 4.3.4)
-  jekyll-archives
-  jekyll-environment-variables
-  jekyll-paginate-v2
-  jekyll-seo-tag
-  jekyll-sitemap
-  webrick (~> 1.8)
+  csv (~> 3.3, >= 3.3.5)
+  jekyll (~> 4.4.1)
+  jekyll-archives (~> 2.3)
+  jekyll-environment-variables (~> 1.0)
+  jekyll-paginate-v2 (~> 3.0)
+  jekyll-seo-tag (~> 2.9)
+  jekyll-sitemap (~> 1.4)
+  webrick (~> 1.9, >= 1.9.2)
 
 BUNDLED WITH
    2.7.2

@@ -1,0 +1,37 @@
+{% assign resource = include.resource %}
+{% assign card_mode = include.mode | default: "compact" %}
+{% assign hide_button = include.hide_button | default: false %}
+
+<article class="official-card media-card resource-card{% if card_mode == 'compact' %} media-card--compact{% endif %}">
+  {% if resource.image %}
+  <div class="media-card__image">
+    <a href="{{ resource.url }}" target="_blank" rel="noopener noreferrer">
+      <img src="{{ resource.image | relative_url }}" alt="{{ resource.image_alt | default: resource.title }}" loading="lazy">
+    </a>
+  </div>
+  {% endif %}
+  <div class="media-card__content">
+    <div>
+      <span class="official-card__meta">{{ resource.level }} · {{ resource.format }}{% if resource.language %} · {{ resource.language }}{% endif %}</span>
+      <h3 class="official-card__title">
+        <a href="{{ resource.url }}" target="_blank" rel="noopener noreferrer">{{ resource.title }}</a>
+      </h3>
+      <p class="official-card__text">{{ resource.description }}</p>
+      {% if resource.tags %}
+      <div class="pill-list mt-4">
+        {% for tag in resource.tags %}
+        <span class="tag-pill">{{ tag }}</span>
+        {% endfor %}
+        {% if resource.aigp_created %}
+        <span class="tag-pill">AIGP-created</span>
+        {% endif %}
+      </div>
+      {% endif %}
+    </div>
+    {% unless hide_button %}
+    <div class="mt-6 flex justify-start md:justify-end">
+      <a class="button button-primary" href="{{ resource.url }}" target="_blank" rel="noopener noreferrer">{{ resource.link_label | default: "Open Resource" }}</a>
+    </div>
+    {% endunless %}
+  </div>
+</article>

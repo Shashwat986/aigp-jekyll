@@ -1,0 +1,130 @@
+resources:
+  - level: Beginner
+    image_alt: GoMagic How to Play Go thumbnail
+    url: https://gomagic.org/courses/go-rules/
+    link_label: Open Course
+    format: Interactive Course
+    title: How to Play Go - A Modern Tutorial
+    language: English
+    tags:
+      - Rules
+      - Beginner
+      - Interactive
+    aigp_created: false
+    image: https://gomagic.org/files/images/go-rules-new-cover-900-624x416.jpg
+    description: A clear GoMagic course that introduces the rules one by one.
+  - level: Beginner
+    image_alt: OGS Logo
+    url: https://online-go.com/learn-to-play-go
+    link_label: Open Tutorial
+    format: Interactive Tutorial
+    title: OGS Learn to Play
+    language: English
+    tags:
+      - Rules
+      - Beginner
+      - Interactive
+    aigp_created: false
+    image: https://ogs-forums.s3.amazonaws.com/original/2X/2/2512899f61b1f5bc8e6cc997cb4a1282cd23ab95.png
+    description: A crisp interactive step by step introduction covering the basic
+      rules and core concepts.
+  - level: Beginner to Intermediate
+    image_alt: Weiqi roadmap guide artwork
+    url: https://weiqi.soumyak4.in/
+    link_label: Open Guide
+    format: Guide
+    title: Weiqi - Baduk - Go Game Roadmap/Guide
+    language: English
+    tags:
+      - Zero to Hero
+      - Resources
+      - Complete Guide
+    aigp_created: true
+    image: https://soumyak4.in/assets/img/roadmap.webp
+    description: A complete step-by-step guide by an AIGP member.
+  - level: Beginner to Intermediate
+    image_alt: Dsaun shape lecture thumbnail
+    url: https://www.youtube.com/watch?v=JKBh8FGK9bU
+    link_label: Watch Lecture
+    format: Video
+    title: Dsaun's Shape Lecture
+    language: English
+    tags:
+      - Shape
+      - Fundamentals
+    aigp_created: false
+    image: https://img.youtube.com/vi/aV3Xb8P10oc/sddefault.jpg
+    description: A memorable lecture on good and bad shape.
+  - level: Beginner to Intermediate
+    image_alt: Dwyrin Back to Basics thumbnail
+    url: https://www.youtube.com/playlist?list=PLv4MbeLo6yXkNDDJVNVQcZ5WuyS85gvwO
+    link_label: Watch Playlist
+    format: Video Playlist
+    title: Dwyrin's Back to Basics
+    language: English
+    tags:
+      - Direction of Play
+      - Life and Death
+      - Mistakes
+    aigp_created: false
+    image: https://i3.ytimg.com/vi/8f5-vAZ3Jik/hqdefault.jpg
+    description: A practical series focused on core habits and decisions that apply
+      in real games.
+  - level: All Levels
+    image_alt: Go learning roadmap
+    url: https://baduktube.soumyak4.in/
+    link_label: Open Resource
+    format: Lectures
+    title: BadukTube - Free Lectures Dictionary
+    language: English
+    tags:
+      - Lectures
+      - Reference
+    aigp_created: true
+    image: https://soumyak4.in/assets/img/baduktube.webp
+    description: A searchable lecture dictionary created by an AIGP member.
+  - level: Beginner
+    image_alt: Cover of the Go comic by Andreas Fecke
+    url: https://www.britgo.org/cartoons/index.html
+    link_label: Open Comic
+    format: Comic
+    title: A Go-Comic by Andreas Fecke
+    language: English
+    tags:
+      - Rules
+      - Beginner
+      - Comic
+    aigp_created: false
+    image: https://www.britgo.org/files/cartoons/cover01.jpg
+    description: A beginner-friendly comic introduction that works well for players
+      familiar with Chess.
+  - level: All Levels
+    image_alt: Polgote profile image
+    url: https://polgote.com/
+    link_label: Open Platform
+    format: Lesson Platform
+    title: POLGOTE.COM
+    language: English
+    tags:
+      - Paid Lessons
+      - Private Lessons
+      - Group Lessons
+    aigp_created: false
+    image: https://pbs.twimg.com/profile_images/1439892171595911170/9eYihMnc_400x400.jpg
+    description: A platform for booking online Go lessons with teachers from around
+      the world.
+  - level: All Levels
+    image_alt: SWHub Logo
+    url: https://github.com/SoumyaK4/WeiqiHub/releases
+    link_label: Get App
+    format: Software
+    title: SWHub
+    language: English
+    tags:
+      - Puzzles
+      - Pattern Search
+      - Joseki
+      - AI
+    aigp_created: true
+    image: https://raw.githubusercontent.com/SoumyaK4/WeiqiHub/main/assets/images/icons/app.png
+    description: Improve with Puzzles, Pattern Search, SRS, Joseki Study and AI

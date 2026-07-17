@@ -1,0 +1,17 @@
+---
+layout: null
+---
+<?xml version="1.0" encoding="UTF-8"?>
+{% assign posts = site.news | sort: "date" | reverse %}
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>{{ site.title | xml_escape }} News</title>
+    <description>Latest news from the Association Of Indian Go Players.</description>
+    <link>{{ "/news/" | absolute_url }}</link>
+    <atom:link href="{{ "/news/feed.xml" | absolute_url }}" rel="self" type="application/rss+xml" />
+    <language>en</language>
+    {% for post in posts limit: 25 %}
+    {% include rss-item.xml item=post %}
+    {% endfor %}
+  </channel>
+</rss>

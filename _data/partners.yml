@@ -1,0 +1,34 @@
+collaborators:
+  - name: Asian Go Federation
+    description: AIGP is listed among Asian Go Federation membership contacts,
+      connecting Indian Go with the wider Asian Go community.
+    url: https://www.asiagofed.org/Page4/Memberships.html
+    link_label: View AGF Memberships
+  - name: Leago
+    description: AIGP currently links tournaments, ratings, and player information
+      through the AIGP profile on Leago.
+    url: https://leago.gg/aigp
+    link_label: Open AIGP On Leago
+  - name: GoMagic
+    description: GoMagic has supported AIGP with free memberships on its platforms.
+      AIGP learners can also get a 50% discount on GoMagic membership or courses
+      with code COLCATAGC.
+    url: https://gomagic.org/
+    link_label: Open GoMagic
+  - name: Korean Baduk Federation
+    description: AIGP has received international representation invitations and
+      visibility through Korean Baduk Federation related events and reports.
+  - name: Chinese Weiqi Association
+    description: AIGP players have participated in the Amateur Asian Weiqi
+      Championships, strengthening India's connection with the wider Asian Go
+      community.
+  - name: Meeplecon And Cluedo
+    description: AIGP event reports record India's first open Go convention and
+      tournament as organized in association with Cluedo and Meeplecon.
+  - name: Schools And Colleges
+    description: AIGP outreach reports include sessions connected with Bennett
+      University, Global Public School, Hingoli and numerous other institutions.
+  - link_label: Open Website
+    name: Pandanet
+    url: https://pandanet-igs.com/communities/pandanet
+    description: Pandanet has previously helped up with multiple lecture and review sessions

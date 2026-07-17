@@ -3,66 +3,47 @@ layout: default
 bodyClass: "page-home"
 ---
 
-<div class="intro">
-  <div class="container">
-    <div class="row justify-content-start">
-      <div class="col-12 col-md-7 col-lg-6 order-2 order-md-1">
-        <h1>{{ page.title }}</h1>
-        <p>{{ page.description }}</p>
-        {% if page.show_call_box %}
-          {% include call.html show_button=true %}
-        {% endif %}
-      </div>
-      {% if page.intro_image %}
-      <div class="col-12 col-md-5 col-lg-6 order-1 order-md-2 position-relative">
-        <img alt="{{ page.title }}" class="intro-image{% if page.intro_image_absolute %} intro-image-absolute{% endif %}{% if page.intro_image_hide_on_mobile %} intro-image-hide-mobile{% endif %}" src="{{ page.intro_image | relative_url }}" />
-      </div>
-      {% endif %}
-    </div>
-  </div>
-</div>
-
-<div class="container">
-  <div class="row justify-content-center">
-    <div class="col-12 col-md-10">
-      <div class="page-content">
-        {{ content }}
+<div class="home-hero">
+  <img class="home-hero__background" src="{{ page.intro_image | relative_url }}"{% if page.intro_image_srcset %} srcset="{{ page.intro_image_srcset }}" sizes="100vw"{% endif %} alt="{{ page.intro_image_alt | default: page.title }}" loading="eager" fetchpriority="high">
+  <div class="home-hero__shade" aria-hidden="true"></div>
+  <div class="container mx-auto px-4">
+    <div class="home-hero__content">
+      <span class="section-eyebrow">Affiliated to Asian Go Federation</span>
+      <h1>{{ page.title }}</h1>
+      <p>{{ page.description }}</p>
+      <div class="home-hero__actions">
+        <a class="button button-primary" href="#home-membership-band">Join AIGP</a>
+        <a class="button button-secondary home-hero__secondary" href="{{ site.data.links.leago.events }}" target="_blank" rel="noopener noreferrer">View Tournaments</a>
+        <a class="button button-secondary home-hero__secondary" href="{{ '/learn/' | relative_url }}">Learn Go</a>
       </div>
     </div>
   </div>
+  <a class="home-scroll-cue" href="#home-start" aria-label="Scroll to main homepage content">
+    <span></span>
+  </a>
 </div>
 
-<div class="strip">
-  <div class="container pt-6 pb-6 pb-md-10">
-    <div class="row justify-content">
+<div class="container mx-auto px-4">
+  <div id="home-start" class="page-content text-[var(--text-color)] leading-relaxed">
+    {{ content }}
+  </div>
+</div>
+
+<div class="site-section home-news-band">
+  <div class="container mx-auto px-4">
+    <div class="section-heading">
+      <span class="section-eyebrow">Latest News</span>
+      <h2 class="section-title">Updates From The Indian Go Community</h2>
+    </div>
+    <div class="card-grid card-grid--3">
       {% assign limit = site.home.limit_news | default: 3 %}
       {% assign news_sorted = site.news | sort: "date" | reverse %}
       {% for item in news_sorted limit: limit %}
-      <div class="col-12 col-md-4 mb-3">
-        <div class="card news-card h-100">
-          {% if item.img %}
-          <a href="{{ item.img | relative_url }}" class="d-block glightbox" data-gallery="news-gallery">
-            <img src="{{ item.img | relative_url }}" class="card-img-top" alt="{{ item.title }}">
-          </a>
-          {% endif %}
-          <div class="card-body">
-            {% if item.date %}
-            <p class="card-text small text-muted mb-2">{{ item.date | date: "%b %-d, %Y" }}</p>
-            {% endif %}
-            <h2 class="card-title">
-              <a href="{{ item.external_url | default: item.url | relative_url }}" {% if item.external_url %}target="_blank"{% endif %}>{{ item.title }}</a>
-            </h2>
-            <p class="card-text">{{ item.description | default: item.excerpt | strip_html | truncate: 100 }}</p>
-          </div>
-        </div>
-      </div>
+        {% include news-card.html post=item mode="compact" %}
       {% endfor %}
     </div>
-    <div class="row justify-content-center mt-4">
-      <div class="col-auto">
-        <a class="button button-primary" href="{{ "/news/" | relative_url }}">View All News</a>
-      </div>
+    <div class="flex justify-center mt-10">
+      <a class="button button-primary" href="{{ "/news/" | relative_url }}">View All News</a>
     </div>
   </div>
 </div>
-<br>

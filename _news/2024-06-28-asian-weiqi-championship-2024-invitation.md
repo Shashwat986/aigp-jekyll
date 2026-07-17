@@ -1,7 +1,8 @@
 ---
 title: Asian Weiqi Championship 2024 Invitation
 date: "2024-06-28T08:09:55.746Z"
-img: /assets/images/news/awc2024l.jpg
+img: /assets/images/news/awc2024l.webp
+img_alt: "Asian Weiqi Championship 2024 Invitation"
 description: Apply to represent India in Asian Weiqi Championship by Chinese
   WeiQi Association
 categories:
@@ -9,12 +10,11 @@ categories:
   - International
   - Selection
   - AWC
+external_url_label: "More Info"
 ---
-![﻿AWC 2024 POSTER](/assets/images/news/awc2024p.jpg)
+![﻿AWC 2024 POSTER](/assets/images/news/awc2024p.webp)
 
 # Asian Weiqi Championship 2024
-
-![﻿AWC 2024 BANNER](/assets/images/news/awc2024l.jpg)
 
 ### What?
 

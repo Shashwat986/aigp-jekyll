@@ -1,6 +1,7 @@
 ---
 title: Pranjal Srivastava to represent India in the 2022 WAGC
-img: /assets/images/news/wagc2022.png
+img: /assets/images/news/wagc2022.webp
+img_alt: "Pranjal Srivastava to represent India in the 2022 WAGC"
 description: Pranjal Srivastava has won the 10-person, 4-round swiss WAGC Indian
   Representation Selection Tournament 2022. He will be representing India in the
   WAGC 2022, which will take place online. Congratulations to Pranjal!
@@ -10,6 +11,7 @@ categories:
   - Selection
   - WAGC
 date: "2022-11-16"
+external_url_label: "More Info"
 ---
 #### Participants
   * Aditya Vikram Kandukuri (OGS: Ruro)

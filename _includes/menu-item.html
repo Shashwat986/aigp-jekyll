@@ -1,0 +1,77 @@
+{% assign item = include.item %}
+{% assign menu_mode = include.mode | default: "desktop" %}
+{% unless item.show_in_header == false %}
+{% assign resolved_item_url = item.url %}
+{% if resolved_item_url contains "." %}
+  {% assign item_link_parts = resolved_item_url | split: "." %}
+  {% if item_link_parts.size == 2 %}
+    {% assign item_link_group = item_link_parts[0] %}
+    {% assign item_link_key = item_link_parts[1] %}
+    {% assign item_link_group_data = site.data.links[item_link_group] %}
+    {% assign item_named_link = item_link_group_data[item_link_key] %}
+    {% if item_named_link %}{% assign resolved_item_url = item_named_link %}{% endif %}
+  {% endif %}
+{% endif %}
+{% assign is_active = false %}
+{% assign is_external = false %}
+{% if resolved_item_url contains "://" or resolved_item_url contains "mailto:" %}{% assign is_external = true %}{% endif %}
+{% assign item_url = resolved_item_url | append: "/" | replace: "//", "/" %}
+{% assign page_url = page.url | append: "/" | replace: "//", "/" %}
+{% if is_external %}
+  {% assign is_active = false %}
+{% elsif resolved_item_url == "/" %}
+  {% if page.url == "/" %}{% assign is_active = true %}{% endif %}
+{% else %}
+  {% if page_url == item_url or page_url contains item_url %}{% assign is_active = true %}{% endif %}
+{% endif %}
+{% for child in item.children %}
+  {% assign resolved_child_url = child.url %}
+  {% if resolved_child_url contains "." %}
+    {% assign child_link_parts = resolved_child_url | split: "." %}
+    {% if child_link_parts.size == 2 %}
+      {% assign child_link_group = child_link_parts[0] %}
+      {% assign child_link_key = child_link_parts[1] %}
+      {% assign child_link_group_data = site.data.links[child_link_group] %}
+      {% assign child_named_link = child_link_group_data[child_link_key] %}
+      {% if child_named_link %}{% assign resolved_child_url = child_named_link %}{% endif %}
+    {% endif %}
+  {% endif %}
+  {% unless resolved_child_url contains "://" or resolved_child_url contains "mailto:" %}
+    {% assign child_url = resolved_child_url | append: "/" | replace: "//", "/" %}
+    {% if page_url == child_url or page_url contains child_url %}{% assign is_active = true %}{% endif %}
+  {% endunless %}
+{% endfor %}
+
+{% if menu_mode == "mobile" %}
+<li class="{% if is_active %}underline decoration-2 underline-offset-8 font-bold text-secondary{% endif %}">
+  <a href="{% include link-url.html url=item.url %}"{% if is_external %} target="_blank" rel="noopener noreferrer"{% endif %} class="hover:text-secondary transition-colors">{{ item.name }}</a>
+</li>
+{% else %}
+<li class="main-menu__item transition-colors duration-200 hover:text-secondary {% if item.children %}main-menu__item--has-dropdown{% endif %} {% if is_active %}is-active text-secondary{% endif %}">
+  <a class="main-menu__link {% if is_active %}underline decoration-2 underline-offset-4{% endif %}" href="{% include link-url.html url=item.url %}"{% if is_external %} target="_blank" rel="noopener noreferrer"{% endif %}>{{ item.name }}</a>
+  {% if item.children %}
+  <button class="main-menu__toggle" type="button" aria-expanded="false" aria-label="Open {{ item.name }} menu">
+    <svg aria-hidden="true" viewBox="0 0 20 20"><path d="M5.2 7.4 10 12.2l4.8-4.8 1.4 1.4L10 15 3.8 8.8l1.4-1.4Z"/></svg>
+  </button>
+  <ul class="main-menu__dropdown" aria-label="{{ item.name }} menu">
+    {% for child in item.children %}
+    {% assign resolved_child_url = child.url %}
+    {% if resolved_child_url contains "." %}
+      {% assign child_link_parts = resolved_child_url | split: "." %}
+      {% if child_link_parts.size == 2 %}
+        {% assign child_link_group = child_link_parts[0] %}
+        {% assign child_link_key = child_link_parts[1] %}
+        {% assign child_link_group_data = site.data.links[child_link_group] %}
+        {% assign child_named_link = child_link_group_data[child_link_key] %}
+        {% if child_named_link %}{% assign resolved_child_url = child_named_link %}{% endif %}
+      {% endif %}
+    {% endif %}
+    {% assign child_external = false %}
+    {% if resolved_child_url contains "://" or resolved_child_url contains "mailto:" %}{% assign child_external = true %}{% endif %}
+    <li><a href="{% include link-url.html url=child.url %}"{% if child_external %} target="_blank" rel="noopener noreferrer"{% endif %}>{{ child.name }}</a></li>
+    {% endfor %}
+  </ul>
+  {% endif %}
+</li>
+{% endif %}
+{% endunless %}

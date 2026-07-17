@@ -1,0 +1,48 @@
+---
+layout: default
+bodyClass: "page-notices"
+---
+
+<div class="container mx-auto px-4 py-12">
+  <div class="w-full mx-auto">
+    <div class="section-heading">
+      <span class="section-eyebrow">Official Notices</span>
+      <h1 class="section-title">{{ page.title }}</h1>
+      <p class="section-summary">{{ page.description }}</p>
+    </div>
+
+    {% assign notices_sorted = site.notices | sort: "date" | reverse %}
+    <div class="card-grid media-card-list">
+      {% assign has_notices = false %}
+      {% for notice in notices_sorted %}
+      {% assign should_show_notice = true %}
+      {% if page.notice_type %}
+        {% assign should_show_notice = false %}
+        {% assign notice_types = notice.notice_types | default: notice.notice_type %}
+        {% if notice_types %}
+          {% if notice_types.first %}
+            {% for notice_type in notice_types %}
+              {% if notice_type == page.notice_type %}
+                {% assign should_show_notice = true %}
+              {% endif %}
+            {% endfor %}
+          {% elsif notice_types == page.notice_type %}
+            {% assign should_show_notice = true %}
+          {% endif %}
+        {% endif %}
+      {% endif %}
+
+      {% if should_show_notice %}
+        {% assign has_notices = true %}
+        {% include notice-card.html notice=notice %}
+      {% endif %}
+      {% endfor %}
+
+      {% unless has_notices %}
+      <div class="official-card official-card__body text-center">
+        <p class="text-[var(--secondary-text-color)]">No official notices found.</p>
+      </div>
+      {% endunless %}
+    </div>
+  </div>
+</div>

@@ -1,25 +1,32 @@
 url: "https://aigp.org.in"
-baseurl: "/"
+baseurl: ""
 permalink: pretty
+future: true
 title: "AIGP"
 description: "Looking for Indians who are interested in the game of Go, and willing to play this wonderful strategy game. Go, also called baduk, weiqi, or igo is a popular strategy game with a very rich history, still in its infancy in India. Help us get bigger!"
 
 # logo: "assets/images/logo/logo.svg"
-logo: "assets/images/logo.png"
+logo: "assets/images/logo.webp"
 site_logo:
   # mobile: "assets/images/logo/logo-mobile.svg"
-  mobile: "assets/images/logo.png"
-  # mobile_height: "32px"
-  mobile_width: "64px"
+  mobile: "assets/images/logo-160.webp"
+  mobile_height: "87"
+  mobile_width: "160"
   # desktop: "assets/images/logo/logo.svg"
-  desktop: "assets/images/logo.png"
-  # desktop_height: "64px"
-  desktop_width: "64px"
+  desktop: "assets/images/logo-160.webp"
+  desktop_height: "87"
+  desktop_width: "160"
 
 collections:
   news:
     output: true
     permalink: /news/:year/:month/:day/:title/
+  notices:
+    output: true
+    permalink: /notices/:year/:month/:day/:title/
+  events:
+    output: true
+    permalink: /events/:path/
 
 defaults:
   - scope:
@@ -28,12 +35,23 @@ defaults:
     values:
       layout: "news_post"
   - scope:
+      path: "_notices"
+      type: "notices"
+    values:
+      layout: "notice_post"
+  - scope:
+      path: "_events"
+      type: "events"
+    values:
+      layout: "event_post"
+  - scope:
       path: "_pages"
     values:
       layout: "page"
 
 include:
   - _pages
+  - _redirects
 
 # Pagination
 pagination:
@@ -70,6 +88,3 @@ exclude:
   - LICENSE.md
   - LICENSE
   - README.md
-
-# reCAPTCHA Configuration
-recaptcha_site_key: "6LfIOG4sAAAAAC5WaxUP7j9VAu1-I94xaVrkq1vZ"

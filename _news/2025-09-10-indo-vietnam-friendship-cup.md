@@ -1,7 +1,8 @@
 ---
 title: India-Vietnam Friendship Cup
 date: "2025-09-10T14:40:02.797Z"
-img: /assets/images/news/india-vietnam-2025.png
+img: /assets/images/news/india-vietnam-2025.webp
+img_alt: "India-Vietnam Friendship Cup"
 description: We proudly present to you the 2nd International Weiqi/Baduk
   Friendship Cup hosted by India. More details shared in the post. Register Now.
 categories:
@@ -9,8 +10,8 @@ categories:
   - International
   - Friendship Cup
   - Vietnam
+external_url_label: "More Info"
 ---
-![](/assets/images/news/india-vietnam-2025.png)
 
 **Event Details -**
 
@@ -35,7 +36,7 @@ There will be 8 players from each country, split into four brackets:
 * Bracket 3: Two players ranked 11 - 16 kyu
 * Bracket 3: Two players ranked 17 - 22 kyu 
 
-![](/assets/images/news/india-vietnam-1-.png "Players")
+![](/assets/images/news/india-vietnam-1-.webp "Players")
 
 **Schedule** - 
 
@@ -46,8 +47,8 @@ There will be 8 players from each country, split into four brackets:
 * R1: **India:6, Vietnam:2**
 * R2: **India:5, Vietnam:3**
 
-<iframe height="250" width="450" src="https://www.youtube.com/embed/zjDRmNU_-Uo?si=2KRbol27uHo3ok1b" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+<iframe height="250" width="450" src="https://www.youtube.com/embed/zjDRmNU_-Uo?si=2KRbol27uHo3ok1b" title="Indo-Vietnam Friendship Cup video" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen loading="lazy"></iframe>
 
-![](/assets/images/news/whatsapp-image-2025-11-02-at-3.06.43-pm.jpeg)
+![](/assets/images/news/whatsapp-image-2025-11-02-at-3.06.43-pm.webp)
 
 Gifts received by the Hanoi Go Club while our Vice President Mr. Karan Rawat visited.

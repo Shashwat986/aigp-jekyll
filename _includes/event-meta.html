@@ -1,0 +1,33 @@
+{% assign event_meta = include.event | default: page %}
+<dl class="home-meta-list{% if include.class %} {{ include.class }}{% endif %}">
+  <div>
+    <dt>When</dt>
+    <dd>{% include event-date-line.html event=event_meta %}</dd>
+  </div>
+  <div>
+    <dt>Format</dt>
+    <dd>{{ event_meta.format }}{% if event_meta.location %} · {{ event_meta.location }}{% endif %}</dd>
+  </div>
+  {% if include.show_organizer and event_meta.organizer %}
+  <div>
+    <dt>Organizer</dt>
+    <dd>{{ event_meta.organizer }}</dd>
+  </div>
+  {% endif %}
+  {% if include.show_contact and event_meta.organizer_contact %}
+  <div>
+    <dt>Contact</dt>
+    <dd>
+      {% if event_meta.organizer_contact contains "@" %}
+      <a href="mailto:{{ event_meta.organizer_contact }}">{{ event_meta.organizer_contact }}</a>
+      {% elsif event_meta.organizer_contact contains "http" %}
+      <a href="{{ event_meta.organizer_contact }}" target="_blank" rel="noopener noreferrer">{{ event_meta.organizer_contact }}</a>
+      {% elsif event_meta.organizer_contact contains "/" %}
+      <a href="{{ event_meta.organizer_contact | relative_url }}">{{ event_meta.organizer_contact }}</a>
+      {% else %}
+      {{ event_meta.organizer_contact }}
+      {% endif %}
+    </dd>
+  </div>
+  {% endif %}
+</dl>

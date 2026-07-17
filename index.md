@@ -1,155 +1,162 @@
 ---
 title: Association Of Indian Go Players
 layout: home
-description: The official website of the Association Of Indian Go Players (AIGP). Promoting the game of Go in India.
-intro_image: "assets/images/illustrations/pointing.svg"
-intro_image_absolute: true
-intro_image_hide_on_mobile: true
+bodyClass: page-home
+description: The official website of the Association Of Indian Go Players (AIGP), promoting Go, Baduk, and Weiqi across India.
+intro_image: "assets/images/home-hero-688.webp"
+intro_image_srcset: "/assets/images/home-hero-520.webp 520w, /assets/images/home-hero-688.webp 688w, /assets/images/home-hero-1032.webp 1032w, /assets/images/home-hero-1376.webp 1376w"
+intro_image_alt: "AIGP players meeting for games and community play"
 show_call_box: false
+use_lightbox: true
 ---
 
-<div class="alert alert-info text-center mb-5 shadow-sm">
-    <p class="mb-0">
-        The AIGP represents the Go playing community in India. We welcome all Go players in India to join us and participate in our events.
+{% assign homepage_events = site.events %}
+{% assign upcoming_events = homepage_events | where: "status", "upcoming" | sort: "event_sort_date" %}
+{% assign ongoing_events = homepage_events | where: "status", "ongoing" | sort: "event_sort_date" %}
+{% assign completed_events = homepage_events | where: "status", "completed" | sort: "event_sort_date" | reverse %}
+{% assign completed_news_events = site.news | where_exp: "post", "post.categories contains 'Tournament' or post.categories contains 'Meetup' or post.categories contains 'Workshop' or post.categories contains 'Results'" | sort: "date" | reverse %}
+{% assign notices_sorted = site.notices | sort: "date" | reverse %}
+{% assign latest_notice = notices_sorted | first %}
+
+<section class="home-priority-grid" aria-label="AIGP priority actions and official updates">
+  <article class="home-priority-card">
+    <span class="section-eyebrow">Start Here</span>
+    <h2>Play, learn, and stay connected with Indian Go Community.</h2>
+    <p>
+      AIGP brings together players, parents, schools, clubs, organizers, and volunteers through learning sessions, tournaments, meetups, and workshops.
     </p>
-</div>
-
-<div class="row row-cols-2 row-cols-md-4 g-2 mb-5">
-    {% for i in (1..8) %}
-    <div class="col">
-        <a href="{{ '/assets/images/home/home_' | append: i | append: '.jpeg' | relative_url }}" class="glightbox" data-gallery="home-gallery">
-            <img src="{{ '/assets/images/home/home_' | append: i | append: '.jpeg' | relative_url }}" class="img-fluid rounded shadow-sm w-100" style="height: 150px; object-fit: cover;" alt="Home image {{ i }}">
-        </a>
+    <div class="home-pathway-list" aria-label="Recommended paths">
+      <div>
+        <strong>New to Go?</strong>
+        <span>Learn the rules at your own pace, join a beginner-friendly session, and start with small-board games so your first steps feel simple.</span>
+      </div>
+      <div>
+        <strong>Already playing?</strong>
+        <span>Find current ratings, register for events, follow results, and watch official notices for selection or representation opportunities.</span>
+      </div>
+      <div>
+        <strong>Running a club or school activity?</strong>
+        <span>Tell us what you are planning. AIGP can help with workshops, demos, local meetups, teaching support, and volunteer coordination.</span>
+      </div>
     </div>
-    {% endfor %}
-</div>
+    <div class="home-link-grid">
+      <a href="{{ site.data.links.leago.events }}" target="_blank" rel="noopener noreferrer">
+        <svg class="home-link-icon" aria-hidden="true" viewBox="0 0 24 24"><path d="M7 4h10v3h3v2a5 5 0 0 1-4.2 4.9A5 5 0 0 1 13 16.9V19h3v2H8v-2h3v-2.1a5 5 0 0 1-2.8-3A5 5 0 0 1 4 9V7h3V4Zm10 5v2.7A3 3 0 0 0 18 9h-1ZM6 9a3 3 0 0 0 1 2.7V9H6Z"/></svg>
+        <span>
+          <strong>Tournaments</strong>
+          <small>Registration and event links</small>
+        </span>
+      </a>
+      <a href="{{ site.data.links.leago.ratings }}" target="_blank" rel="noopener noreferrer">
+        <svg class="home-link-icon" aria-hidden="true" viewBox="0 0 24 24"><path d="M4 19h16v2H2V3h2v16Zm3.3-3.4-1.4-1.4 4.3-4.3 3 3 5.4-6.2 1.5 1.3-6.8 7.8-3.1-3.1-2.9 2.9Z"/></svg>
+        <span>
+          <strong>Players/Ratings</strong>
+          <small>Official ratings and records</small>
+        </span>
+      </a>
+      <a href="{{ '/learn/' | relative_url }}">
+        <svg class="home-link-icon" aria-hidden="true" viewBox="0 0 24 24"><path d="M5 4.5A3.5 3.5 0 0 1 8.5 1H20v18H8.5A3.5 3.5 0 0 0 5 22.5v-18Zm3.5-1A1.5 1.5 0 0 0 7 5v13.3a5.4 5.4 0 0 1 1.5-.3H18V3.5H8.5Z"/></svg>
+        <span>
+          <strong>Learn Go</strong>
+          <small>Beginner resources and lessons</small>
+        </span>
+      </a>
+      <a href="{{ '/community/' | relative_url }}">
+        <svg class="home-link-icon" aria-hidden="true" viewBox="0 0 24 24"><path d="M8 11a4 4 0 1 1 0-8 4 4 0 0 1 0 8Zm8.5 1a3.5 3.5 0 1 1 0-7 3.5 3.5 0 0 1 0 7ZM2 20a6 6 0 0 1 12 0v1H2v-1Zm12.5-1.7a7.5 7.5 0 0 0-2.1-4.2A5.5 5.5 0 0 1 22 18v1h-7.5v-.7Z"/></svg>
+        <span>
+          <strong>Community</strong>
+          <small>Join like-minded people</small>
+        </span>
+      </a>
+    </div>
+  </article>
 
-<div class="row mb-5">
-    <div class="col-lg-7 mb-4">
-        <div class="card h-100 shadow-sm">
-            <div class="card-header bg-gray py-3">
-                <h4 class="card-title mb-0">Become a Member</h4>
-            </div>
-            <div class="card-body p-4">
-                <p class="mb-4">
-                    Join the AIGP and meet like-minded Go players across India!
-                </p>
-                <form action="https://gmail.us6.list-manage.com/subscribe/post" method="post" target="_blank" id="membership-form">
-                    <input type="hidden" name="u" value="4fd58232bb8466eaa9cb5ce1b">
-                    <input type="hidden" name="id" value="477349c5a7">
+  <aside class="home-update-stack" aria-label="AIGP official updates">
+    <article class="official-card home-update-card">
+      <div class="official-card__body">
+        <span class="section-eyebrow">Recent Events</span>
+        <div class="home-event-scroll" tabindex="0">
+          {% if upcoming_events.size > 0 %}
+          <section class="home-event-group" aria-label="Upcoming events">
+            {% for event in upcoming_events %}
+            {% include event-card.html event=event mode="home" status="Upcoming" button_class="button-primary" %}
+            {% endfor %}
+          </section>
+          {% endif %}
 
-                    <div class="row mb-3">
-                        <label for="mce-NAME" class="col-sm-3 col-form-label">Name</label>
-                        <div class="col-sm-9">
-                            <input type="text" name="NAME" class="form-control rounded-pill" id="mce-NAME" required>
-                        </div>
-                    </div>
+          {% if ongoing_events.size > 0 %}
+          <section class="home-event-group" aria-label="Ongoing events">
+            {% for event in ongoing_events %}
+            {% include event-card.html event=event mode="home" status="Ongoing" button_class="button-primary" %}
+            {% endfor %}
+          </section>
+          {% endif %}
 
-                    <div class="row mb-3">
-                        <label for="mce-EMAIL" class="col-sm-3 col-form-label">Email</label>
-                        <div class="col-sm-9">
-                            <input type="email" name="EMAIL" class="form-control rounded-pill" id="mce-EMAIL" required>
-                        </div>
-                    </div>
-
-                    <div class="row mb-3">
-                        <label for="mce-MMERGE6" class="col-sm-3 col-form-label">Rank</label>
-                        <div class="col-sm-9">
-                            <select name="MMERGE6" id="mce-MMERGE6" class="form-select rounded-pill">
-                                <option>Newbie</option>
-                                <option>Know the rules</option>
-                                <option>30k to 15k</option>
-                                <option>15k to 5k</option>
-                                <option>5k to 1k</option>
-                                <option>1d+</option>
-                            </select>
-                        </div>
-                    </div>
-
-                    <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
-                    <div style="position: absolute; left: -5000px;" aria-hidden="true">
-                        <input type="text" name="b_4fd58232bb8466eaa9cb5ce1b_477349c5a7" tabindex="-1" value="">
-                    </div>
-
-                    <div class="row">
-                        <div class="col-sm-9 offset-sm-3">
-                            <button type="submit" name="subscribe" id="mc-embedded-subscribe" class="btn btn-danger px-5 rounded-pill">Submit</button>
-                        </div>
-                    </div>
-                </form>
-            </div>
+          <section class="home-event-group" aria-label="Latest completed event">
+            {% if completed_events.size > 0 %}
+              {% for event in completed_events limit: 1 %}
+              {% include event-card.html event=event mode="home" status="Completed" button_class="button-secondary" %}
+              {% endfor %}
+            {% else %}
+              {% assign latest_completed_news = completed_news_events | first %}
+              {% if latest_completed_news %}
+              <article class="home-event-item">
+                <span class="home-event-status">Completed</span>
+                <strong>{{ latest_completed_news.title }}</strong>
+                <p>{{ latest_completed_news.description | default: latest_completed_news.excerpt | strip_html | truncate: 150 }}</p>
+                <dl class="home-meta-list">
+                  <div>
+                    <dt>When</dt>
+                    <dd>{{ latest_completed_news.date | date: "%b %-d, %Y" }}</dd>
+                  </div>
+                  <div>
+                    <dt>Type</dt>
+                    <dd>{{ latest_completed_news.categories | join: " · " }}</dd>
+                  </div>
+                </dl>
+                <a class="button button-secondary" href="{{ latest_completed_news.url | relative_url }}">Read Report</a>
+              </article>
+              {% else %}
+              <p class="official-card__text">Completed event reports will appear here.</p>
+              {% endif %}
+            {% endif %}
+          </section>
         </div>
-    </div>
+      </div>
+    </article>
 
-    <div class="col-lg-5 mb-4">
-        <div class="card h-100 shadow-sm border-0 bg-light">
-            <div class="card-body p-4">
-                <h5 class="card-title text-center mb-4">Association Activities</h5>
-                <ul class="list-unstyled">
-                    <li class="mb-3 d-flex align-items-start">
-                        <i class="fa fa-calendar-check-o text-danger mt-1 me-3"></i>
-                        <span>Weekly Sessions on Sundays at 6pm</span>
-                    </li>
-                    <li class="mb-3 d-flex align-items-start">
-                        <i class="fa fa-comments-o text-danger mt-1 me-3"></i>
-                        <span>Active Telegram and WhatsApp Community</span>
-                    </li>
-                    <li class="mb-3 d-flex align-items-start">
-                        <i class="fa fa-users text-danger mt-1 me-3"></i>
-                        <span>Community Outreach within India</span>
-                    </li>
-                    <li class="mb-3 d-flex align-items-start">
-                        <i class="fa fa-globe text-danger mt-1 me-3"></i>
-                        <span>International Go events visibility</span>
-                    </li>
-                </ul>
-            </div>
+    <article class="official-card home-update-card">
+      <div class="official-card__body">
+        <span class="section-eyebrow">Latest Notice</span>
+        {% if latest_notice %}
+        <time class="official-card__meta" datetime="{{ latest_notice.date | date_to_xmlschema }}">{{ latest_notice.date | date: "%b %-d, %Y" }}</time>
+        <h2 class="official-card__title"><a href="{{ latest_notice.url | relative_url }}">{{ latest_notice.title }}</a></h2>
+        <p class="official-card__text">{{ latest_notice.description | default: latest_notice.excerpt | strip_html | truncate: 150 }}</p>
+        <div class="home-button-row">
+          <a class="button button-primary" href="{{ latest_notice.url | relative_url }}">Read Notice</a>
+          <a class="button button-secondary" href="{{ '/notices/' | relative_url }}">All Notices</a>
         </div>
-    </div>
-</div>
+        {% else %}
+        <h2 class="official-card__title">Official Notices</h2>
+        <p class="official-card__text">Official AIGP notices will appear here.</p>
+        {% endif %}
+      </div>
+    </article>
+  </aside>
+</section>
 
-<div class="row row-cols-1 row-cols-md-3 g-4 mb-5">
-    <div class="col">
-        <div class="card h-100 shadow-sm border-0">
-            <div class="card-body text-center p-4 d-flex flex-column">
-                <div class="mb-3 fs-1 text-danger">
-                    <i class="fa fa-book"></i>
-                </div>
-                <h4 class="card-title h5 fw-bold">Learn Go</h4>
-                <p class="card-text small text-muted">
-                    Regularly-updated list of resources for players of all levels to learn Go.
-                </p>
-                <a href="{{ '/learn/' | relative_url }}" class="btn btn-sm btn-outline-danger rounded-pill mt-auto align-self-center">Learn More</a>
-            </div>
-        </div>
+<section id="aigp-maintains" class="home-proof-section" aria-label="AIGP community and credibility">
+  <div class="home-proof-board" aria-label="AIGP community proof and maintained records">
+    {% assign home_gallery_images = site.static_files | where_exp: "file", "file.path contains '/assets/images/home/' and file.path contains '.webp'" | sort: "path" %}
+    {% assign home_gallery_columns = home_gallery_images.size | plus: 1 | divided_by: 2 %}
+    <div class="home-proof-photos" aria-label="AIGP community photos" style="--home-photo-columns: {{ home_gallery_columns }};">
+      {% for image in home_gallery_images %}
+      <a href="{{ image.path | relative_url }}" class="home-proof-photo glightbox" data-gallery="home-gallery">
+        <img src="{{ image.path | relative_url }}" alt="AIGP community event photo {{ forloop.index }}" loading="lazy">
+      </a>
+      {% endfor %}
     </div>
-    <div class="col">
-        <div class="card h-100 shadow-sm border-0">
-            <div class="card-body text-center p-4 d-flex flex-column">
-                <div class="mb-3 fs-1 text-danger">
-                    <i class="fa fa-commenting-o"></i>
-                </div>
-                <h4 class="card-title h5 fw-bold">Join our Community</h4>
-                <p class="card-text small text-muted">
-                    Active on many platforms. Reach out to us or watch our weekly session recordings.
-                </p>
-                <a href="{{ '/community/' | relative_url }}" class="btn btn-sm btn-outline-danger rounded-pill mt-auto align-self-center">Learn More</a>
-            </div>
-        </div>
-    </div>
-    <div class="col">
-        <div class="card h-100 shadow-sm border-0">
-            <div class="card-body text-center p-4 d-flex flex-column">
-                <div class="mb-3 fs-1 text-danger">
-                    <i class="fa fa-map-marker"></i>
-                </div>
-                <h4 class="card-title h5 fw-bold">Meet Us</h4>
-                <p class="card-text small text-muted">
-                    We meet virtually, but our players are spread globally. We'd love to meet you!
-                </p>
-                <a href="{{ '/contact/' | relative_url }}" class="btn btn-sm btn-outline-danger rounded-pill mt-auto align-self-center">Learn More</a>
-            </div>
-        </div>
-    </div>
-</div>
-
+  </div>
+</section>
+<div id="home-membership-band"></div>
+{% include membership-form.html id_prefix="home" %}

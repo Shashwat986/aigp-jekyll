@@ -23,6 +23,24 @@
     width: 100%;
   }
 }
+
+.site-header-logo {
+  flex: 0 0 auto;
+
+  a,
+  img {
+    display: block;
+  }
+
+  img {
+    height: auto;
+    width: 64px;
+  }
+}
+
+.site-header-logo--mobile img {
+  width: 64px;
+}
 .lock-scroll {
   .header {
     &.header-absolute {

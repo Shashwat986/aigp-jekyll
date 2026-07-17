@@ -6,49 +6,1710 @@
   <meta name="robots" content="noindex" />
   <title>Content Manager</title>
   <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+  <!-- Load js-yaml for custom frontmatter format serialization -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/js-yaml/4.1.0/js-yaml.min.js"></script>
 </head>
 <body>
   <!-- Include the script that builds the page and powers Decap CMS -->
-  <script src="https://unpkg.com/netlify-cms@^2.0.0/dist/netlify-cms.js"></script>
+  <script src="https://unpkg.com/decap-cms@3.14.1/dist/decap-cms.js"></script>
   <script>
-    var PostPreview = createClass({
-      render: function() {
-        var entry = this.props.entry;
-        var image = entry.getIn(['data', 'img']);
-        var bg = image && this.props.getAsset(image);
-        return h('div', {},
-          h('div', {className: "notification media is-shady"},
-            h('div', {className: "columns is-multiline is-mobile"},
-                h('div', {className: 'column is-12'},
-                    h('h4', {className: 'title is-4 has-text-centered'}, entry.getIn(['data', 'title']))
-                ),
-                h('div', {className: 'column is-4'},
-                    h('img', {src: bg.toString()}, null)
-                ),
-                h('div', {className: 'column is-8 content'},
-                    h('em', {}, "Date: " + entry.getIn(['data', 'date'])),
-                    h('br', {}, null),
-                    h('br', {}, null),
-                    h('p', {}, entry.getIn(['data', 'description'])),
-                    h('br', {}, null),
-                    h('br', {}, null),
-                    (entry.getIn(['data', 'external_url']) && entry.getIn(['data', 'external_url']) != "") ?
-                        h('a', {target: "_blank", href: entry.getIn(['data', 'external_url']), className: "is-pulled-right"}, "More Information") :
-                        h('u', {className: 'is-pulled-right'}, "More Information")
-                )
-            )
-          ),
-          h('div', {className: "columns is-mobile"},
-            h('div', {className: 'column is-12 content'},
-                h('div', {"className": "text"}, this.props.widgetFor('body'))
-            )
-          )
-        );
-      }
-    });
+    function registerCMSPlugins() {
+      if (window.CMS && typeof window.CMS.registerCustomFormat === 'function') {
+        // Define alias to avoid ReferenceError with lowercase/uppercase jsyaml library exported name
+        var jsYaml = window.jsyaml || window.jsYaml;
 
-    CMS.registerPreviewTemplate("news", PostPreview);
-    CMS.registerPreviewStyle("https://unpkg.com/bulma@0.9.0/css/bulma.min.css")
+        function formatPreviewDate(dateVal, options) {
+          if (!dateVal) return '';
+          try {
+            var d;
+            if (dateVal._isAMomentObject || (typeof dateVal.toDate === 'function')) {
+              d = dateVal.toDate();
+            } else {
+              d = new Date(dateVal);
+            }
+            if (isNaN(d.getTime())) return dateVal;
+            return d.toLocaleDateString('en-US', options);
+          } catch (e) {
+            return dateVal.toString();
+          }
+        }
+
+        // Helper to format date matching the public site (Month DD, YYYY)
+        function formatDate(dateVal) {
+          return formatPreviewDate(dateVal, { month: 'long', day: 'numeric', year: 'numeric' });
+        }
+
+        function formatShortDate(dateVal) {
+          return formatPreviewDate(dateVal, { month: 'short', day: 'numeric', year: 'numeric' });
+        }
+
+        function plainText(value) {
+          return (value || '').toString().replace(/<[^>]*>/g, '').replace(/\s+/g, ' ').trim();
+        }
+
+        function truncateText(value, limit) {
+          var text = plainText(value);
+          if (text.length <= limit) return text;
+          return text.slice(0, limit - 3).trim() + '...';
+        }
+
+        function entryValue(entry, key, fallback) {
+          var value = entry.getIn(['data', key]);
+          return value === undefined || value === null ? fallback : value;
+        }
+
+        function toJS(value) {
+          if (!value) return value;
+          if (typeof value.toJS === 'function') return value.toJS();
+          if (typeof value.toArray === 'function') return value.toArray();
+          return value;
+        }
+
+        function toList(value) {
+          var jsValue = toJS(value);
+          if (!jsValue) return [];
+          if (Array.isArray(jsValue)) return jsValue;
+          return [jsValue];
+        }
+
+        function toDelimitedList(value) {
+          var jsValue = toJS(value);
+          if (!jsValue) return [];
+          if (Array.isArray(jsValue)) return jsValue;
+          if (typeof jsValue === 'string') {
+            return jsValue.split(',').map(function(item) { return item.trim(); }).filter(Boolean);
+          }
+          return [jsValue];
+        }
+
+        function itemValue(item, key, fallback) {
+          if (!item) return fallback;
+          if (typeof item.get === 'function') {
+            var value = item.get(key);
+            return value === undefined || value === null ? fallback : value;
+          }
+          return item[key] === undefined || item[key] === null ? fallback : item[key];
+        }
+
+        function previewSlug(entry) {
+          return entry.get('slug') || entry.get('path') || entry.getIn(['data', 'title']) || '';
+        }
+
+        function slugifyForUrl(value) {
+          return (value || '').toString().trim().toLowerCase()
+            .replace(/&/g, ' and ')
+            .replace(/[^a-z0-9]+/g, '-')
+            .replace(/^-+|-+$/g, '');
+        }
+
+        function entryFileName(entry) {
+          var path = entry.get('path') || '';
+          return path.split('/').pop() || '';
+        }
+
+        function buildDatedEntryUrl(entry, prefix) {
+          var fileName = entryFileName(entry);
+          var match = fileName.match(/^(\d{4})-(\d{2})-(\d{2})-(.+)\.md$/);
+          if (match) {
+            return '/' + prefix + '/' + match[1] + '/' + match[2] + '/' + match[3] + '/' + match[4] + '/';
+          }
+
+          var date = entryValue(entry, 'date', '');
+          var titleSlug = slugifyForUrl(entryValue(entry, 'title', ''));
+          if (!date || !titleSlug) return '#';
+
+          var dateMatch = date.toString().match(/^(\d{4})-(\d{2})-(\d{2})/);
+          if (!dateMatch) return '#';
+          var year = dateMatch[1];
+          var month = dateMatch[2];
+          var day = dateMatch[3];
+          return '/' + prefix + '/' + year + '/' + month + '/' + day + '/' + titleSlug + '/';
+        }
+
+        function buildSimpleEntryUrl(entry, prefix) {
+          var fileName = entryFileName(entry).replace(/\.md$/, '');
+          var slug = fileName || slugifyForUrl(entryValue(entry, 'title', ''));
+          return slug ? '/' + prefix + '/' + slug + '/' : '#';
+        }
+
+        function externalLinkProps(url) {
+          return url && /^https?:\/\//.test(url) ? { target: '_blank', rel: 'noopener noreferrer' } : {};
+        }
+
+        function renderAssetThumb(value, row, getAsset, altKey, fallbackKey) {
+          if (!value) return renderDataValue(value);
+          var bg = getAsset(value);
+          return h('img', {
+            className: 'data-table__thumb',
+            src: bg.toString(),
+            alt: itemValue(row, altKey || 'image_alt', itemValue(row, fallbackKey || 'name', ''))
+          });
+        }
+
+        function renderMarkdownPreview(widget, className) {
+          return h('div', { className: className || 'content' }, widget);
+        }
+
+        function basePreviewStyles(extraCss) {
+          return `
+            :root {
+              --bg-color: #ffffff;
+              --text-color: #1f2533;
+              --heading-color: #1f2533;
+              --secondary-text-color: #5b6170;
+              --card-bg: #fffdf8;
+              --surface-muted: #f7f2e8;
+              --surface-strong: #eef6ef;
+              --border-color: #e7dccb;
+              --link-color: #ff671f;
+              --color-primary: #ff671f;
+              --color-primary-dark: #c94a13;
+              --color-secondary: #138808;
+              --chakra-blue: #1f4fa3;
+              --saffron: #ff671f;
+              --india-green: #138808;
+              --tricolor-line: linear-gradient(90deg, var(--saffron) 0%, rgba(255, 255, 255, 0.95) 50%, var(--india-green) 100%);
+              --tag-bg: rgba(255, 103, 31, 0.12);
+              --tag-border: rgba(255, 103, 31, 0.2);
+              --action-shadow: 0 10px 22px rgba(255, 103, 31, 0.18);
+              --card-accent-shadow: inset 0 3px 0 color-mix(in srgb, var(--chakra-blue) 62%, transparent);
+              --font-sans: Helvetica, Arial, sans-serif, -apple-system;
+              --font-serif: "Playfair Display", serif, -apple-system;
+            }
+            html, body {
+              margin: 0 !important;
+              padding: 0 !important;
+              width: 100% !important;
+              max-width: 100% !important;
+              overflow-x: hidden !important;
+              background-color: var(--bg-color) !important;
+              color: var(--text-color) !important;
+              font-family: var(--font-sans);
+              font-size: 16px;
+              line-height: 1.45;
+              box-sizing: border-box;
+            }
+            body > div:first-child:not(.preview-page) {
+              margin: 0;
+              padding: 32px;
+              color: var(--text-color);
+              font-family: var(--font-sans);
+              font-size: 15px;
+              line-height: 1.65;
+              white-space: pre-wrap;
+            }
+            body > div:first-child:not(.preview-page) > * + * {
+              margin-top: 16px;
+            }
+            *, *::before, *::after { box-sizing: inherit; }
+            .preview-page {
+              min-height: 100vh;
+              overflow-x: hidden;
+              background-color: var(--bg-color);
+              color: var(--text-color);
+              font-family: var(--font-sans);
+            }
+            .preview-container {
+              width: 100%;
+              max-width: 1120px;
+              margin: 0 auto;
+              padding: 48px 16px;
+            }
+            .preview-container--narrow {
+              max-width: 920px;
+            }
+            .section-heading { margin-bottom: 28px; }
+            .section-eyebrow {
+              display: block;
+              margin-bottom: 8px;
+              color: var(--color-primary);
+              font-size: 12px;
+              font-weight: 800;
+              letter-spacing: .08em;
+              text-transform: uppercase;
+            }
+            .section-eyebrow::after {
+              background: var(--tricolor-line);
+              border-radius: 999px;
+              content: "";
+              display: block;
+              height: 2px;
+              margin-top: 7px;
+              width: 42px;
+            }
+            .section-title {
+              margin: 0;
+              font-family: var(--font-serif);
+              font-size: clamp(34px, 7vw, 56px);
+              line-height: 1.08;
+              color: var(--heading-color);
+            }
+            .section-summary {
+              max-width: 760px;
+              margin: 14px 0 0;
+              color: var(--secondary-text-color);
+              font-size: 18px;
+              line-height: 1.6;
+            }
+            .preview-grid {
+              display: grid;
+              grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+              gap: 18px;
+            }
+            .preview-grid--compact {
+              grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            }
+            .preview-section {
+              margin-top: 34px;
+            }
+            .preview-section:first-child {
+              margin-top: 0;
+            }
+            .preview-section-title {
+              margin: 0 0 14px;
+              color: var(--heading-color);
+              font-size: 13px;
+              font-weight: 800;
+              letter-spacing: .08em;
+              text-transform: uppercase;
+            }
+            .preview-stat-row {
+              display: grid;
+              grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+              gap: 12px;
+              margin: 0 0 28px;
+            }
+            .preview-stat {
+              border: 1px solid var(--border-color);
+              border-radius: 8px;
+              background: var(--surface-muted);
+              padding: 14px;
+            }
+            .preview-stat strong {
+              display: block;
+              color: var(--heading-color);
+              font-family: var(--font-serif);
+              font-size: 28px;
+              line-height: 1;
+            }
+            .preview-stat span {
+              display: block;
+              margin-top: 6px;
+              color: var(--secondary-text-color);
+              font-size: 12px;
+              font-weight: 800;
+              letter-spacing: .06em;
+              text-transform: uppercase;
+            }
+            .data-table-wrap {
+              overflow-x: auto;
+              border: 1px solid var(--border-color);
+              border-radius: 8px;
+              background: var(--card-bg);
+            }
+            .data-table {
+              width: 100%;
+              border-collapse: collapse;
+              min-width: 680px;
+            }
+            .data-table th {
+              padding: 10px 12px;
+              border-bottom: 1px solid var(--border-color);
+              background: var(--surface-muted);
+              color: var(--heading-color);
+              font-size: 11px;
+              font-weight: 800;
+              letter-spacing: .06em;
+              text-align: left;
+              text-transform: uppercase;
+              vertical-align: top;
+            }
+            .data-table td {
+              padding: 12px;
+              border-top: 1px solid var(--border-color);
+              color: var(--text-color);
+              font-size: 13px;
+              line-height: 1.45;
+              vertical-align: top;
+            }
+            .data-table tbody tr:first-child td {
+              border-top: 0;
+            }
+            .data-table__primary {
+              color: var(--heading-color);
+              font-weight: 800;
+            }
+            .data-table__muted {
+              color: var(--secondary-text-color);
+            }
+            .data-table__thumb {
+              display: block;
+              width: 64px;
+              height: 44px;
+              border: 1px solid var(--border-color);
+              border-radius: 6px;
+              background: var(--surface-muted);
+              object-fit: cover;
+            }
+            .data-chip-list {
+              display: flex;
+              flex-wrap: wrap;
+              gap: 5px;
+              min-width: 160px;
+            }
+            .data-chip {
+              display: inline-flex;
+              max-width: 240px;
+              padding: 3px 8px;
+              border: 1px solid var(--tag-border);
+              border-radius: 999px;
+              background: var(--tag-bg);
+              color: var(--color-primary-dark);
+              font-size: 11px;
+              font-weight: 800;
+              line-height: 1.35;
+            }
+            .data-empty {
+              padding: 18px;
+              border: 1px dashed var(--border-color);
+              border-radius: 8px;
+              color: var(--secondary-text-color);
+              font-size: 14px;
+            }
+            .official-card {
+              overflow: hidden;
+              border: 1px solid var(--border-color);
+              border-radius: 12px;
+              background: var(--card-bg);
+              box-shadow: 0 10px 24px rgba(31, 79, 163, 0.12), var(--card-accent-shadow);
+            }
+            .official-card--flat { box-shadow: none; }
+            .official-card__body { padding: 22px; }
+            .official-card__meta {
+              display: block;
+              margin-bottom: 10px;
+              color: var(--color-primary-dark);
+              font-size: 12px;
+              font-weight: 800;
+              letter-spacing: .08em;
+              text-transform: uppercase;
+            }
+            .official-card__title {
+              margin: 0 0 12px;
+              font-family: var(--font-serif);
+              font-size: 26px;
+              line-height: 1.15;
+              color: var(--heading-color);
+              overflow-wrap: anywhere;
+            }
+            .official-card__title a {
+              color: inherit;
+              text-decoration: none;
+            }
+            .official-card__text {
+              margin: 0;
+              color: var(--secondary-text-color);
+              font-size: 14px;
+              line-height: 1.6;
+            }
+            .button {
+              display: inline-block;
+              min-height: 40px;
+              padding: 10px 14px;
+              border: 1px solid transparent;
+              border-radius: 4px;
+              background: var(--color-primary);
+              color: #fff;
+              font-size: 13px;
+              font-weight: 800;
+              letter-spacing: .025em;
+              text-decoration: none;
+              text-transform: uppercase;
+              box-shadow: var(--action-shadow);
+            }
+            .button-secondary {
+              background: transparent;
+              border-color: var(--border-color);
+              color: var(--heading-color);
+              box-shadow: none;
+            }
+            .pill-list {
+              display: flex;
+              flex-wrap: wrap;
+              gap: 8px;
+              margin: 14px 0;
+            }
+            .tag-pill {
+              display: inline-block;
+              padding: 4px 12px;
+              border: 1px solid var(--tag-border);
+              border-radius: 999px;
+              background: var(--tag-bg);
+              color: var(--color-primary-dark);
+              font-size: 12px;
+              font-weight: 800;
+              line-height: 1.5;
+            }
+            .mt-6 { margin-top: 24px; }
+            .flex { display: flex; }
+            .justify-start { justify-content: flex-start; }
+            .justify-end { justify-content: flex-end; }
+            .sr-only {
+              position: absolute;
+              width: 1px;
+              height: 1px;
+              padding: 0;
+              margin: -1px;
+              overflow: hidden;
+              clip: rect(0, 0, 0, 0);
+              white-space: nowrap;
+              border: 0;
+            }
+            .media-card {
+              display: flex;
+              flex-direction: column;
+            }
+            .media-card__image {
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              overflow: hidden;
+              aspect-ratio: 16 / 9;
+              background: var(--surface-muted);
+            }
+            .media-card__image img {
+              display: block;
+              width: 100%;
+              height: 100%;
+              object-fit: cover;
+            }
+            .media-card__image a {
+              display: block;
+              width: 100%;
+              height: 100%;
+            }
+            .media-card__content {
+              display: flex;
+              flex: 1;
+              flex-direction: column;
+              justify-content: space-between;
+              padding: 22px;
+            }
+            .person-card__image {
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              aspect-ratio: 16 / 10;
+              overflow: hidden;
+              background: var(--surface-muted);
+            }
+            .person-card__image img {
+              display: block;
+              width: 100%;
+              height: 100%;
+              object-fit: cover;
+            }
+            .person-card__image img.is-placeholder {
+              width: auto;
+              height: auto;
+              max-width: 50%;
+              max-height: 50%;
+              object-fit: contain;
+            }
+            .home-meta-list {
+              display: grid;
+              gap: 12px;
+              margin: 18px 0;
+              padding: 0;
+            }
+            .home-meta-list div {
+              border-top: 1px solid var(--border-color);
+              padding-top: 12px;
+            }
+            .home-meta-list dt {
+              margin-bottom: 4px;
+              color: var(--secondary-text-color);
+              font-size: 11px;
+              font-weight: 800;
+              letter-spacing: .08em;
+              text-transform: uppercase;
+            }
+            .home-meta-list dd {
+              margin: 0;
+              color: var(--text-color);
+            }
+            .content {
+              max-width: 760px;
+              color: var(--text-color);
+              line-height: 1.65;
+            }
+            .content--page {
+              max-width: none;
+            }
+            .content a { color: var(--link-color); text-decoration: underline; }
+            .content img {
+              display: block;
+              max-width: min(100%, 560px);
+              max-height: 420px;
+              height: auto;
+              margin: 20px auto;
+              object-fit: contain;
+            }
+            .content p { color: var(--secondary-text-color); }
+            .content p,
+            .content ul,
+            .content ol {
+              margin-top: 0;
+              margin-bottom: 16px;
+            }
+            .content ul,
+            .content ol {
+              padding-left: 22px;
+              color: var(--secondary-text-color);
+            }
+            .content li {
+              margin-bottom: 6px;
+            }
+            .content h1, .content h2, .content h3 {
+              color: var(--heading-color);
+              font-family: var(--font-serif);
+              line-height: 1.15;
+            }
+            .content h1 { font-size: 42px; }
+            .content h2 { font-size: 30px; margin-top: 32px; }
+            .content h3 { font-size: 22px; margin-top: 24px; }
+            .content .site-section--tight {
+              margin: 34px 0;
+            }
+            .content .section-heading {
+              margin-bottom: 22px;
+            }
+            .content .grid {
+              display: grid;
+            }
+            .content .grid-cols-1 {
+              grid-template-columns: minmax(0, 1fr);
+            }
+            .content .gap-2 { gap: 8px; }
+            .content .gap-4 { gap: 16px; }
+            .content .gap-5 { gap: 20px; }
+            .content .my-8 {
+              margin-top: 32px;
+              margin-bottom: 32px;
+            }
+            .content .mt-4 { margin-top: 16px; }
+            .content .mt-5 { margin-top: 20px; }
+            .content .mt-6 { margin-top: 24px; }
+            .content .mb-2 { margin-bottom: 8px; }
+            .content .mb-8 { margin-bottom: 32px; }
+            .content .space-y-2 > * + * { margin-top: 8px; }
+            .content .text-center { text-align: center; }
+            .content .font-semibold { font-weight: 700; }
+            .content .official-card + .official-card {
+              margin-top: 18px;
+            }
+            .content .official-card__body > :last-child {
+              margin-bottom: 0;
+            }
+            .content table {
+              display: block;
+              width: 100%;
+              overflow-x: auto;
+              border-collapse: collapse;
+            }
+            .content th, .content td {
+              padding: 8px;
+              border-top: 1px solid var(--border-color);
+              text-align: left;
+            }
+            @media (min-width: 768px) {
+              .media-card { flex-direction: row; }
+              .media-card__image {
+                align-self: stretch;
+                width: 28%;
+                min-height: 220px;
+                aspect-ratio: auto;
+              }
+              .media-card__content { width: 72%; }
+              .content .md\\:grid-cols-2 {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+              }
+              .content .md\\:grid-cols-3 {
+                grid-template-columns: repeat(3, minmax(0, 1fr));
+              }
+            }
+            @media (min-width: 1024px) {
+              .content .lg\\:grid-cols-3 {
+                grid-template-columns: repeat(3, minmax(0, 1fr));
+              }
+              .content .lg\\:col-span-2 {
+                grid-column: span 2 / span 2;
+              }
+            }
+            ${extraCss || ''}
+          `;
+        }
+
+        // Custom React preview component matching the news post layout
+        var PostPreview = createClass({
+          render: function() {
+            var entry = this.props.entry;
+            var title = entry.getIn(['data', 'title']) || '';
+            var date = entry.getIn(['data', 'date']) || '';
+            var description = entry.getIn(['data', 'description']) || '';
+            var body = entry.getIn(['data', 'body']) || '';
+            var externalUrl = entry.getIn(['data', 'external_url']) || '';
+            var externalLabel = entry.getIn(['data', 'external_url_label']) || 'More Info';
+            var image = entry.getIn(['data', 'img']);
+            var imageAlt = entry.getIn(['data', 'img_alt']) || title;
+            var bg = image ? this.props.getAsset(image) : null;
+            var postUrl = externalUrl || buildDatedEntryUrl(entry, 'news');
+            var postLinkProps = externalLinkProps(postUrl);
+            var cardDescription = truncateText(description || body, 250);
+
+            // Retrieve and parse categories (Immutable List, Array, or String)
+            var categories = entry.getIn(['data', 'categories']);
+            var categoriesList = toDelimitedList(categories);
+
+            return h('div', { className: 'preview-page' },
+              h('style', { type: "text/css" }, basePreviewStyles(`
+                .preview-container {
+                  max-width: 1200px;
+                }
+
+                .news-list-card-wrap {
+                  width: 100%;
+                  margin-bottom: 48px;
+                }
+
+                .news-list-card {
+                  display: flex;
+                  flex-direction: column;
+                  width: 100%;
+                  overflow: hidden;
+                  border: 1px solid var(--border-color);
+                  border-radius: 16px;
+                  background: var(--card-bg);
+                  color: var(--text-color);
+                  box-shadow: 0 12px 32px rgba(31, 79, 163, 0.14), var(--card-accent-shadow);
+                }
+
+                .news-list-card-image-wrap {
+                  display: flex;
+                  align-items: center;
+                  justify-content: center;
+                  width: 100%;
+                  aspect-ratio: 16 / 9;
+                  overflow: hidden;
+                  background: var(--surface-muted);
+                }
+
+                .news-list-card-image {
+                  display: block;
+                  width: 100%;
+                  height: 100%;
+                  object-fit: cover;
+                }
+
+                .news-list-card-body {
+                  display: flex;
+                  flex-direction: column;
+                  justify-content: space-between;
+                  width: 100%;
+                  min-width: 0;
+                  padding: 24px;
+                }
+
+                .news-list-card-title {
+                  margin: 0 0 8px;
+                  font-family: var(--font-serif);
+                  font-size: 24px;
+                  line-height: 1.2;
+                  font-weight: 700;
+                  color: var(--heading-color);
+                  overflow-wrap: anywhere;
+                }
+
+                .news-list-card-title a {
+                  color: inherit;
+                  text-decoration: none;
+                }
+
+                .news-list-card-date {
+                  margin: 0 0 16px;
+                  font-size: 14px;
+                  font-weight: 600;
+                  color: var(--secondary-text-color);
+                }
+
+                .news-list-card-description {
+                  margin: 0;
+                  font-size: 14px;
+                  line-height: 1.56;
+                  color: var(--secondary-text-color);
+                  overflow-wrap: anywhere;
+                }
+
+                .news-list-card-actions {
+                  display: flex;
+                  justify-content: flex-end;
+                  margin-top: 24px;
+                }
+
+                .button {
+                  display: inline-block;
+                  height: 40px;
+                  padding: 0 14px;
+                  border-radius: 4px;
+                  background: var(--color-primary);
+                  border: 1px solid transparent;
+                  color: #ffffff;
+                  font-size: 14px;
+                  font-weight: 800;
+                  line-height: 40px;
+                  letter-spacing: 0.025em;
+                  text-decoration: none;
+                  text-transform: uppercase;
+                  white-space: nowrap;
+                  box-shadow: var(--action-shadow);
+                }
+
+                .preview-row {
+                  display: flex;
+                  justify-content: center;
+                  width: 100%;
+                }
+
+                .preview-column {
+                  width: 100%;
+                  min-width: 0;
+                }
+
+                .news-post {
+                  min-width: 0;
+                  color: var(--text-color);
+                }
+
+                .news-post-title {
+                  margin: 0 0 16px;
+                  font-family: var(--font-serif);
+                  font-size: 36px;
+                  line-height: 1.12;
+                  font-weight: 700;
+                  color: var(--heading-color);
+                  overflow-wrap: anywhere;
+                }
+
+                .post-date {
+                  margin: 0 0 16px;
+                  font-size: 14px;
+                  color: var(--secondary-text-color);
+                }
+
+                .category-list {
+                  display: flex;
+                  flex-wrap: wrap;
+                  gap: 8px;
+                  margin-bottom: 24px;
+                }
+
+                .category-chip {
+                  display: inline-block;
+                  padding: 4px 12px;
+                  border-radius: 999px;
+                  background: var(--tag-bg);
+                  border: 1px solid var(--tag-border);
+                  color: var(--color-primary-dark);
+                  font-size: 12px;
+                  font-weight: 800;
+                  line-height: 1.5;
+                }
+
+                .featured-image-frame {
+                  margin-bottom: 32px;
+                  margin-left: auto;
+                  margin-right: auto;
+                  max-width: 576px;
+                  overflow: hidden;
+                  border: 1px solid var(--border-color);
+                  border-radius: 16px;
+                  box-shadow: 0 10px 24px rgba(31, 79, 163, 0.12), var(--card-accent-shadow);
+                }
+
+                .featured-image-link {
+                  display: block;
+                }
+
+                .featured-image {
+                  display: block;
+                  width: 100%;
+                  max-width: 100%;
+                  max-height: 360px;
+                  height: auto;
+                  object-fit: contain;
+                  background: var(--card-bg);
+                }
+
+                .featured-description {
+                  max-width: 576px;
+                  margin: -16px auto 32px;
+                  color: var(--secondary-text-color);
+                  font-size: 14px;
+                  line-height: 1.56;
+                  text-align: center;
+                }
+
+                .content {
+                  min-width: 0;
+                  max-width: none;
+                  overflow-wrap: anywhere;
+                  color: var(--text-color);
+                  line-height: 1.56;
+                }
+
+                .content a {
+                  color: var(--link-color);
+                  text-decoration: underline;
+                  overflow-wrap: anywhere;
+                }
+
+                .content img {
+                  display: block;
+                  max-width: min(100%, 560px);
+                  max-height: 420px;
+                  height: auto;
+                  margin: 20px auto;
+                  object-fit: contain;
+                }
+
+                .content .grid {
+                  display: grid;
+                }
+
+                .content .grid-cols-2 {
+                  grid-template-columns: repeat(2, minmax(0, 1fr));
+                }
+
+                .content .gap-3 {
+                  gap: 12px;
+                }
+
+                .content .my-6 {
+                  margin-top: 24px;
+                  margin-bottom: 24px;
+                }
+
+                .content .grid img {
+                  width: 100%;
+                  max-width: 100%;
+                  max-height: none;
+                  margin: 0;
+                }
+
+                .content strong {
+                  font-weight: bold;
+                }
+
+                .content em {
+                  font-style: italic;
+                }
+
+                .content p {
+                  margin-top: 0;
+                  margin-bottom: 16px;
+                  font-family: var(--font-sans);
+                  line-height: 1.56;
+                  color: var(--secondary-text-color);
+                }
+
+                .content h1 {
+                  font-family: var(--font-sans);
+                  font-size: 34px;
+                  line-height: 1.26;
+                  font-weight: normal;
+                  margin-top: 30px;
+                  margin-bottom: 20px;
+                }
+
+                .content h2 {
+                  font-family: var(--font-sans);
+                  font-size: 26px;
+                  font-weight: normal;
+                  line-height: 1.4;
+                  margin-top: 30px;
+                  margin-bottom: 16px;
+                }
+
+                .content h3 {
+                  font-family: var(--font-sans);
+                  font-size: 20px;
+                  line-height: 1.4;
+                  font-weight: normal;
+                  margin-top: 30px;
+                  margin-bottom: 16px;
+                }
+
+                .content ul,
+                .content ol {
+                  margin-top: 0;
+                  margin-bottom: 20px;
+                  padding-left: 0;
+                }
+
+                .content ul {
+                  list-style: disc;
+                }
+
+                .content ol {
+                  list-style: decimal;
+                }
+
+                .content li {
+                  margin-bottom: 5px;
+                  margin-left: 20px;
+                  line-height: 1.56;
+                  color: var(--secondary-text-color);
+                }
+
+                .content hr {
+                  border: none;
+                  border-bottom: 1px solid var(--border-color);
+                }
+
+                .content table {
+                  display: block;
+                  width: 100%;
+                  max-width: 100%;
+                  margin-top: 30px;
+                  margin-bottom: 30px;
+                  overflow-x: auto;
+                  border-collapse: collapse;
+                }
+
+                .content th,
+                .content td {
+                  padding: 5px;
+                  vertical-align: top;
+                  border-top: 1px solid var(--border-color);
+                }
+
+                .content thead th {
+                  vertical-align: bottom;
+                  border-bottom: 1px solid var(--border-color);
+                  text-align: left;
+                  font-weight: bold;
+                }
+
+                .content tbody + tbody {
+                  border-top: 1px solid var(--border-color);
+                }
+
+                .content blockquote {
+                  margin-left: 0;
+                  margin-right: 0;
+                  padding: 0 1em;
+                  color: var(--secondary-text-color);
+                  border-left: .25em solid var(--color-secondary);
+                }
+
+                @media (min-width: 768px) {
+                  html, body {
+                    line-height: 1.3;
+                  }
+
+                  .preview-column {
+                    width: 66.666667%;
+                  }
+
+                  .news-list-card {
+                    flex-direction: row;
+                  }
+
+                  .news-list-card-image-wrap {
+                    width: 25%;
+                    max-height: 256px;
+                    aspect-ratio: 1 / 1;
+                  }
+
+                  .news-list-card-body {
+                    width: 75%;
+                  }
+
+                  .news-post-title {
+                    font-size: 48px;
+                  }
+                }
+              `)),
+              
+              /* Unified Outer Layout Container mimicking standard web structure */
+              h('div', { className: 'preview-container' },
+                h('div', { className: 'news-list-card-wrap' },
+                  h('div', { className: 'news-list-card' },
+                    bg ? h('div', { className: 'news-list-card-image-wrap' },
+                      h('img', {
+                        src: bg.toString(),
+                        alt: imageAlt,
+                        className: 'news-list-card-image'
+                      })
+                    ) : null,
+                    h('div', { className: 'news-list-card-body' },
+                      h('div', null,
+                        h('h2', { className: 'news-list-card-title' },
+                          h('a', Object.assign({ href: postUrl }, postLinkProps), title)
+                        ),
+                        date ? h('h3', { className: 'news-list-card-date' }, formatShortDate(date)) : null,
+                        cardDescription ? h('p', { className: 'news-list-card-description' }, cardDescription) : null
+                      ),
+                      h('div', { className: 'news-list-card-actions' },
+                        h('a', Object.assign({ href: postUrl, className: 'button' }, postLinkProps), externalLabel)
+                      )
+                    )
+                  )
+                ),
+                h('div', { className: 'preview-row' },
+                  h('div', { className: 'preview-column' },
+                    h('div', { className: 'news-post' },
+                      h('h1', { className: 'news-post-title' }, title),
+
+                      date ? h('p', { className: 'post-date' }, formatDate(date)) : null,
+
+                      categoriesList.length > 0 ? h('div', { className: 'category-list' },
+                        categoriesList.map(function(category, idx) {
+                          return h('span', {
+                            key: idx,
+                            className: 'category-chip'
+                          }, category);
+                        })
+                      ) : null,
+
+                      bg ? h('div', { className: 'featured-image-frame' },
+                        h('a', { href: bg.toString(), className: 'featured-image-link glightbox', 'data-gallery': 'post-gallery' },
+                          h('img', {
+                            src: bg.toString(),
+                            alt: imageAlt,
+                            className: 'featured-image'
+                          })
+                        )
+                      ) : null,
+
+                      bg && description ? h('p', { className: 'featured-description' }, description) : null,
+
+                      h('div', { className: 'content' },
+                        this.props.widgetFor('body')
+                      )
+                    )
+                  )
+                )
+              )
+            );
+          }
+        });
+
+        var NoticePreview = createClass({
+          render: function() {
+            var entry = this.props.entry;
+            var title = entry.getIn(['data', 'title']) || '';
+            var date = entry.getIn(['data', 'date']) || '';
+            var description = entry.getIn(['data', 'description']) || '';
+            var image = entry.getIn(['data', 'img']);
+            var imageAlt = entry.getIn(['data', 'img_alt']) || title;
+            var bg = image ? this.props.getAsset(image) : null;
+            var noticeUrl = buildDatedEntryUrl(entry, 'notices');
+            var noticeTypes = entry.getIn(['data', 'notice_types']) || entry.getIn(['data', 'notice_type']);
+            var noticeTypesList = toDelimitedList(noticeTypes);
+
+            return h('div', { className: 'preview-page' },
+              h('style', { type: "text/css" }, basePreviewStyles(`
+                .preview-container { max-width: 900px; }
+                .notice-card { display: flex; flex-direction: column; width: 100%; overflow: hidden; border: 1px solid var(--border-color); border-radius: 16px; background: var(--card-bg); box-shadow: 0 12px 32px rgba(31,79,163,.14), var(--card-accent-shadow); margin-bottom: 48px; }
+                .notice-card-image-wrap { display: flex; align-items: center; justify-content: center; width: 100%; aspect-ratio: 16 / 9; overflow: hidden; background: var(--surface-muted); }
+                .notice-card-image-link { display: block; width: 100%; height: 100%; }
+                .notice-card-image { display: block; width: 100%; height: 100%; object-fit: cover; }
+                .notice-card-body { display: flex; flex-direction: column; justify-content: space-between; width: 100%; min-width: 0; padding: 24px; }
+                .notice-date { margin: 0 0 8px; font-size: 12px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--secondary-text-color); }
+                .notice-title { margin: 0 0 8px; font-family: var(--font-serif); font-size: 24px; line-height: 1.2; color: var(--heading-color); overflow-wrap: anywhere; }
+                .notice-title a { color: inherit; text-decoration: none; }
+                .notice-description { margin: 0; font-size: 14px; line-height: 1.56; color: var(--secondary-text-color); }
+                .notice-types { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 16px; }
+                .category-chip { display: inline-block; padding: 4px 12px; border: 1px solid var(--tag-border); border-radius: 999px; background: var(--tag-bg); color: var(--color-primary-dark); font-size: 12px; font-weight: 800; line-height: 1.5; }
+                .notice-card-actions { display: flex; justify-content: flex-end; margin-top: 24px; }
+                .button { display: inline-block; height: 40px; padding: 0 14px; border: 1px solid transparent; border-radius: 4px; background: var(--color-primary); color: #fff; font-size: 14px; font-weight: 800; line-height: 40px; letter-spacing: .025em; text-decoration: none; text-transform: uppercase; white-space: nowrap; box-shadow: var(--action-shadow); }
+                .notice-post-title { margin: 0 0 16px; font-family: var(--font-serif); font-size: 42px; line-height: 1.12; color: var(--heading-color); overflow-wrap: anywhere; }
+                .featured-image-frame { margin: 0 0 32px; overflow: hidden; border: 1px solid var(--border-color); border-radius: 16px; background: var(--card-bg); box-shadow: 0 10px 24px rgba(31,79,163,.12), var(--card-accent-shadow); }
+                .featured-image { display: block; width: 100%; max-height: 420px; object-fit: contain; }
+                .content { min-width: 0; overflow-wrap: anywhere; color: var(--text-color); line-height: 1.56; }
+                .content a { color: var(--link-color); text-decoration: underline; overflow-wrap: anywhere; }
+                .content img { display: block; width: auto; max-width: min(100%, 560px); max-height: 420px; height: auto; margin: 20px auto; object-fit: contain; }
+                .content .grid { display: grid; }
+                .content .grid-cols-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+                .content .gap-3 { gap: 12px; }
+                .content .my-6 { margin-top: 24px; margin-bottom: 24px; }
+                .content .grid img { width: 100%; max-width: 100%; max-height: none; margin: 0; }
+                .content p { margin-top: 0; margin-bottom: 16px; color: var(--secondary-text-color); line-height: 1.56; }
+                .content ul, .content ol { margin-top: 0; margin-bottom: 20px; padding-left: 22px; color: var(--secondary-text-color); }
+                .content li { margin-bottom: 5px; line-height: 1.56; }
+                .content h1, .content h2, .content h3 { color: var(--heading-color); font-family: var(--font-serif); line-height: 1.2; }
+                .content h1 { font-size: 34px; }
+                .content h2 { font-size: 26px; margin-top: 30px; margin-bottom: 16px; }
+                .content h3 { font-size: 20px; margin-top: 24px; margin-bottom: 14px; }
+                .content blockquote { margin-left: 0; margin-right: 0; padding: 0 1em; color: var(--secondary-text-color); border-left: .25em solid var(--color-secondary); }
+                .content table { display: block; width: 100%; max-width: 100%; margin: 30px 0; overflow-x: auto; border-collapse: collapse; }
+                .content th, .content td { padding: 8px; vertical-align: top; border-top: 1px solid var(--border-color); text-align: left; }
+                @media (min-width: 768px) {
+                  .notice-card { flex-direction: row; }
+                  .notice-card-image-wrap { align-self: stretch; width: 25%; aspect-ratio: auto; }
+                  .notice-card-body { width: 75%; }
+                  .notice-post-title { font-size: 48px; }
+                }
+              `)),
+              h('div', { className: 'preview-container' },
+                h('div', { className: 'notice-card' },
+                  bg ? h('div', { className: 'notice-card-image-wrap' },
+                    h('a', { href: noticeUrl, className: 'notice-card-image-link' },
+                      h('img', { src: bg.toString(), alt: imageAlt, className: 'notice-card-image' })
+                    )
+                  ) : null,
+                  h('div', { className: 'notice-card-body' },
+                    h('div', null,
+                      date ? h('p', { className: 'notice-date' }, formatShortDate(date)) : null,
+                      h('h2', { className: 'notice-title' }, h('a', { href: noticeUrl }, title)),
+                      noticeTypesList.length > 0 ? h('div', { className: 'notice-types' },
+                        noticeTypesList.map(function(type, idx) {
+                          return h('span', { key: idx, className: 'category-chip' }, type);
+                        })
+                      ) : null,
+                      description ? h('p', { className: 'notice-description' }, description) : null
+                    ),
+                    h('div', { className: 'notice-card-actions' },
+                      h('a', { href: noticeUrl, className: 'button' }, 'More Info')
+                    )
+                  )
+                ),
+                h('p', { className: 'notice-date' }, 'Official Notice'),
+                h('h1', { className: 'notice-post-title' }, title),
+                date ? h('p', { className: 'post-date' }, formatDate(date)) : null,
+                noticeTypesList.length > 0 ? h('div', { className: 'notice-types' },
+                  noticeTypesList.map(function(type, idx) {
+                    return h('span', { key: idx, className: 'category-chip' }, type);
+                  })
+                ) : null,
+                bg ? h('div', { className: 'featured-image-frame' },
+                  h('img', { src: bg.toString(), alt: imageAlt, className: 'featured-image' })
+                ) : null,
+                h('div', { className: 'content' }, this.props.widgetFor('body'))
+              )
+            );
+          }
+        });
+
+        var EventPreview = createClass({
+          render: function() {
+            var entry = this.props.entry;
+            var title = entryValue(entry, 'title', '');
+            var date = entryValue(entry, 'date', '');
+            var displayDate = entryValue(entry, 'display_date', '');
+            var time = entryValue(entry, 'time', '');
+            var timezone = entryValue(entry, 'timezone', '');
+            var status = entryValue(entry, 'status', 'Event');
+            var eventType = entryValue(entry, 'event_type', '');
+            var format = entryValue(entry, 'format', '');
+            var location = entryValue(entry, 'location', '');
+            var organizer = entryValue(entry, 'organizer', '');
+            var organizerContact = entryValue(entry, 'organizer_contact', '');
+            var description = entryValue(entry, 'description', '');
+            var registrationUrl = entryValue(entry, 'registration_url', '');
+            var image = entryValue(entry, 'img', null);
+            var imageAlt = entryValue(entry, 'img_alt', title);
+            var buttonLabel = entryValue(entry, 'registration_label', 'More Info');
+            var bg = image ? this.props.getAsset(image) : null;
+            var whenLine = displayDate || [formatShortDate(date), time, timezone].filter(Boolean).join(' ');
+            var eventUrl = buildSimpleEntryUrl(entry, 'events');
+            var actionUrl = registrationUrl || eventUrl;
+            var actionLinkProps = externalLinkProps(actionUrl);
+
+            return h('div', { className: 'preview-page' },
+              h('style', { type: 'text/css' }, basePreviewStyles()),
+              h('div', { className: 'preview-container' },
+                h('div', { className: 'section-heading' },
+                  h('span', { className: 'section-eyebrow' }, 'Event Preview'),
+                  h('h1', { className: 'section-title' }, 'AIGP Event Desk')
+                ),
+                h('article', { className: bg ? 'official-card media-card' : 'official-card official-card--flat' },
+                  bg ? h('div', { className: 'media-card__image' },
+                    h('a', { href: eventUrl },
+                      h('img', { src: bg.toString(), alt: imageAlt })
+                    )
+                  ) : null,
+                  h('div', { className: bg ? 'media-card__content' : 'official-card__body' },
+                    h('div', null,
+                      h('span', { className: 'official-card__meta' }, status || eventType || 'Event'),
+                      h('h2', { className: 'official-card__title' }, h('a', { href: eventUrl }, title)),
+                      h('dl', { className: 'home-meta-list' },
+                        whenLine ? h('div', null, h('dt', null, 'When'), h('dd', null, whenLine)) : null,
+                        (format || location) ? h('div', null, h('dt', null, 'Format'), h('dd', null, [format, location].filter(Boolean).join(' · '))) : null,
+                        organizer ? h('div', null, h('dt', null, 'Organizer'), h('dd', null, organizer)) : null,
+                        organizerContact ? h('div', null, h('dt', null, 'Contact'), h('dd', null, organizerContact)) : null
+                      ),
+                      description ? h('p', { className: 'official-card__text' }, description) : null
+                    ),
+                    h('div', { style: { marginTop: '24px' } },
+                      h('a', Object.assign({ href: actionUrl, className: 'button' }, actionLinkProps), buttonLabel)
+                    )
+                  )
+                ),
+                h('div', { style: { marginTop: '36px' } },
+                  h('h2', { className: 'official-card__title' }, title),
+                  renderMarkdownPreview(this.props.widgetFor('body'))
+                )
+              )
+            );
+          }
+        });
+
+        function renderSimpleCard(item, options) {
+          options = options || {};
+          var meta = options.meta || '';
+          var title = options.title || '';
+          var text = options.text || '';
+          var tags = options.tags || [];
+          var button = options.button || null;
+          return h('article', { className: 'official-card official-card--flat' },
+            h('div', { className: 'official-card__body' },
+              meta ? h('span', { className: 'official-card__meta' }, meta) : null,
+              h('h2', { className: 'official-card__title' }, title),
+              text ? h('p', { className: 'official-card__text' }, text) : null,
+              tags.length ? h('div', { className: 'pill-list' },
+                tags.map(function(tag, idx) {
+                  return h('span', { key: idx, className: 'tag-pill' }, tag);
+                })
+              ) : null,
+              button ? h('p', { style: { margin: '22px 0 0' } },
+                h('a', { href: '#', className: 'button button-secondary' }, button)
+              ) : null
+            )
+          );
+        }
+
+        function renderStat(value, label) {
+          return h('div', { className: 'preview-stat' },
+            h('strong', null, value.toString()),
+            h('span', null, label)
+          );
+        }
+
+        function renderPreviewSection(title, content) {
+          return h('section', { className: 'preview-section' },
+            h('h2', { className: 'preview-section-title' }, title),
+            content
+          );
+        }
+
+        function renderChipList(values) {
+          var list = toList(values).filter(Boolean);
+          if (!list.length) return h('span', { className: 'data-table__muted' }, '-');
+          return h('div', { className: 'data-chip-list' }, list.map(function(value, idx) {
+            return h('span', { key: idx, className: 'data-chip' }, value.toString());
+          }));
+        }
+
+        function renderDataValue(value) {
+          if (value === undefined || value === null || value === '') {
+            return h('span', { className: 'data-table__muted' }, '-');
+          }
+          if (Array.isArray(value) || (value && typeof value.toArray === 'function')) {
+            return renderChipList(value);
+          }
+          if (typeof value === 'boolean') {
+            return value ? 'Yes' : 'No';
+          }
+          if (typeof value === 'object') {
+            var pairs = Object.keys(value).map(function(key) {
+              return key + ': ' + renderPlainDataValue(value[key]);
+            });
+            return pairs.length ? h('span', null, pairs.join(' · ')) : h('span', { className: 'data-table__muted' }, '-');
+          }
+          return value.toString();
+        }
+
+        function renderPlainDataValue(value) {
+          if (value === undefined || value === null || value === '') return '-';
+          if (Array.isArray(value)) return value.map(renderPlainDataValue).join(', ');
+          if (typeof value === 'boolean') return value ? 'Yes' : 'No';
+          if (typeof value === 'object') {
+            return Object.keys(value).map(function(key) {
+              return key + ': ' + renderPlainDataValue(value[key]);
+            }).join(', ');
+          }
+          return value.toString();
+        }
+
+        function renderDataTable(items, columns) {
+          var rows = toList(items);
+          if (!rows.length) {
+            return h('div', { className: 'data-empty' }, 'No entries yet.');
+          }
+          return h('div', { className: 'data-table-wrap' },
+            h('table', { className: 'data-table' },
+              h('thead', null,
+                h('tr', null, columns.map(function(column, idx) {
+                  return h('th', { key: idx }, column.label);
+                }))
+              ),
+              h('tbody', null,
+                rows.map(function(row, rowIdx) {
+                  return h('tr', { key: rowIdx }, columns.map(function(column, colIdx) {
+                    var value = column.key ? itemValue(row, column.key, '') : row;
+                    return h('td', { key: colIdx }, column.render ? column.render(value, row, rowIdx) : renderDataValue(value));
+                  }));
+                })
+              )
+            )
+          );
+        }
+
+        function renderPersonCard(person, getAsset, idx) {
+          var placeholderImage = '/assets/images/team/person.webp';
+          var image = itemValue(person, 'image', placeholderImage) || placeholderImage;
+          var name = itemValue(person, 'name', '');
+          var role = itemValue(person, 'role', '');
+          var group = itemValue(person, 'group', '');
+          var location = itemValue(person, 'location', '');
+          var text = itemValue(person, 'bio', itemValue(person, 'contribution', ''));
+          var imageAlt = itemValue(person, 'image_alt', name);
+          var bg = getAsset(image);
+          return h('article', { key: idx, className: 'official-card person-card' },
+            h('div', { className: 'person-card__image' },
+              h('img', { src: bg.toString(), alt: imageAlt, className: image === placeholderImage ? 'is-placeholder' : '' })
+            ),
+            h('div', { className: 'official-card__body' },
+              h('span', { className: 'official-card__meta' }, [role, group].filter(Boolean).join(' · ')),
+              h('h3', { className: 'official-card__title' }, name),
+              location ? h('p', { className: 'official-card__text', style: { fontWeight: 700, marginBottom: '10px' } }, location) : null,
+              h('p', { className: 'official-card__text' }, text)
+            )
+          );
+        }
+
+        var SiteDataPreview = createClass({
+          render: function() {
+            var entry = this.props.entry;
+            var slug = previewSlug(entry);
+            var hasDataKey = function(key) {
+              return entry.getIn(['data', key]) !== undefined;
+            };
+            var title = 'Site Data';
+            var subtitle = 'CMS-managed public data';
+            var content;
+
+            if (hasDataKey('resources') || slug.indexOf('resources') !== -1) {
+              title = 'Learning Resources';
+              subtitle = 'Editable resource data table.';
+              var resources = toList(entry.getIn(['data', 'resources']));
+              content = h('div', null,
+                h('div', { className: 'preview-stat-row' },
+                  renderStat(resources.length, 'Resources'),
+                  renderStat(resources.filter(function(resource) { return itemValue(resource, 'aigp_created', false); }).length, 'AIGP-created'),
+                  renderStat(resources.filter(function(resource) { return itemValue(resource, 'level', '') === 'Beginner'; }).length, 'Beginner')
+                ),
+                renderDataTable(resources, [
+                  { label: 'Image', key: 'image', render: function(value, row) {
+                    return renderAssetThumb(value, row, this.props.getAsset, 'image_alt', 'title');
+                  }.bind(this) },
+                  { label: 'Title', key: 'title', render: function(value) { return h('span', { className: 'data-table__primary' }, renderDataValue(value)); } },
+                  { label: 'Level', key: 'level' },
+                  { label: 'Format', key: 'format' },
+                  { label: 'Description', key: 'description' },
+                  { label: 'Tags', key: 'tags' },
+                  { label: 'AIGP', key: 'aigp_created' },
+                  { label: 'Button', key: 'link_label' }
+                ])
+              );
+            } else if (hasDataKey('executive_members') || hasDataKey('zonal_heads') || slug.indexOf('team_structure') !== -1) {
+              title = 'Team Structure';
+              subtitle = 'Editable association support and community structure tables.';
+              var executives = toList(entry.getIn(['data', 'executive_members']));
+              var zones = toList(entry.getIn(['data', 'zonal_heads']));
+              var channels = toList(entry.getIn(['data', 'community_channels']));
+              content = h('div', null,
+                h('div', { className: 'preview-stat-row' },
+                  renderStat(executives.length, 'Executives'),
+                  renderStat(zones.length, 'Zonal heads'),
+                  renderStat(channels.length, 'Channels')
+                ),
+                executives.length ? h('div', { style: { marginTop: '28px' } },
+                  h('h2', { className: 'preview-section-title' }, 'Executive Members'),
+                  renderDataTable(executives.map(function(member) {
+                    return typeof member === 'string' ? { name: member } : member;
+                  }), [
+                    { label: 'Image', key: 'image', render: function(value, row) {
+                      return renderAssetThumb(value, row, this.props.getAsset, 'image_alt', 'name');
+                    }.bind(this) },
+                    { label: 'Name', key: 'name', render: function(value) { return h('span', { className: 'data-table__primary' }, renderDataValue(value)); } }
+                  ])
+                ) : null,
+                zones.length ? h('div', { style: { marginTop: '28px' } },
+                  h('h2', { className: 'preview-section-title' }, 'Zonal Heads'),
+                  renderDataTable(zones, [
+                    { label: 'Image', key: 'image', render: function(value, row) {
+                      return renderAssetThumb(value, row, this.props.getAsset, 'image_alt', 'name');
+                    }.bind(this) },
+                    { label: 'Name', key: 'name', render: function(value) { return h('span', { className: 'data-table__primary' }, renderDataValue(value)); } },
+                    { label: 'Zone', key: 'zone' },
+                    { label: 'Activity', key: 'activity' },
+                    { label: 'Members', key: 'active_members' },
+                    { label: 'Outreach', key: 'outreach' },
+                    { label: 'Reach', key: 'outreach_reach' }
+                  ])
+                ) : null,
+                channels.length ? h('div', { style: { marginTop: '28px' } },
+                  h('h2', { className: 'preview-section-title' }, 'Community Channels'),
+                  renderDataTable(channels, [
+                    { label: 'Channel', key: 'name', render: function(value) { return h('span', { className: 'data-table__primary' }, renderDataValue(value)); } },
+                    { label: 'Members', key: 'members' }
+                  ])
+                ) : null
+              );
+            } else if (hasDataKey('team') || slug.indexOf('team') !== -1) {
+              title = 'Core Team';
+              subtitle = 'Editable core team data table.';
+              var team = toList(entry.getIn(['data', 'team']));
+              content = h('div', null,
+                h('div', { className: 'preview-stat-row' }, renderStat(team.length, 'Team members')),
+                renderDataTable(team, [
+                  { label: 'Image', key: 'image', render: function(value, row) {
+                    return renderAssetThumb(value, row, this.props.getAsset, 'image_alt', 'name');
+                  }.bind(this) },
+                  { label: 'Name', key: 'name', render: function(value) { return h('span', { className: 'data-table__primary' }, renderDataValue(value)); } },
+                  { label: 'Role', key: 'role' },
+                  { label: 'Bio', key: 'bio' },
+                  { label: 'Responsibilities', key: 'responsibilities' },
+                  { label: 'Link', key: 'link' }
+                ])
+              );
+            } else if (hasDataKey('contributors') || slug.indexOf('contributors') !== -1) {
+              title = 'Team Page Contributor List';
+              subtitle = 'Editable contributor data table.';
+              var contributors = toList(entry.getIn(['data', 'contributors']));
+              content = h('div', null,
+                h('div', { className: 'preview-stat-row' }, renderStat(contributors.length, 'Contributors')),
+                renderDataTable(contributors, [
+                  { label: 'Image', key: 'image', render: function(value, row) {
+                    return renderAssetThumb(value, row, this.props.getAsset, 'image_alt', 'name');
+                  }.bind(this) },
+                  { label: 'Name', key: 'name', render: function(value) { return h('span', { className: 'data-table__primary' }, renderDataValue(value)); } },
+                  { label: 'Role', key: 'role' },
+                  { label: 'Group', key: 'group' },
+                  { label: 'Location', key: 'location' },
+                  { label: 'Contribution', key: 'contribution' }
+                ])
+              );
+            } else if (hasDataKey('collaborators') || slug.indexOf('partner_data') !== -1) {
+              title = 'Partners And Supporters';
+              subtitle = 'Editable collaborator cards used on the Partners page.';
+              var collaborators = toList(entry.getIn(['data', 'collaborators']));
+              content = h('div', null,
+                h('div', { className: 'preview-stat-row' }, renderStat(collaborators.length, 'Collaborators')),
+                renderDataTable(collaborators, [
+                  { label: 'Name', key: 'name', render: function(value) { return h('span', { className: 'data-table__primary' }, renderDataValue(value)); } },
+                  { label: 'Description', key: 'description' },
+                  { label: 'Website', key: 'url' },
+                  { label: 'Link Label', key: 'link_label' }
+                ])
+              );
+            } else if (hasDataKey('support_options') || slug.indexOf('support') !== -1) {
+              title = 'Partners And Support';
+              subtitle = 'Editable support option data table.';
+              var supportOptions = toList(entry.getIn(['data', 'support_options']));
+              var policy = toJS(entry.getIn(['data', 'policy'])) || {};
+              content = h('div', null,
+                h('div', { className: 'preview-stat-row' },
+                  renderStat(supportOptions.length, 'Support routes'),
+                  renderStat(policy.accepts_online_donations ? 'Yes' : 'No', 'Online donations')
+                ),
+                renderPreviewSection('Donation Policy',
+                  renderDataTable([policy], [
+                    { label: 'Accepts Online Donations', key: 'accepts_online_donations' },
+                    { label: 'Message', key: 'message' }
+                  ])
+                ),
+                renderPreviewSection('Support Options',
+                  renderDataTable(supportOptions, [
+                    { label: 'Title', key: 'title', render: function(value) { return h('span', { className: 'data-table__primary' }, renderDataValue(value)); } },
+                    { label: 'Summary', key: 'summary' },
+                    { label: 'Contact Label', key: 'contact_label' },
+                    { label: 'Contact URL', key: 'contact_url' }
+                  ])
+                )
+              );
+            } else if (hasDataKey('reports') || slug.indexOf('annual_reports') !== -1) {
+              title = 'Annual Reports';
+              subtitle = 'Editable annual report data table.';
+              var reports = toList(entry.getIn(['data', 'reports']));
+              content = h('div', null,
+                h('div', { className: 'preview-stat-row' }, renderStat(reports.length, 'Reports')),
+                renderDataTable(reports, [
+                  { label: 'Year', key: 'year', render: function(value) { return h('span', { className: 'data-table__primary' }, renderDataValue(value)); } },
+                  { label: 'Status', key: 'status' },
+                  { label: 'Summary', key: 'summary' },
+                  { label: 'Highlights', key: 'highlights' },
+                  { label: 'Links', key: 'links', render: function(value) {
+                    return renderChipList(toList(value).map(function(link) {
+                      return [itemValue(link, 'label', ''), itemValue(link, 'url', '')].filter(Boolean).join(': ');
+                    }));
+                  } }
+                ])
+              );
+            } else if (hasDataKey('representatives') || slug.indexOf('representatives') !== -1) {
+              title = 'Representatives';
+              subtitle = 'Editable representative record data table.';
+              var representatives = toList(entry.getIn(['data', 'representatives']));
+              content = h('div', null,
+                h('div', { className: 'preview-stat-row' }, renderStat(representatives.length, 'Representative records')),
+                renderDataTable(representatives, [
+                  { label: 'Year', key: 'year' },
+                  { label: 'Event', key: 'event', render: function(value) { return h('span', { className: 'data-table__primary' }, renderDataValue(value)); } },
+                  { label: 'Representative', key: 'representative' },
+                  { label: 'Notes', key: 'notes' },
+                  { label: 'Source URL', key: 'source_url' }
+                ])
+              );
+            } else {
+              content = h('div', { className: 'official-card official-card--flat' },
+                h('div', { className: 'official-card__body' },
+                  h('p', { className: 'official-card__text' }, 'This data file uses the public card preview styles. Save and view the linked public page for the complete layout.')
+                )
+              );
+            }
+
+            return h('div', { className: 'preview-page' },
+              h('style', { type: 'text/css' }, basePreviewStyles()),
+              h('div', { className: 'preview-container' },
+                h('div', { className: 'section-heading' },
+                  h('span', { className: 'section-eyebrow' }, subtitle),
+                  h('h1', { className: 'section-title' }, title)
+                ),
+                content
+              )
+            );
+          }
+        });
+
+        var OfficialPagePreview = createClass({
+          render: function() {
+            var entry = this.props.entry;
+            var title = entryValue(entry, 'title', 'Official Page');
+            var description = entryValue(entry, 'description', '');
+            var pagePath = entry.get('path') || '';
+            var pageLabel = pagePath ? pagePath.replace(/^_pages\//, '').replace(/\.md$/, '') : 'official page';
+            return h('div', { className: 'preview-page' },
+              h('style', { type: 'text/css' }, basePreviewStyles()),
+              h('div', { className: 'preview-container preview-container--narrow' },
+                h('div', { className: 'section-heading' },
+                  h('span', { className: 'section-eyebrow' }, pageLabel + ' preview'),
+                  h('h1', { className: 'section-title' }, title),
+                  description ? h('p', { className: 'section-summary' }, description) : null
+                ),
+                h('article', { className: 'official-card official-card--flat' },
+                  h('div', { className: 'official-card__body' },
+                    renderMarkdownPreview(this.props.widgetFor('body'), 'content content--page')
+                  )
+                )
+              )
+            );
+          }
+        });
+
+        function registerPreviewTemplateAliases(names, component) {
+          names.forEach(function(name) {
+            CMS.registerPreviewTemplate(name, component);
+          });
+        }
+
+        CMS.registerPreviewTemplate("news", PostPreview);
+        CMS.registerPreviewTemplate("notices", NoticePreview);
+        CMS.registerPreviewTemplate("events", EventPreview);
+        registerPreviewTemplateAliases([
+          "site_data",
+          "resources",
+          "team",
+          "team_structure",
+          "support",
+          "annual_reports",
+          "representatives",
+          "contributors",
+          "site_data.resources",
+          "site_data.team",
+          "site_data.team_structure",
+          "site_data.support",
+          "site_data.partner_data",
+          "site_data.annual_reports",
+          "site_data.representatives",
+          "site_data.contributors"
+        ], SiteDataPreview);
+        registerPreviewTemplateAliases([
+          "official_pages",
+          "about",
+          "representation",
+          "outreach",
+          "partners",
+          "code_of_conduct",
+          "constitution",
+          "contact_escalation",
+          "privacy",
+          "terms",
+          "official_pages.about",
+          "official_pages.representation",
+          "official_pages.outreach",
+          "official_pages.partners",
+          "official_pages.code_of_conduct",
+          "official_pages.constitution",
+          "official_pages.contact_escalation",
+          "official_pages.privacy",
+          "official_pages.terms"
+        ], OfficialPagePreview);
+
+        CMS.registerPreviewStyle("https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&display=swap");
+
+        // Register custom yaml-frontmatter formatter to enforce double quotes on the date field on save
+        CMS.registerCustomFormat('yaml-frontmatter', 'md', {
+          fromFile: function(text) {
+            var match = text.match(/^---\r?\n([\s\S]*?)\r?\n---\r?\n([\s\S]*)$/);
+            if (!match) {
+              match = text.match(/^---\r?\n([\s\S]*?)\r?\n---([\s\S]*)$/);
+            }
+            if (match) {
+              var yamlStr = match[1];
+              var body = match[2];
+              var obj = jsYaml.load(yamlStr) || {};
+              obj.body = body;
+              return obj;
+            }
+            return { body: text };
+          },
+          toFile: function(obj) {
+            var body = obj.body || '';
+            var frontmatterObj = Object.assign({}, obj);
+            delete frontmatterObj.body;
+
+            var yamlStr = jsYaml.dump(frontmatterObj, {
+              noRefs: true,
+              lineWidth: -1
+            });
+
+            // Regex to wrap date value in double quotes
+            yamlStr = yamlStr.replace(/^date:\s*['"]?([^'\n\r"]+)['"]?/m, 'date: "$1"');
+
+            return '---\n' + yamlStr.trim() + '\n---\n' + body;
+          }
+        });
+      } else {
+        // Wait and try again
+        setTimeout(registerCMSPlugins, 50);
+      }
+    }
+
+    // Start the process
+    registerCMSPlugins();
   </script>
 </body>
 </html>

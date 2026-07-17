@@ -1,18 +1,20 @@
 @use "sass:color";
 
 // Colors
-$primary: #e5261f;
-$primary-dark: #a01b16;
-$secondary: #f88379;
-$black: #2f2f41;
+$primary: #ff671f;
+$primary-dark: #c94a13;
+$secondary: #138808;
+$chakra-blue: #1f4fa3;
+$chakra-blue-dark: #12356f;
+$black: #1f2533;
 $white: #ffffff;
-$white-offset: #fff6f8;
-$steel: #5c5a5a;
+$white-offset: #fff8ef;
+$steel: #5b6170;
 
 // Links
 $link-color: $primary;
 $link-decoration: none;
-$link-hover-color: color.adjust($primary, $lightness: 10%);
+$link-hover-color: color.adjust($primary, $lightness: -8%);
 $link-hover-decoration: underline;
 
 // Fonts
@@ -20,13 +22,41 @@ $font-family-base: Helvetica, Arial, sans-serif, -apple-system;
 $font-family-heading: "Playfair Display", serif, -apple-system;
 
 // Footer
-$footer-background-color: $primary;
+$footer-background-color: $chakra-blue;
 $footer-text-color: $white;
-$sub-footer-background-color: color.adjust($primary, $lightness: -10%);
+$sub-footer-background-color: $chakra-blue-dark;
 $sub-footer-text-color: $white;
 
 // Utilities
 .h-70 {
   height: 200px;
   object-fit: cover;
+}
+
+@mixin media-breakpoint-up($name) {
+  @if $name == xs {
+    @content;
+  } @else if $name == sm {
+    @media (min-width: 576px) { @content; }
+  } @else if $name == md {
+    @media (min-width: 768px) { @content; }
+  } @else if $name == lg {
+    @media (min-width: 992px) { @content; }
+  } @else if $name == xl {
+    @media (min-width: 1300px) { @content; }
+  }
+}
+
+@mixin media-breakpoint-down($name) {
+  @if $name == xs {
+    @media (max-width: 575.98px) { @content; }
+  } @else if $name == sm {
+    @media (max-width: 575.98px) { @content; }
+  } @else if $name == md {
+    @media (max-width: 767.98px) { @content; }
+  } @else if $name == lg {
+    @media (max-width: 991.98px) { @content; }
+  } @else if $name == xl {
+    @media (max-width: 1299.98px) { @content; }
+  }
 }

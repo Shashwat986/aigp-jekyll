@@ -1,0 +1,27 @@
+{% assign pagination = include.paginator | default: paginator %}
+{% assign pagination_link_class = "px-4 py-2 border border-[var(--border-color)] rounded-lg text-sm bg-[var(--card-bg)] text-[var(--text-color)] hover:bg-primary hover:text-white transition-all" %}
+{% assign pagination_current_class = "px-4 py-2 border border-primary rounded-lg text-sm bg-primary text-white font-bold" %}
+
+{% if pagination.total_pages > 1 %}
+<nav aria-label="Page navigation" class="mt-12 flex justify-center">
+  <ul class="flex items-center gap-2">
+    {% if pagination.previous_page %}
+      <li><a class="{{ pagination_link_class }}" href="{{ pagination.previous_page_path | relative_url }}">Previous</a></li>
+    {% endif %}
+
+    {% for page_number in (1..pagination.total_pages) %}
+      {% if page_number == pagination.page %}
+        <li><span class="{{ pagination_current_class }}">{{ page_number }}</span></li>
+      {% elsif page_number == 1 %}
+        <li><a class="{{ pagination_link_class }}" href="{{ '/news/' | relative_url }}">{{ page_number }}</a></li>
+      {% else %}
+        <li><a class="{{ pagination_link_class }}" href="{{ '/news/page/' | append: page_number | append: '/' | relative_url }}">{{ page_number }}</a></li>
+      {% endif %}
+    {% endfor %}
+
+    {% if pagination.next_page %}
+      <li><a class="{{ pagination_link_class }}" href="{{ pagination.next_page_path | relative_url }}">Next</a></li>
+    {% endif %}
+  </ul>
+</nav>
+{% endif %}

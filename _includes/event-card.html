@@ -1,0 +1,57 @@
+{% assign event = include.event %}
+{% assign card_mode = include.mode | default: "card" %}
+{% assign event_status = include.status | default: event.status | default: event.event_type | default: "Event" %}
+{% assign button_class = include.button_class | default: "button-primary" %}
+{% assign event_url = event.url %}
+{% assign action_url = event.registration_url | default: event.url %}
+{% assign link_label = event.registration_label | default: event.external_url_label | default: "More Info" %}
+{% assign event_image = event.img | default: event.image %}
+{% assign event_is_external = false %}
+{% assign action_is_external = false %}
+{% if event_url contains "http" %}
+  {% assign event_is_external = true %}
+{% endif %}
+{% if action_url contains "http" %}
+  {% assign action_is_external = true %}
+{% endif %}
+
+{% if card_mode == "home" %}
+<article class="home-event-item">
+  <span class="home-event-status">{{ event_status }}</span>
+  <strong>{{ event.title }}</strong>
+  <p>{{ event.description }}</p>
+  {% include event-meta.html event=event %}
+  {% if action_url %}
+  <a class="button {{ button_class }}" href="{% if action_is_external %}{{ action_url }}{% else %}{{ action_url | relative_url }}{% endif %}" {% if action_is_external %}target="_blank" rel="noopener noreferrer"{% endif %}>{{ link_label }}</a>
+  {% endif %}
+</article>
+{% else %}
+<article class="official-card event-card{% if event_image %} media-card{% else %} official-card--flat{% endif %}">
+  {% if event_image %}
+  <div class="media-card__image">
+    {% if event_url %}<a href="{% if event_is_external %}{{ event_url }}{% else %}{{ event_url | relative_url }}{% endif %}" {% if event_is_external %}target="_blank" rel="noopener noreferrer"{% endif %}>{% endif %}
+      <img class="event-card__thumbnail" src="{{ event_image | relative_url }}" alt="{{ event.img_alt | default: event.image_alt | default: event.title }}" loading="lazy">
+    {% if event_url %}</a>{% endif %}
+  </div>
+  {% endif %}
+  <div class="media-card__content">
+    <div>
+      <span class="official-card__meta">{{ event.status | default: event.event_type | default: "Event" }}</span>
+      <h2 class="official-card__title">
+        {% if event_url %}
+        <a href="{% if event_is_external %}{{ event_url }}{% else %}{{ event_url | relative_url }}{% endif %}" {% if event_is_external %}target="_blank" rel="noopener noreferrer"{% endif %}>{{ event.title }}</a>
+        {% else %}
+        {{ event.title }}
+        {% endif %}
+      </h2>
+      {% include event-meta.html event=event show_organizer=true %}
+      <p class="official-card__text">{{ event.description }}</p>
+    </div>
+    {% if action_url %}
+    <div class="mt-6 flex justify-start md:justify-end">
+      <a class="button button-primary" href="{% if action_is_external %}{{ action_url }}{% else %}{{ action_url | relative_url }}{% endif %}" {% if action_is_external %}target="_blank" rel="noopener noreferrer"{% endif %}>{{ link_label }}</a>
+    </div>
+    {% endif %}
+  </div>
+</article>
+{% endif %}

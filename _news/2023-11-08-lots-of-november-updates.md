@@ -1,7 +1,8 @@
 ---
 title: Lots of November updates
 date: "2023-11-08T06:19:12.390Z"
-img: /assets/images/news/whatsapp-image-2023-10-30-at-8.55.05-pm.jpeg
+img: /assets/images/news/whatsapp-image-2023-10-30-at-8.55.05-pm.webp
+img_alt: "Lots of November updates"
 description: November activities
 categories:
   - Tournament
@@ -14,6 +15,7 @@ categories:
   - Kolkata
   - Delhi
   - Bangalore
+external_url_label: "More Info"
 ---
 * October challenge winners
 * WAGC selection tournament

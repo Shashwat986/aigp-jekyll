@@ -1,0 +1,6 @@
+{% assign notice = include.notice %}
+{% assign notice_types = notice.notice_types | default: notice.notice_type %}
+
+<div class="w-full">
+  {% include media-card.html item=notice taxonomy_items=notice_types taxonomy_path="/notices/type/" %}
+</div>

@@ -1,14 +1,15 @@
 ---
 title: August challenge winners & next challenge announcement
 date: "2023-09-27T11:06:25.631Z"
-img: /assets/images/news/photo1694526887.jpeg
+img: /assets/images/news/photo1694526887.webp
+img_alt: "August challenge winners & next challenge announcement"
 description: Join our monthly challenges which help you get better, faster,
   stronger & harder to beat
 categories:
   - Challenge
   - Results
+external_url_label: "More Info"
 ---
-![](/assets/images/news/photo1694526887.jpeg "Nihon Kiin keychain")
 
 AIGP held an August challenge for all of it's members
 

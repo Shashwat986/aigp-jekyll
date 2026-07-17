@@ -1,0 +1,36 @@
+rules:
+  - content_type: "Association Update Notices"
+    applies_to: "Official notices involving national representation, selection tournaments, or eligibility decisions."
+    required_review: "Two reviewers"
+    approver: "At least two AIGP officers or delegated tournament officials."
+    checklist:
+      - "Event name, host, format, and dates are included."
+      - "Eligibility rules and registration deadline are clear."
+      - "Tie-breaks, appeals route, and organizer contact are present."
+
+  - content_type: "Policy Pages"
+    applies_to: "Constitution, conduct, privacy, terms, representation policy, and official process pages."
+    required_review: "Officer approval"
+    approver: "AIGP officer or delegated governance reviewer."
+    checklist:
+      - "Change reason is documented."
+      - "Effective date or review date is included when relevant."
+      - "Contact or escalation path is visible."
+
+  - content_type: "Event Posts"
+    applies_to: "Events, tournaments, workshops, camps, weekly sessions, and meetups."
+    required_review: "Organizer review"
+    approver: "Named organizer or event lead."
+    checklist:
+      - "Date, time, timezone, format, and location/platform are included."
+      - "Organizer contact or contact route is present."
+      - "Registration or information link has a clear label."
+
+  - content_type: "News Posts"
+    applies_to: "General news, reports, photos, and community updates."
+    required_review: "Editorial review"
+    approver: "AIGP editor or page maintainer."
+    checklist:
+      - "Title, date, categories, description, image alt text, and source links are checked."
+      - "Photos are appropriate for public use."
+      - "External links have clear labels."

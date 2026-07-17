@@ -1,0 +1,18 @@
+servers:
+  - name: Online Go Server
+    url: https://online-go.com/group/102
+    image: https://ogs-forums.s3.amazonaws.com/original/2X/2/2512899f61b1f5bc8e6cc997cb4a1282cd23ab95.png
+    image_alt: OGS Logo
+    description: The Online Go Server (OGS) has many active communities and is one
+      of the newer English-speaking online Go communities. AIGP has an active
+      group on OGS, where we try to play, compete, and enjoy the game of Go.
+    linked_title: true
+  - name: Internet Go Server
+    url: https://pandanet-igs.com/communities/pandanet
+    image: https://pandanet-igs.com/assets/pandanet_trademark_400-0898ae25ac8f7b1717934f5710f9cc58d43ab33ec4922c0c6e5809984358988d.png
+    image_alt: Pandanet Logo
+    description: Pandanet's Internet Go Server is one of the original Go servers
+      that opened up to the western world, and it still has an active base of
+      high-ranked players. AIGP has a room on IGS, which is invitation-only.
+      Registered members of AIGP can ask to join the room on the Telegram group.
+    linked_title: true

@@ -1,0 +1,7 @@
+<item>
+  <title>{{ include.item.title | xml_escape }}</title>
+  <description>{{ include.item.description | default: include.item.excerpt | strip_html | normalize_whitespace | xml_escape }}</description>
+  <link>{{ include.item.url | absolute_url }}</link>
+  <guid isPermaLink="true">{{ include.item.url | absolute_url }}</guid>
+  <pubDate>{{ include.item.date | date_to_rfc822 }}</pubDate>
+</item>

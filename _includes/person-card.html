@@ -1,0 +1,45 @@
+{% assign person = include.person %}
+{% assign placeholder_image = "/assets/images/team/person.webp" %}
+{% assign person_name = include.name | default: person.name | default: person %}
+{% assign person_role = include.role | default: person.role %}
+{% assign person_group = include.group | default: person.group %}
+{% assign person_location = include.location | default: person.location %}
+{% assign person_link = include.link | default: person.link %}
+{% assign person_text = include.text | default: person.bio | default: person.contribution %}
+{% assign person_image = include.image | default: person.image | default: placeholder_image %}
+{% assign person_image_alt = include.image_alt | default: person.image_alt | default: person_name %}
+
+<article class="official-card media-card person-card">
+  <div class="media-card__image person-card__image">
+    <img{% if person_image == placeholder_image %} class="person-card__placeholder"{% endif %} src="{{ person_image | relative_url }}" alt="{{ person_image_alt }}" loading="lazy">
+  </div>
+  <div class="media-card__content">
+    <div>
+      {% if person_role or person_group %}
+      <span class="official-card__meta">{{ person_role }}{% if person_group %} · {{ person_group }}{% endif %}</span>
+      {% endif %}
+      <h3 class="official-card__title">
+        {% if person_link and person_link != "#" %}
+        <a href="{{ person_link }}" target="_blank" rel="noopener noreferrer">{{ person_name }}</a>
+        {% else %}
+        {{ person_name }}
+        {% endif %}
+      </h3>
+      {% if person_location %}<p class="font-semibold mb-3">{{ person_location }}</p>{% endif %}
+      {% if person_text %}<p class="official-card__text">{{ person_text }}</p>{% endif %}
+      {% if person.responsibilities %}
+      <ul class="mt-4 space-y-2 text-sm text-[var(--secondary-text-color)]">
+        {% for responsibility in person.responsibilities %}
+        <li>{{ responsibility }}</li>
+        {% endfor %}
+      </ul>
+      {% endif %}
+      {% if person.activity %}
+      <p class="official-card__text{% if person_text %} mt-4{% endif %}"><strong>{{ person.activity }}</strong>{% if person.active_members %}<br>{{ person.active_members }}{% endif %}</p>
+      {% endif %}
+      {% if person.outreach %}
+      <p class="official-card__text mt-4"><strong>{{ person.outreach }}</strong>{% if person.outreach_reach %}<br>{{ person.outreach_reach }}{% endif %}</p>
+      {% endif %}
+    </div>
+  </div>
+</article>

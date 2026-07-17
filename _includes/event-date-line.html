@@ -1,0 +1,3 @@
+{% assign event = include.event %}
+{% assign date_line = event.display_date | default: event.date %}
+{{ date_line }}{% if event.time %}, {{ event.time }}{% endif %}{% if event.timezone %} {{ event.timezone }}{% endif %}

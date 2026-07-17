@@ -1,0 +1,36 @@
+{% assign needs_lightbox = page.use_lightbox | default: false %}
+{% if page.collection == "news" or page.collection == "notices" %}
+  {% assign needs_lightbox = true %}
+{% endif %}
+
+<script type="text/javascript" src="{{ '/assets/js/scripts.js' | relative_url }}"></script>
+
+{% if jekyll.environment == "production" %}
+<script data-goatcounter="https://aigp.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
+{% endif %}
+
+{% if needs_lightbox %}
+  <script src="https://cdn.jsdelivr.net/npm/glightbox@3.3.1/dist/js/glightbox.min.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      document.querySelectorAll('.news-post .content img, .page-notice-post .content img').forEach(function(img) {
+        img.loading = img.loading || 'lazy';
+        var src = img.getAttribute('src');
+        if (!src || img.closest('a')) return;
+        var link = document.createElement('a');
+        link.href = src;
+        link.classList.add('glightbox');
+        link.setAttribute('data-gallery', 'post-gallery');
+        img.parentNode.insertBefore(link, img);
+        link.appendChild(img);
+      });
+      if (window.GLightbox) {
+        GLightbox({ selector: '.glightbox' });
+      }
+    });
+  </script>
+{% endif %}
+
+{% if page.url == "/" %}
+  <script async src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+{% endif %}

@@ -1,11 +1,13 @@
 ---
 title: Register for the first quarterly tournament of 2025
 date: "2025-02-05T16:54:43.612Z"
-img: /assets/images/news/aigp-online-cup.png
+img: /assets/images/news/aigp-online-cup.webp
+img_alt: "Register for the first quarterly tournament of 2025"
 description: Compete and win exiting prizes.
 categories:
   - Tournament
   - National
+external_url_label: "More Info"
 ---
 **R﻿equirements:**
 
@@ -20,13 +22,13 @@ categories:
 3. The best performing players(Top 3) will receive some amazing prizes.
 4. The Player playing as Black send a challenge to your Opponent on [OGS](https://online-go.com/) with the following settings + **No Undo**:
 
-![Game settings](/assets/images/news/screenshot-from-2025-02-06-15-09-26.png "dhdfhjhbk")
+![Game settings](/assets/images/news/screenshot-from-2025-02-06-15-09-26.webp "dhdfhjhbk")
 
 ### [Click here](https://forms.gle/XujUxqAgBUbNoxQHA) for Registration Link
 
 **P﻿rizes:**
 
-![](/assets/images/news/prizesx.jpg)
+![](/assets/images/news/prizesx.webp)
 
 **Refer to the [Roadmap](https://weiqi.soumyak4.in/) for learning resources.**
 

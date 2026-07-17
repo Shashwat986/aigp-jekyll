@@ -1,0 +1,42 @@
+{% assign card_item = include.item %}
+{% assign card_mode = include.mode | default: "list" %}
+{% assign card_url = include.url | default: card_item.url %}
+{% assign card_is_external = false %}
+{% if card_url contains "://" or card_url contains "mailto:" %}
+  {% assign card_is_external = true %}
+{% endif %}
+{% assign card_image = include.image | default: card_item.img | default: card_item.image %}
+{% assign card_image_alt = include.image_alt | default: card_item.img_alt | default: card_item.image_alt | default: card_item.title %}
+{% assign card_label = include.action_label | default: "More Info" %}
+{% assign card_aria_label = card_label | append: ": " | append: card_item.title %}
+{% assign card_taxonomy_items = include.taxonomy_items %}
+{% assign card_taxonomy_path = include.taxonomy_path %}
+
+<article class="official-card media-card{% if card_mode == 'compact' %} media-card--compact{% endif %}">
+  {% if card_image %}
+  <div class="media-card__image">
+    <a href="{% if card_is_external %}{{ card_url }}{% else %}{{ card_url | relative_url }}{% endif %}" {% if card_is_external %}target="_blank" rel="noopener noreferrer"{% endif %}>
+      <img src="{{ card_image | relative_url }}" alt="{{ card_image_alt }}" loading="lazy">
+    </a>
+  </div>
+  {% endif %}
+  <div class="media-card__content">
+    <div>
+      {% if card_item.date %}
+      <time class="official-card__meta" datetime="{{ card_item.date | date_to_xmlschema }}">{{ card_item.date | date: "%b %-d, %Y" }}</time>
+      {% endif %}
+      <h2 class="official-card__title">
+        <a href="{% if card_is_external %}{{ card_url }}{% else %}{{ card_url | relative_url }}{% endif %}" {% if card_is_external %}target="_blank" rel="noopener noreferrer"{% endif %}>{{ card_item.title }}</a>
+      </h2>
+      {% if card_taxonomy_items %}
+      <div class="pill-list">
+        {% include taxonomy-pills.html items=card_taxonomy_items path=card_taxonomy_path %}
+      </div>
+      {% endif %}
+      <p class="official-card__text">{{ card_item.description | default: card_item.excerpt | strip_html | truncate: 250 }}</p>
+    </div>
+    <div class="mt-6 flex justify-start md:justify-end">
+      <a href="{% if card_is_external %}{{ card_url }}{% else %}{{ card_url | relative_url }}{% endif %}" class="button button-primary" aria-label="{{ card_aria_label | escape }}" {% if card_is_external %}target="_blank" rel="noopener noreferrer"{% endif %}>{{ card_label }}<span class="sr-only">: {{ card_item.title }}</span></a>
+    </div>
+  </div>
+</article>

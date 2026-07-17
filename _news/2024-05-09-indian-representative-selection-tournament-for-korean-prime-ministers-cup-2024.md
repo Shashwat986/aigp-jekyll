@@ -2,7 +2,8 @@
 title: Indian Representative Selection Tournament for Korean Prime Minister's
   Cup, 2024
 date: "2024-05-09T12:23:46.912Z"
-img: /assets/images/news/screenshot-2024-05-09-at-5.55.28-pm.png
+img: /assets/images/news/screenshot-2024-05-09-at-5.55.28-pm.webp
+img_alt: "Indian Representative Selection Tournament for Korean Prime Minister's Cup, 2024"
 description: AIGP has been invited by the Korean Baduk Federation to participate
   in the Korea Prime Minister Cup 2024.
 categories:
@@ -10,6 +11,7 @@ categories:
   - International
   - Selection
   - KPMC
+external_url_label: "More Info"
 ---
 AIGP has been invited by the Korean Baduk Federation to participate in the Korea Prime Minister Cup 2024.
 

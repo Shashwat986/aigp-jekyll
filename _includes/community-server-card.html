@@ -1,0 +1,26 @@
+{% assign server = include.server %}
+{% assign server_url = server.url | default: "#" %}
+{% assign server_is_external = false %}
+{% if server_url contains "://" or server_url contains "mailto:" %}
+  {% assign server_is_external = true %}
+{% endif %}
+
+<div class="bg-[var(--card-bg)] text-[var(--text-color)] border border-[var(--border-color)] shadow-xl rounded-2xl p-6 flex flex-col justify-between transition-all duration-300 hover:shadow-2xl">
+  <div>
+    <div class="text-center px-4 mb-4 flex justify-center items-center h-24">
+      <a href="{{ server_url }}"{% if server_is_external %} target="_blank" rel="noopener noreferrer"{% endif %}>
+        <img src="{{ server.image }}" class="max-h-20 max-w-full object-contain" alt="{{ server.image_alt | default: server.name }}" loading="lazy">
+      </a>
+    </div>
+    <h5 class="text-md font-bold text-[var(--heading-color)] mb-2{% if server.linked_title %} hover:text-primary transition-colors{% endif %}">
+      {% if server.linked_title %}
+      <a href="{{ server_url }}"{% if server_is_external %} target="_blank" rel="noopener noreferrer"{% endif %}>{{ server.name }}</a>
+      {% else %}
+      {{ server.name }}
+      {% endif %}
+    </h5>
+    <p class="text-xs text-[var(--secondary-text-color)] leading-relaxed">
+      {{ server.description }}
+    </p>
+  </div>
+</div>

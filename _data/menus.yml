@@ -2,32 +2,90 @@ main:
   - name: "Home"
     url: "/"
     weight: 1
-  - name: "Learn"
-    url: "/learn/"
+    show_in_header: false
+    show_in_footer: false
+  - name: "Tournaments"
+    url: "leago.events"
     weight: 2
+    show_in_header: false
+  - name: "Events"
+    url: "/events/"
+    weight: 2.5
+    show_in_header: false
+  - name: "Players"
+    url: "leago.ratings"
+    weight: 3
+    show_in_header: false
+  - name: "Notices"
+    url: "/notices/"
+    weight: 1
+    show_in_header: false
   - name: "News"
     url: "/news/"
+    weight: 2
+    children:
+      - name: "Official Notices"
+        url: "/notices/"
+      - name: "Latest News"
+        url: "/news/"
+      - name: "News Categories"
+        url: "/news/category/"
+  - name: "Learn"
+    url: "/learn/"
     weight: 3
+    children:
+      - name: "Your Go Path"
+        url: "/pathways/"
+      - name: "Learn Go"
+        url: "/learn/"
   - name: "Community"
     url: "/community/"
     weight: 4
+    children:
+      - name: "Community"
+        url: "/community/"
+      - name: "Tournaments"
+        url: "leago.events"
+      - name: "Events"
+        url: "/events/"
+      - name: "Players/Ratings"
+        url: "leago.ratings"
+      - name: "Clubs"
+        url: "leago.clubs"
+      - name: "Representatives"
+        url: "/representatives/"
   - name: "Contact"
     url: "/contact/"
     weight: 5
+    show_in_header: false
   - name: "About"
     url: "/about/"
     weight: 6
+    children:
+      - name: "About AIGP"
+        url: "/about/"
+      - name: "Team"
+        url: "/team/"
+      - name: "Contact"
+        url: "/contact/"
+      - name: "Partners"
+        url: "/partners/"
+      - name: "Outreach"
+        url: "/outreach/"
+  - name: "Search"
+    url: "/search/"
+    weight: 7
 
 footer:
-  - name: "Home"
-    url: "/"
+  - name: "Official Notices"
+    url: "/notices/"
     weight: 1
-  - name: "News"
-    url: "/news/"
-    weight: 3
   - name: "Learn"
     url: "/learn/"
     weight: 2
+  - name: "News"
+    url: "/news/"
+    weight: 3
   - name: "Community"
     url: "/community/"
     weight: 4
@@ -37,9 +95,12 @@ footer:
   - name: "About"
     url: "/about/"
     weight: 6
-  - name: "Tournaments"
-    url: "https://leago.gg/aigp/events"
+  - name: "Search"
+    url: "/search/"
     weight: 7
-  - name: "Players"
-    url: "https://leago.gg/aigp/ratings"
+  - name: "Feeds"
+    url: "/feed/"
     weight: 8
+  - name: "Sitemap"
+    url: "/sitemap/"
+    weight: 9

@@ -1,7 +1,8 @@
 ---
 title: Indo-Malaysian Friendship Cup
 date: "2025-04-01T16:39:33.079Z"
-img: /assets/images/news/indo-mal.jpeg
+img: /assets/images/news/indo-mal.webp
+img_alt: "Indo-Malaysian Friendship Cup"
 description: We proudly present to you the first International Weiqi/Baduk
   Friendship Cup hosted by India. More details shared in the post. Register Now.
 categories:
@@ -9,8 +10,9 @@ categories:
   - International
   - Friendship Cup
   - Malaysia
+external_url_label: "More Info"
 ---
-![](/assets/images/news/indo-mal.jpeg)
+![](/assets/images/news/indo-mal.webp)
 
 **Event Video -**
 
@@ -18,7 +20,7 @@ categories:
 title="YouTube video player"
 frameborder="0"
 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-allowfullscreen></iframe>
+allowfullscreen loading="lazy"></iframe>
 
 **Event Details -**
 

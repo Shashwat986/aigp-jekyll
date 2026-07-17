@@ -1,0 +1,16 @@
+{% assign ratio = include.ratio | default: "aspect-video" %}
+
+<div class="{{ ratio }} rounded-xl overflow-hidden shadow-inner border border-[var(--border-color)] bg-black">
+  <iframe
+    src="{{ include.src }}"
+    title="{{ include.title }}"
+    class="w-full h-full"
+    {% if include.allow %}allow="{{ include.allow }}"{% endif %}
+    allowfullscreen
+    loading="lazy"></iframe>
+</div>
+{% if include.fallback_url %}
+<p class="embed-fallback mt-3 text-xs">
+  <a href="{{ include.fallback_url }}" target="_blank" rel="noopener noreferrer">{{ include.fallback_label | default: "Open embedded content" }}</a>
+</p>
+{% endif %}

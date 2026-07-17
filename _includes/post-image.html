@@ -1,0 +1,21 @@
+{% assign image_item = include.item | default: page %}
+{% assign image_url = include.src | default: image_item.img | default: image_item.image %}
+{% assign image_link = include.href | default: image_url %}
+{% assign image_alt = include.alt | default: image_item.img_alt | default: image_item.image_alt | default: image_item.title %}
+{% assign wrapper_class = include.wrapper_class | default: "mb-8 rounded-2xl overflow-hidden shadow-lg border border-[var(--border-color)] bg-[var(--card-bg)]" %}
+{% assign image_class = include.image_class | default: "w-full max-h-[420px] object-contain" %}
+
+{% if image_url and image_url != "" %}
+<div class="{{ wrapper_class }}">
+  {% if include.link != false %}
+  <a href="{{ image_link | relative_url }}" class="{{ include.link_class | default: 'glightbox block' }}" {% if include.gallery %}data-gallery="{{ include.gallery }}"{% endif %}>
+    <img src="{{ image_url | relative_url }}" alt="{{ image_alt }}" class="{{ image_class }}" loading="lazy">
+  </a>
+  {% else %}
+  <img src="{{ image_url | relative_url }}" alt="{{ image_alt }}" class="{{ image_class }}" loading="lazy">
+  {% endif %}
+</div>
+{% if include.caption %}
+<p class="{{ include.caption_class | default: 'mt-4 text-sm leading-relaxed text-center text-[var(--secondary-text-color)]' }}">{{ include.caption }}</p>
+{% endif %}
+{% endif %}

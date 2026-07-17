@@ -1,0 +1,53 @@
+{% assign taxonomy_kind = include.kind | default: "news" %}
+{% assign taxonomy_names = "" %}
+
+{% if taxonomy_kind == "notice_types" %}
+  {% assign taxonomy_collection = site.notices %}
+  {% assign taxonomy_path = "/notices/type/" %}
+  {% assign taxonomy_all_label = "All notices" %}
+  {% assign taxonomy_aria = "Notice types" %}
+  {% for taxonomy_doc in taxonomy_collection %}
+    {% assign taxonomy_values = taxonomy_doc.notice_types | default: taxonomy_doc.notice_type %}
+    {% if taxonomy_values %}
+      {% if taxonomy_values.first %}
+        {% for taxonomy_value in taxonomy_values %}
+          {% assign taxonomy_token = "|" | append: taxonomy_value | append: "|" %}
+          {% unless taxonomy_names contains taxonomy_token %}
+            {% assign taxonomy_names = taxonomy_names | append: "|" | append: taxonomy_value | append: "|" %}
+          {% endunless %}
+        {% endfor %}
+      {% else %}
+        {% assign taxonomy_token = "|" | append: taxonomy_values | append: "|" %}
+        {% unless taxonomy_names contains taxonomy_token %}
+          {% assign taxonomy_names = taxonomy_names | append: "|" | append: taxonomy_values | append: "|" %}
+        {% endunless %}
+      {% endif %}
+    {% endif %}
+  {% endfor %}
+{% else %}
+  {% assign taxonomy_collection = site.news %}
+  {% assign taxonomy_path = "/news/category/" %}
+  {% assign taxonomy_all_label = "All news" %}
+  {% assign taxonomy_aria = "News categories" %}
+  {% for taxonomy_doc in taxonomy_collection %}
+    {% for taxonomy_value in taxonomy_doc.categories %}
+      {% assign taxonomy_token = "|" | append: taxonomy_value | append: "|" %}
+      {% unless taxonomy_names contains taxonomy_token %}
+        {% assign taxonomy_names = taxonomy_names | append: "|" | append: taxonomy_value | append: "|" %}
+      {% endunless %}
+    {% endfor %}
+  {% endfor %}
+{% endif %}
+
+{% assign taxonomy_array = taxonomy_names | split: "|" | sort %}
+<nav class="filter-bar" aria-label="{{ include.aria_label | default: taxonomy_aria }}">
+  {% if include.show_all != false %}
+  <a class="filter-pill" href="{{ include.all_url | default: taxonomy_path | relative_url }}">{{ include.all_label | default: taxonomy_all_label }}</a>
+  {% endif %}
+  {% for taxonomy_item in taxonomy_array %}
+    {% if taxonomy_item != "" %}
+      {% assign taxonomy_slug = taxonomy_item | slugify %}
+      <a class="filter-pill" href="{{ taxonomy_path | append: taxonomy_slug | append: '/' | relative_url }}">{{ taxonomy_item }}</a>
+    {% endif %}
+  {% endfor %}
+</nav>

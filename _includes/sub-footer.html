@@ -1,16 +1,12 @@
-<div class="sub-footer">
-  <div class="container">
-    <div class="row">
-      <div class="col-12">
-        <div class="sub-footer-inner">
-          {% if site.data.social %}
-            {% include social.html %}
-          {% endif %}
-          {% if site.data.seo.copyright_text %}
-          <div class="copyright">{{ site.data.seo.copyright_text }}</div>
-          {% endif %}
-        </div>
-      </div>
+<div class="sub-footer bg-neutral-900 text-neutral-400 py-6 border-t border-neutral-800 transition-colors duration-300">
+  <div class="container mx-auto px-4">
+    <div class="flex flex-col md:flex-row items-center justify-between gap-4">
+      {% if site.data.social %}
+        {% include social.html %}
+      {% endif %}
+      {% if site.data.seo.copyright_text %}
+      <div class="copyright text-xs text-neutral-400 font-medium">{{ site.data.seo.copyright_text }}</div>
+      {% endif %}
     </div>
   </div>
 </div>

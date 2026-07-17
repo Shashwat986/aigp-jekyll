@@ -1,0 +1,58 @@
+<!-- Image Gallery -->
+<div class="grid grid-cols-2 gap-3 my-6">
+  <img src="/assets/images/news/" alt="image 1" loading="lazy">
+  <img src="/assets/images/news/" alt="image 2" loading="lazy">
+</div>
+
+<!-- Gallery with individual captions and one gallery caption: -->
+<div class="grid grid-cols-2 gap-3 my-6" aria-label="Mumbai workshop gallery">
+  <figure style="margin: 0;">
+    <img
+      src="/assets/images/news/photo-1.webp"
+      alt="Students playing on small Go boards"
+      loading="lazy"
+      style="width: 100%; height: 220px; object-fit: cover;"
+    >
+    <figcaption style="margin-top: 0.5rem; font-size: 0.85rem; color: var(--secondary-text-color);">
+      Beginner games
+    </figcaption>
+  </figure>
+
+  <figure style="margin: 0;">
+    <img
+      src="/assets/images/news/photo-2.webp"
+      alt="Instructor explaining a Go position"
+      loading="lazy"
+      style="width: 100%; height: 220px; object-fit: cover;"
+    >
+    <figcaption style="margin-top: 0.5rem; font-size: 0.85rem; color: var(--secondary-text-color);">
+      Lesson and review
+    </figcaption>
+  </figure>
+</div>
+
+<p style="margin-top: -0.75rem; color: var(--secondary-text-color); font-size: 0.9rem;">
+  Highlights from the Mumbai workshop.
+</p>
+
+<!-- 
+Use HTML figure/figcaption for captions, and inline styles for reliable custom sizing
+Use object-fit: cover to crop an image into the chosen size.
+Use object-fit: contain instead if you want the full image visible without cropping.
+Omit height if you only want to constrain its width while preserving the original ratio. -->
+<figure style="margin: 1.5rem 0; text-align: center;">
+  <img
+    src="/assets/images/news/photo.webp"
+    alt="Players reviewing a Go game"
+    loading="lazy"
+    style="width: 320px; max-width: 100%; height: 240px; object-fit: cover; margin: 0 auto;"
+  >
+  <figcaption style="margin-top: 0.5rem; color: var(--secondary-text-color); font-size: 0.9rem;">
+    Game review during the workshop.
+  </figcaption>
+</figure>
+
+<!-- Centre Embeds -->
+ <div class="flex justify-center">
+<iframe></iframe>
+ </div>

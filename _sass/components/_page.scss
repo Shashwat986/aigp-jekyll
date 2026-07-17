@@ -6,3 +6,8 @@
     flex: 1 0 0;
   }
 }
+
+body:not(.page-home) #main-content > .container {
+  max-width: clamp(56rem, 80vw, 80rem);
+  width: 100%;
+}

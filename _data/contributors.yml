@@ -1,0 +1,24 @@
+contributors:
+  - name: "City Meetup Organizers"
+    role: "Local Organizers"
+    group: "Community Volunteers"
+    location: "Multiple cities"
+    contribution: "Host local meetups, welcome new players, coordinate venues, and share reports with AIGP."
+
+  - name: "Workshop Volunteers"
+    role: "Teachers And Demonstrators"
+    group: "Outreach Volunteers"
+    location: "Schools, colleges, and public events"
+    contribution: "Introduce Go to new learners, help run beginner games, and support follow-up sessions."
+
+  - name: "Tournament Staff"
+    role: "Pairing, Refereeing, And Results"
+    group: "Event Volunteers"
+    location: "Online and in person"
+    contribution: "Support fair pairings, player communication, result collection, and event documentation."
+
+  - name: "Translators, Designers, And Developers"
+    role: "Creative And Technical Support"
+    group: "Project Contributors"
+    location: "Remote"
+    contribution: "Improve public communication, translations, visual assets, website features, and community tools."

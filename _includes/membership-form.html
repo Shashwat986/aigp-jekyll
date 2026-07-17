@@ -1,0 +1,43 @@
+{% assign form_id_prefix = include.id_prefix | default: "membership" %}
+{% assign form_title = include.title | default: "Become a Member" %}
+{% assign form_summary = include.summary | default: "Join the AIGP mailing list and meet Go players across India." %}
+
+<section class="home-membership-band{% if include.compact %} home-membership-band--compact{% endif %}" aria-labelledby="{{ form_id_prefix }}-membership-title">
+  <div>
+    <span class="section-eyebrow">Membership</span>
+    {% unless include.hide_title %}
+    <h2 id="{{ form_id_prefix }}-membership-title" class="section-title">{{ form_title }}</h2>
+    {% endunless %}
+    <p class="section-summary">{{ form_summary }}</p>
+  </div>
+
+  <form action="https://gmail.us6.list-manage.com/subscribe/post" method="post" target="_blank" rel="noopener noreferrer" id="{{ form_id_prefix }}-membership-form" class="membership-form">
+    <input type="hidden" name="u" value="4fd58232bb8466eaa9cb5ce1b">
+    <input type="hidden" name="id" value="477349c5a7">
+
+    <div class="form-grid">
+      <label for="{{ form_id_prefix }}-mce-NAME">Name</label>
+      <input type="text" name="NAME" id="{{ form_id_prefix }}-mce-NAME" required>
+
+      <label for="{{ form_id_prefix }}-mce-EMAIL">Email</label>
+      <input type="email" name="EMAIL" id="{{ form_id_prefix }}-mce-EMAIL" required>
+
+      <label for="{{ form_id_prefix }}-mce-MMERGE6">Rank</label>
+      <select name="MMERGE6" id="{{ form_id_prefix }}-mce-MMERGE6">
+        <option>Newbie</option>
+        <option>Know the rules</option>
+        <option>30k to 15k</option>
+        <option>15k to 5k</option>
+        <option>5k to 1k</option>
+        <option>1d+</option>
+      </select>
+    </div>
+
+    <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups -->
+    <div style="position: absolute; left: -5000px;" aria-hidden="true">
+      <input type="text" name="b_4fd58232bb8466eaa9cb5ce1b_477349c5a7" tabindex="-1" value="">
+    </div>
+
+    <button type="submit" name="subscribe" id="{{ form_id_prefix }}-mc-embedded-subscribe" class="button button-primary">Submit</button>
+  </form>
+</section>

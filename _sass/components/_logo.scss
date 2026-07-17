@@ -1,9 +1,11 @@
-@use "bootstrap-shim" as *;
+@use "theme" as *;
 
 .logo {
   display: none;
   @include media-breakpoint-up(sm) {
     display: block;
+    height: auto;
+    width: 64px;
   }
   img {
     max-width: unset;

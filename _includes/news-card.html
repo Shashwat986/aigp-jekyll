@@ -1,0 +1,6 @@
+{% assign post = include.post %}
+{% assign card_mode = include.mode | default: "list" %}
+{% assign action_label = post.external_url_label | default: "More Info" %}
+{% assign card_url = post.external_url | default: post.url %}
+
+{% include media-card.html item=post mode=card_mode url=card_url action_label=action_label taxonomy_items=post.categories taxonomy_path="/news/category/" %}

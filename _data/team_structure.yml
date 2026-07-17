@@ -1,0 +1,51 @@
+executive_members:
+  - name: Kriti Kumar
+  - name: Megha Haware
+  - name: Neha Rawat
+  - name: Sarthak Chandra
+zonal_heads:
+  - name: Sarthak Wadhwani
+    zone: North
+    activity: Monthly meetups
+    active_members: 15-20 members
+    outreach: 2 universities
+    outreach_reach: 20-30 students
+  - name: Ashok Dudhare
+    zone: West
+    activity: Monthly meetups
+    active_members: 15-20 members
+    outreach: 20+ schools
+    outreach_reach: 200+ students
+  - name: Soumya Kanti Kundu
+    zone: East + Online
+    activity: Monthly meetups
+    active_members: 15-20 members
+    outreach: Offline classes, meetups and online tournaments
+    outreach_reach: 10 students
+    image: /assets/images/team/soumya_about.webp
+    image_alt: Soumya Kanti Kundu
+  - name: Kriti Kumar
+    zone: South
+    activity: Monthly meetups
+    active_members: 15-20 members
+    outreach: 5+ schools
+    outreach_reach: 20+ students
+  - name: Suhas Sontakki
+    zone: South
+    activity: Weekly meetups
+    active_members: 10-15 members
+    outreach: Online meetups and tournaments
+    outreach_reach: ""
+community_channels:
+  - name: Facebook
+    members: 600+ members
+  - name: Instagram
+    members: 175+ members
+  - name: Mailing List
+    members: 600+ members
+  - name: Online Go Server
+    members: 250+ members
+  - name: WhatsApp and Telegram
+    members: 250+ members
+  - name: Offline
+    members: 400+ members

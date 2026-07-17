@@ -3,7 +3,7 @@ local_backend: true
 
 backend:
   name: git-gateway
-  branch: soumyak4 # Branch to update (optional; defaults to master)
+  # branch: master # Branch to update (optional; defaults to master)
 media_folder: "assets/images/news"
 public_folder: "/assets/images/news"
 collections:
@@ -22,7 +22,279 @@ collections:
       - {label: "Publish Date", name: "date", widget: "datetime", format: "YYYY-MM-DDTHH:mm:ssZ"}
       - {label: "Categories", name: "categories", widget: "list", default: ["News"], required: true}
       - {label: "Featured Image", name: "img", widget: "image"}
+      - {label: "Featured Image Alt Text", name: "img_alt", widget: "string", hint: "Describe the image for accessibility. Do not repeat only the title."}
       - {label: "Description", name: "description", widget: "string"}
       - {label: "External URL", name: "external_url", widget: "string", required: false}
+      - {label: "External Link Label", name: "external_url_label", widget: "string", required: false, default: "More Info"}
       - {label: "Body", name: "body", widget: "markdown"}
+  - name: "notices"
+    label: "Official Notices"
+    folder: "_notices"
+    create: true
+    extension: "md"
+    format: "yaml-frontmatter"
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    preview_path: "notices/{{year}}/{{month}}/{{day}}/{{slug}}/"
+    sortable_fields: ["date", "notice_types"]
+    sort: "-date"
+    fields:
+      - {label: "Title", name: "title", widget: "string"}
+      - {label: "Publish Date", name: "date", widget: "datetime", format: "YYYY-MM-DDTHH:mm:ssZ"}
+      - {label: "Notice Types", name: "notice_types", widget: "select", options: ["Association Update", "Rating", "Membership", "Policy", "Partners", "Financial"], multiple: true, min: 1, default: ["Association Update"]}
+      - {label: "Featured Image", name: "img", widget: "image", required: false}
+      - {label: "Featured Image Alt Text", name: "img_alt", widget: "string", required: false}
+      - {label: "Description", name: "description", widget: "string"}
+      - {label: "Reviewer Notes", name: "review_notes", widget: "text", required: false}
+      - {label: "Body", name: "body", widget: "markdown"}
+  - name: "events"
+    label: "Events"
+    folder: "_events"
+    create: true
+    extension: "md"
+    format: "yaml-frontmatter"
+    slug: "{{slug}}"
+    preview_path: "events/{{slug}}/"
+    sortable_fields: ["date", "status", "event_type"]
+    sort: "-date"
+    fields:
+      - {label: "Title", name: "title", widget: "string"}
+      - {label: "Event Date", name: "date", widget: "datetime", date_format: "YYYY-MM-DD", time_format: false, format: "YYYY-MM-DD"}
+      - {label: "Sort Date", name: "sort_date", widget: "datetime", date_format: "YYYY-MM-DD", time_format: false, format: "YYYY-MM-DD", required: false, hint: "Optional. Only use when the public date is custom, recurring, or a range, such as Every Sunday or July 19-21. Leave blank for normal one-day events."}
+      - {label: "Display Date", name: "display_date", widget: "string", required: false}
+      - {label: "Time", name: "time", widget: "string", required: false}
+      - {label: "Timezone", name: "timezone", widget: "string", default: "IST"}
+      - {label: "Status", name: "status", widget: "select", options: ["upcoming", "ongoing", "completed"], default: "upcoming"}
+      - {label: "Event Type", name: "event_type", widget: "select", options: ["Tournament", "Workshop", "Weekly Session", "Selection", "Meetup"], default: "Tournament"}
+      - {label: "Format", name: "format", widget: "select", options: ["Online", "In person", "Hybrid"], default: "Online"}
+      - {label: "Location / Platform", name: "location", widget: "string", required: false}
+      - {label: "Organizer", name: "organizer", widget: "string"}
+      - {label: "Organizer Contact", name: "organizer_contact", widget: "string"}
+      - {label: "Registration / Info URL", name: "registration_url", widget: "string", required: false, hint: "Optional override. Leave blank to link the event card button to this event page. Use /contact/, /community/, or a full external URL only when the button should go somewhere else."}
+      - {label: "Button Label", name: "registration_label", widget: "string", required: false, default: "More Info", hint: "Text for the registration/info button."}
+      - {label: "Featured Image", name: "img", widget: "image", required: false}
+      - {label: "Featured Image Alt Text", name: "img_alt", widget: "string", required: false}
+      - {label: "Description", name: "description", widget: "text"}
+      - {label: "Body", name: "body", widget: "markdown"}
+  - name: "site_data"
+    label: "Site Data"
+    media_folder: "assets/images/team"
+    public_folder: "/assets/images/team"
+    files:
+      - name: "links"
+        label: "Shared Links"
+        file: "_data/links.yml"
+        format: "yml"
+        fields:
+          - label: "Leago"
+            name: "leago"
+            widget: "object"
+            fields:
+              - {label: "Home", name: "home", widget: "string"}
+              - {label: "Events", name: "events", widget: "string"}
+              - {label: "Ratings", name: "ratings", widget: "string"}
+              - {label: "Clubs", name: "clubs", widget: "string"}
+          - label: "Social"
+            name: "social"
+            widget: "object"
+            fields:
+              - {label: "Facebook", name: "facebook", widget: "string"}
+              - {label: "YouTube", name: "youtube", widget: "string"}
+          - label: "Latest Event Videos"
+            name: "latest_events"
+            widget: "object"
+            fields:
+              - label: "Videos"
+                name: "videos"
+                widget: "list"
+                summary: "{{fields.title}}"
+                fields:
+                  - {label: "Title", name: "title", widget: "string"}
+                  - {label: "YouTube Embed URL", name: "embed_url", widget: "string", hint: "Use https://www.youtube.com/embed/VIDEO_ID"}
+                  - {label: "YouTube Watch URL", name: "watch_url", widget: "string", hint: "Use the normal YouTube or youtu.be URL"}
+      - name: "community_servers"
+        label: "Community Server Cards"
+        file: "_data/community_servers.yml"
+        format: "yml"
+        fields:
+          - label: "Servers"
+            name: "servers"
+            widget: "list"
+            summary: "{{fields.name}}"
+            fields:
+              - {label: "Name", name: "name", widget: "string"}
+              - {label: "URL", name: "url", widget: "string", default: "#"}
+              - {label: "Image", name: "image", widget: "string"}
+              - {label: "Image Alt Text", name: "image_alt", widget: "string"}
+              - {label: "Description", name: "description", widget: "text"}
+              - {label: "Linked Title", name: "linked_title", widget: "boolean", default: true}
+      - name: "partner_data"
+        label: "Partners And Supporters"
+        file: "_data/partners.yml"
+        format: "yml"
+        fields:
+          - label: "Collaborators"
+            name: "collaborators"
+            widget: "list"
+            summary: "{{fields.name}}"
+            fields:
+              - {label: "Name", name: "name", widget: "string"}
+              - {label: "Description", name: "description", widget: "text"}
+              - {label: "Website URL", name: "url", widget: "string", required: false}
+              - {label: "Link Label", name: "link_label", widget: "string", required: false, default: "Open Website"}
+      - name: "resources"
+        label: "Learning Resources"
+        file: "_data/resources.yml"
+        format: "yml"
+        fields:
+          - label: "Resources"
+            name: "resources"
+            widget: "list"
+            summary: "{{fields.level}} · {{fields.title}}"
+            fields:
+              - {label: "Title", name: "title", widget: "string"}
+              - {label: "Description", name: "description", widget: "text"}
+              - {label: "Level", name: "level", widget: "string"}
+              - {label: "Language", name: "language", widget: "string", default: "English"}
+              - {label: "Format", name: "format", widget: "string"}
+              - {label: "Image", name: "image", widget: "string", required: false}
+              - {label: "Image Alt Text", name: "image_alt", widget: "string", required: false}
+              - {label: "URL", name: "url", widget: "string"}
+              - {label: "Link Label", name: "link_label", widget: "string", default: "Open Resource"}
+              - {label: "Tags", name: "tags", widget: "list", required: false}
+              - {label: "AIGP-created", name: "aigp_created", widget: "boolean", default: false}
+      - name: "team"
+        label: "Core Team"
+        file: "_data/team.yml"
+        format: "yml"
+        fields:
+          - label: "Team Members"
+            name: "team"
+            widget: "list"
+            summary: "{{fields.role}} · {{fields.name}}"
+            fields:
+              - {label: "Name", name: "name", widget: "string"}
+              - {label: "Role", name: "role", widget: "string"}
+              - {label: "Image", name: "image", widget: "image", required: false}
+              - {label: "Image Alt Text", name: "image_alt", widget: "string", required: false}
+              - {label: "Bio", name: "bio", widget: "text"}
+              - {label: "Responsibilities", name: "responsibilities", widget: "list", required: false}
+              - {label: "Link", name: "link", widget: "string", required: false}
+      - name: "team_structure"
+        label: "Team Structure"
+        file: "_data/team_structure.yml"
+        format: "yml"
+        fields:
+          - label: "Executive Members"
+            name: "executive_members"
+            widget: "list"
+            summary: "{{fields.name}}"
+            fields:
+              - {label: "Name", name: "name", widget: "string"}
+              - {label: "Image", name: "image", widget: "image", required: false}
+              - {label: "Image Alt Text", name: "image_alt", widget: "string", required: false}
+          - label: "Zonal Heads"
+            name: "zonal_heads"
+            widget: "list"
+            summary: "{{fields.zone}} · {{fields.name}}"
+            fields:
+              - {label: "Name", name: "name", widget: "string"}
+              - {label: "Zone", name: "zone", widget: "string"}
+              - {label: "Image", name: "image", widget: "image", required: false}
+              - {label: "Image Alt Text", name: "image_alt", widget: "string", required: false}
+              - {label: "Activity", name: "activity", widget: "string"}
+              - {label: "Active Members", name: "active_members", widget: "string"}
+              - {label: "Outreach", name: "outreach", widget: "string"}
+              - {label: "Outreach Reach", name: "outreach_reach", widget: "string", required: false}
+          - label: "Community Channels"
+            name: "community_channels"
+            widget: "list"
+            summary: "{{fields.name}} · {{fields.members}}"
+            fields:
+              - {label: "Name", name: "name", widget: "string"}
+              - {label: "Members", name: "members", widget: "string"}
+      - name: "support"
+        label: "Support Options"
+        file: "_data/support.yml"
+        format: "yml"
+        fields:
+          - label: "Support Options"
+            name: "support_options"
+            widget: "list"
+            summary: "{{fields.title}}"
+            fields:
+              - {label: "Title", name: "title", widget: "string"}
+              - {label: "Summary", name: "summary", widget: "text"}
+              - {label: "Contact Label", name: "contact_label", widget: "string"}
+              - {label: "Contact URL", name: "contact_url", widget: "string"}
+          - label: "Policy"
+            name: "policy"
+            widget: "object"
+            fields:
+              - {label: "Accepts Online Donations", name: "accepts_online_donations", widget: "boolean", default: false}
+              - {label: "Message", name: "message", widget: "text"}
+      - name: "annual_reports"
+        label: "Annual Reports"
+        file: "_data/annual_reports.yml"
+        format: "yml"
+        fields:
+          - label: "Reports"
+            name: "reports"
+            widget: "list"
+            summary: "{{fields.year}} · {{fields.status}}"
+            fields:
+              - {label: "Year", name: "year", widget: "string"}
+              - {label: "Status", name: "status", widget: "string"}
+              - {label: "Summary", name: "summary", widget: "text"}
+              - {label: "Highlights", name: "highlights", widget: "list"}
+              - label: "Links"
+                name: "links"
+                widget: "list"
+                required: false
+                fields:
+                  - {label: "Label", name: "label", widget: "string"}
+                  - {label: "URL", name: "url", widget: "string"}
+      - name: "representatives"
+        label: "Representatives"
+        file: "_data/representatives.yml"
+        format: "yml"
+        fields:
+          - label: "Representatives"
+            name: "representatives"
+            widget: "list"
+            summary: "{{fields.year}} · {{fields.event}}"
+            fields:
+              - {label: "Year", name: "year", widget: "string"}
+              - {label: "Event", name: "event", widget: "string"}
+              - {label: "Representative", name: "representative", widget: "string"}
+              - {label: "Source URL", name: "source_url", widget: "string"}
+              - {label: "Notes", name: "notes", widget: "text"}
+      - name: "contributors"
+        label: "Team Page Contributor List"
+        file: "_data/contributors.yml"
+        format: "yml"
+        fields:
+          - label: "Contributors"
+            name: "contributors"
+            widget: "list"
+            summary: "{{fields.group}} · {{fields.name}}"
+            fields:
+              - {label: "Name", name: "name", widget: "string"}
+              - {label: "Role", name: "role", widget: "string"}
+              - {label: "Group", name: "group", widget: "string"}
+              - {label: "Location", name: "location", widget: "string", required: false}
+              - {label: "Image", name: "image", widget: "image", required: false}
+              - {label: "Image Alt Text", name: "image_alt", widget: "string", required: false}
+              - {label: "Contribution", name: "contribution", widget: "text"}
+  - name: "official_pages"
+    label: "Official Pages"
+    files:
+      - {label: "About AIGP", name: "about", file: "_pages/about.md", fields: [{label: "Title", name: "title", widget: "string"}, {label: "Permalink", name: "permalink", widget: "hidden", default: "/about/"}, {label: "Layout", name: "layout", widget: "hidden", default: "page"}, {label: "Description", name: "description", widget: "string", required: false}, {label: "Body", name: "body", widget: "markdown"}]}
+      - {label: "National Representation", name: "representation", file: "_pages/representation.md", fields: [{label: "Title", name: "title", widget: "string"}, {label: "Permalink", name: "permalink", widget: "hidden", default: "/representation/"}, {label: "Layout", name: "layout", widget: "hidden", default: "page"}, {label: "Description", name: "description", widget: "string"}, {label: "Body", name: "body", widget: "markdown"}]}
+      - {label: "School And Outreach", name: "outreach", file: "_pages/outreach.md", fields: [{label: "Title", name: "title", widget: "string"}, {label: "Permalink", name: "permalink", widget: "hidden", default: "/outreach/"}, {label: "Layout", name: "layout", widget: "hidden", default: "page"}, {label: "Description", name: "description", widget: "string"}, {label: "Body", name: "body", widget: "markdown"}]}
+      - {label: "Partners And Support", name: "partners", file: "_pages/partners.md", fields: [{label: "Title", name: "title", widget: "string"}, {label: "Permalink", name: "permalink", widget: "hidden", default: "/partners/"}, {label: "Layout", name: "layout", widget: "hidden", default: "page"}, {label: "Description", name: "description", widget: "string"}, {label: "Body", name: "body", widget: "markdown"}]}
+      - {label: "Code Of Conduct", name: "code_of_conduct", file: "_pages/code-of-conduct.md", fields: [{label: "Title", name: "title", widget: "string"}, {label: "Permalink", name: "permalink", widget: "hidden", default: "/code-of-conduct/"}, {label: "Layout", name: "layout", widget: "hidden", default: "page"}, {label: "Description", name: "description", widget: "string"}, {label: "Body", name: "body", widget: "markdown"}]}
+      - {label: "Constitution And Bylaws", name: "constitution", file: "_pages/constitution.md", fields: [{label: "Title", name: "title", widget: "string"}, {label: "Permalink", name: "permalink", widget: "hidden", default: "/constitution/"}, {label: "Layout", name: "layout", widget: "hidden", default: "page"}, {label: "Description", name: "description", widget: "string"}, {label: "Body", name: "body", widget: "markdown"}]}
+      - {label: "Contact And Escalation Policy", name: "contact_escalation", file: "_pages/contact-escalation.md", fields: [{label: "Title", name: "title", widget: "string"}, {label: "Permalink", name: "permalink", widget: "hidden", default: "/contact-escalation/"}, {label: "Layout", name: "layout", widget: "hidden", default: "page"}, {label: "Description", name: "description", widget: "string"}, {label: "Body", name: "body", widget: "markdown"}]}
+      - {label: "Privacy Policy", name: "privacy", file: "_pages/privacy.md", fields: [{label: "Title", name: "title", widget: "string"}, {label: "Permalink", name: "permalink", widget: "hidden", default: "/privacy/"}, {label: "Layout", name: "layout", widget: "hidden", default: "page"}, {label: "Description", name: "description", widget: "string"}, {label: "Body", name: "body", widget: "markdown"}]}
+      - {label: "Terms And Disclaimer", name: "terms", file: "_pages/terms.md", fields: [{label: "Title", name: "title", widget: "string"}, {label: "Permalink", name: "permalink", default: "/terms/", widget: "hidden"}, {label: "Layout", name: "layout", widget: "hidden", default: "page"}, {label: "Description", name: "description", widget: "string"}, {label: "Body", name: "body", widget: "markdown"}]}
 publish_mode: editorial_workflow

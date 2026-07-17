@@ -1,23 +1,32 @@
-<div class="footer">
-  <div class="container">
-    <div class="row">
-      <div class="col-12">
-        <div class="footer-inner">
-          <a class="footer-logo" href="{{ site.baseurl }}">
-            <img width="{{ site.site_logo.desktop_width }}" height="{{ site.site_logo.desktop_height }}" alt="{{ site.title }}" src="{{ site.site_logo.desktop | relative_url }}" />
-          </a>
-          <ul>
-            {% assign footermenu = site.data.menus.footer | sort: 'weight'  %}
-            {% for item in footermenu %}
-            {% assign item_url = item.url | append: "/" | replace: "//", "/" %}
-            {% assign page_url = page.url | append: "/" | replace: "//", "/" %}
-            <li class="{% if page_url == item_url or page_url contains item_url %}active{% endif %}">
-              <a href="{{ item.url | relative_url }}">{{ item.name }}</a>
-            </li>
-            {% endfor %}
-          </ul>
-        </div>
-      </div>
+<div class="footer text-white py-8 transition-colors duration-300">
+  <div class="container mx-auto px-4">
+    <div class="flex flex-col lg:flex-row items-center justify-between gap-6">
+      <a class="footer-logo transition-transform duration-300 hover:scale-105" href="{{ '/' | relative_url }}">
+        <img width="{{ site.site_logo.desktop_width }}" height="{{ site.site_logo.desktop_height }}" alt="{{ site.title }}" src="{{ site.site_logo.desktop | relative_url }}" loading="lazy" />
+      </a>
+      <ul class="flex flex-wrap items-center justify-center lg:justify-end gap-1 text-sm font-bold">
+        {% assign footermenu = site.data.menus.footer | sort: 'weight'  %}
+        {% for item in footermenu %}
+        {% assign resolved_item_url = item.url %}
+        {% if resolved_item_url contains "." %}
+          {% assign item_link_parts = resolved_item_url | split: "." %}
+          {% if item_link_parts.size == 2 %}
+            {% assign item_link_group = item_link_parts[0] %}
+            {% assign item_link_key = item_link_parts[1] %}
+            {% assign item_link_group_data = site.data.links[item_link_group] %}
+            {% assign item_named_link = item_link_group_data[item_link_key] %}
+            {% if item_named_link %}{% assign resolved_item_url = item_named_link %}{% endif %}
+          {% endif %}
+        {% endif %}
+        {% assign is_external = false %}
+        {% if resolved_item_url contains "://" or resolved_item_url contains "mailto:" %}{% assign is_external = true %}{% endif %}
+        {% assign item_url = resolved_item_url | append: "/" | replace: "//", "/" %}
+        {% assign page_url = page.url | append: "/" | replace: "//", "/" %}
+        <li class="transition-colors duration-200 hover:text-secondary {% if page_url == item_url or page_url contains item_url %}underline decoration-2 underline-offset-4{% endif %}">
+          <a href="{% include link-url.html url=item.url %}"{% if is_external %} target="_blank" rel="noopener noreferrer"{% endif %} class="hover:opacity-80">{{ item.name }}</a>
+        </li>
+        {% endfor %}
+      </ul>
     </div>
   </div>
 </div>

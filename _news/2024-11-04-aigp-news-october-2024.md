@@ -1,7 +1,8 @@
 ---
 title: AIGP News October 2024
 date: "2024-11-04T14:36:57.493Z"
-img: /assets/images/news/2nd-bangalore.jpeg
+img: /assets/images/news/2nd-bangalore.webp
+img_alt: "AIGP News October 2024"
 description: October has been quite busy for the Indian Baduk Scene. The first
   quarterly national tournament held online finished. We also had multiple
   offline workshops, tournaments and club meetups.
@@ -11,12 +12,12 @@ categories:
   - Results
   - Workshop
   - Bangalore
+external_url_label: "More Info"
 ---
-**W﻿in a chance to represent India at the 2024 Under-16 Asian Peace Student
+**Win a chance to represent India at the 2024 Under-16 Asian Peace Student
 Baduk Championship held in South Korea**
 
-![2nd Bangalore Go Game Workshop and Tournament](/assets/images/news/2nd-bangalore.jpeg "2nd Bangalore Go Game Workshop and Tournament")
-![Venue of the Bangalore Baduk Event](/assets/images/news/bangalore-venue.jpeg "Venue of the Bangalore Baduk Event")
+![Venue of the Bangalore Baduk Event](/assets/images/news/bangalore-venue.webp "Venue of the Bangalore Baduk Event")
 
 *Venue of the Bangalore Baduk Event*
 

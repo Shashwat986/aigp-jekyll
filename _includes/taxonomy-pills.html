@@ -1,0 +1,15 @@
+{% assign taxonomy_items = include.items %}
+{% assign taxonomy_path = include.path %}
+{% assign taxonomy_class = include.class | default: "tag-pill" %}
+
+{% if taxonomy_items %}
+  {% if taxonomy_items.first %}
+    {% for taxonomy_item in taxonomy_items %}
+      {% assign taxonomy_slug = taxonomy_item | slugify %}
+      <a href="{{ taxonomy_path | append: taxonomy_slug | append: '/' | relative_url }}" class="{{ taxonomy_class }}">{{ taxonomy_item }}</a>
+    {% endfor %}
+  {% else %}
+    {% assign taxonomy_slug = taxonomy_items | slugify %}
+    <a href="{{ taxonomy_path | append: taxonomy_slug | append: '/' | relative_url }}" class="{{ taxonomy_class }}">{{ taxonomy_items }}</a>
+  {% endif %}
+{% endif %}

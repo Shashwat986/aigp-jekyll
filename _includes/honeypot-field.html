@@ -1,0 +1,8 @@
+{% assign honeypot_name = include.name | default: "_gotcha" %}
+{% assign honeypot_id = include.id | default: "site-gotcha" %}
+{% assign honeypot_label = include.label | default: "Leave this field empty" %}
+
+<div style="position: absolute; left: -5000px;" aria-hidden="true">
+  <label for="{{ honeypot_id }}">{{ honeypot_label }}</label>
+  <input type="text" name="{{ honeypot_name }}" id="{{ honeypot_id }}" tabindex="-1" autocomplete="off" data-honeypot-field>
+</div>

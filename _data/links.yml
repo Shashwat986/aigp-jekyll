@@ -1,0 +1,16 @@
+leago:
+  home: "https://leago.gg/aigp"
+  events: "https://leago.gg/aigp/events"
+  ratings: "https://leago.gg/aigp/ratings"
+  clubs: "https://leago.gg/aigp/clubs"
+social:
+  facebook: "https://www.facebook.com/IndiaBaduk/"
+  youtube: "https://www.youtube.com/@aigpindia"
+latest_events:
+  videos:
+    - title: "Latest Event Video 1"
+      embed_url: "https://www.youtube.com/embed/zjDRmNU_-Uo"
+      watch_url: "https://youtu.be/zjDRmNU_-Uo"
+    - title: "Latest Event Video 2"
+      embed_url: "https://www.youtube.com/embed/xJk43GJGLcQ"
+      watch_url: "https://youtu.be/xJk43GJGLcQ"

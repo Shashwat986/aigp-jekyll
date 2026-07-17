@@ -1,15 +1,14 @@
 ---
 title: Represent India at the International Humanitarian Games 2025
 date: "2024-12-19"
-img: https://upload.wikimedia.org/wikipedia/en/thumb/4/41/Flag_of_India.svg/1024px-Flag_of_India.svg.png
-description: We are excited to announce that the Association of Indian Go
-  Players (AIGP) has been invited to participate in the International
-  Humanitarian Games 2025. This prestigious event will take place from February
-  11–15, 2025, in Kermanshah City, Iran.
+img: https://www.humanitariangames.org/image/%DA%AF%D9%88%20psd-min_1734360825.jpg
+img_alt: Represent India at the International Humanitarian Games 2025
+description: We are excited to announce that the Association of Indian Go Players (AIGP) has been invited to participate in the International Humanitarian Games 2025. This prestigious event will take place from February 11–15, 2025, in Kermanshah City, Iran.
 categories:
   - Tournament
   - International
   - Selection
+external_url_label: More Info
 ---
 **Go at the Humanitarian Games**
 

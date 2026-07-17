@@ -2,11 +2,13 @@
 title: Register for the first quarterly tournament of 2026
 date: "2026-02-12T13:37:21.796Z"
 img: https://blob.leago.gg/banners/3e92bb4f-163d-4da6-a3ae-6d1130aa0ae0.png
+img_alt: "Register for the first quarterly tournament of 2026"
 description: The long awaited quarterly tournament is here, sign up ASAP
 categories:
   - Tournament
   - National
   - Quarterly
+external_url_label: "More Info"
 ---
 **R﻿equirements:**
 
@@ -19,7 +21,7 @@ categories:
 2. Each round runs from Monday 12PM IST to Sunday 11PM IST
 3. The Player playing as Black send a challenge to your Opponent on [OGS](https://online-go.com/) with the following settings + **No Undo**:
 
-![Game settings](/assets/images/news/screenshot-from-2025-02-06-15-09-26.png "Game Settings")
+![Game settings](/assets/images/news/screenshot-from-2025-02-06-15-09-26.webp "Game Settings")
 
 ### [Click here](https://forms.gle/6uJs4PZQTffoMq988) for the Registration Link
 

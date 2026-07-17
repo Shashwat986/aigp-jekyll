@@ -1,0 +1,18 @@
+{%- assign link_url = include.url | default: "#" -%}
+{%- if link_url contains "." -%}
+  {%- assign link_parts = link_url | split: "." -%}
+  {%- if link_parts.size == 2 -%}
+    {%- assign link_group = link_parts[0] -%}
+    {%- assign link_key = link_parts[1] -%}
+    {%- assign link_group_data = site.data.links[link_group] -%}
+    {%- assign named_link = link_group_data[link_key] -%}
+    {%- if named_link -%}
+      {%- assign link_url = named_link -%}
+    {%- endif -%}
+  {%- endif -%}
+{%- endif -%}
+{%- if link_url contains "://" or link_url contains "mailto:" -%}
+{{- link_url -}}
+{%- else -%}
+{{- link_url | relative_url -}}
+{%- endif -%}

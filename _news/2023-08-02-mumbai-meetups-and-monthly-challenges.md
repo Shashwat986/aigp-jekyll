@@ -1,13 +1,15 @@
 ---
 title: Mumbai meetups and Monthly Challenges
 date: "2023-08-02T12:16:27.537Z"
-img: /assets/images/news/whatsapp-image-2023-08-02-at-5.48.17-pm.jpeg
+img: /assets/images/news/whatsapp-image-2023-08-02-at-5.48.17-pm.webp
+img_alt: "Mumbai meetups and Monthly Challenges"
 description: Find out about the Mumbai monthly meetups and our brand new
   "Challenge of the Month"
 categories:
   - Meetup
   - Mumbai
   - Challenge
+external_url_label: "More Info"
 ---
 ## Mumbai Meetups lead the way!
 
@@ -25,8 +27,8 @@ For August 2023, whoever plays the most games on OGS will receive a prize!
 
 Here are a few more pics of the meetup last week
 
-![](/assets/images/news/whatsapp-image-2023-08-02-at-5.48.18-pm.jpeg)
+![](/assets/images/news/whatsapp-image-2023-08-02-at-5.48.18-pm.webp)
 
-![](/assets/images/news/whatsapp-image-2023-08-02-at-5.48.18-pm-1-.jpeg)
+![](/assets/images/news/whatsapp-image-2023-08-02-at-5.48.18-pm-1-.webp)
 
-![](/assets/images/news/whatsapp-image-2023-08-02-at-5.48.19-pm.jpeg)
+![](/assets/images/news/whatsapp-image-2023-08-02-at-5.48.19-pm.webp)

@@ -1,0 +1,33 @@
+---
+layout: null
+permalink: /search-index.json
+---
+[
+{% assign comma = false %}
+{% for item in site.news %}
+  {% if comma %},{% endif %}
+  {"title":{{ item.title | jsonify }},"url":{{ item.url | relative_url | jsonify }},"type":"News","date":{{ item.date | date: "%Y-%m-%d" | jsonify }},"description":{{ item.description | default: item.excerpt | strip_html | normalize_whitespace | jsonify }},"tags":{{ item.categories | join: " " | jsonify }}}
+  {% assign comma = true %}
+{% endfor %}
+{% for item in site.notices %}
+  {% if comma %},{% endif %}
+  {"title":{{ item.title | jsonify }},"url":{{ item.url | relative_url | jsonify }},"type":"Notice","date":{{ item.date | date: "%Y-%m-%d" | jsonify }},"description":{{ item.description | default: item.excerpt | strip_html | normalize_whitespace | jsonify }},"tags":{{ item.notice_types | default: item.notice_type | join: " " | jsonify }}}
+  {% assign comma = true %}
+{% endfor %}
+{% for item in site.events %}
+  {% if comma %},{% endif %}
+  {"title":{{ item.title | jsonify }},"url":{{ item.url | relative_url | jsonify }},"type":"Event","date":{{ item.event_sort_date | date: "%Y-%m-%d" | jsonify }},"description":{{ item.description | default: item.excerpt | strip_html | normalize_whitespace | jsonify }},"tags":{{ item.event_type | append: " " | append: item.status | append: " " | append: item.format | jsonify }}}
+  {% assign comma = true %}
+{% endfor %}
+{% for resource in site.data.resources.resources %}
+  {% if comma %},{% endif %}
+  {"title":{{ resource.title | jsonify }},"url":{{ resource.url | jsonify }},"type":"Resource","date":"","description":{{ resource.description | jsonify }},"tags":{{ resource.tags | join: " " | append: " " | append: resource.level | append: " " | append: resource.format | jsonify }}}
+  {% assign comma = true %}
+{% endfor %}
+{% assign public_pages = site.pages | where_exp: "page", "page.title and page.description and page.url != '/search-index.json'" %}
+{% for item in public_pages %}
+  {% if comma %},{% endif %}
+  {"title":{{ item.title | jsonify }},"url":{{ item.url | relative_url | jsonify }},"type":"Page","date":"","description":{{ item.description | jsonify }},"tags":""}
+  {% assign comma = true %}
+{% endfor %}
+]

@@ -3,13 +3,14 @@ layout: default
 bodyClass: "page-news-post"
 ---
 
-<div class="container pb-6 pt-6 pt-md-10 pb-md-10">
-  <div class="row justify-content-center">
-    <div class="col-12 col-md-8">
-      <div class="news-post">
-        <h1 class="title">{{page.title}}</h1>
+<div class="container mx-auto px-4 py-12">
+  <div class="flex justify-center">
+    <div class="w-full">
+      <div class="news-post text-[var(--text-color)]">
+        <h1 class="text-4xl md:text-5xl font-bold font-serif mb-4 text-[var(--heading-color)] leading-tight">{{page.title}}</h1>
+
         {% if page.date %}
-        <p class="text-muted">{{ page.date | date: "%B %d, %Y" }}</p>
+        <p class="text-sm text-[var(--secondary-text-color)] mb-4">{{ page.date | date: "%B %d, %Y" }}</p>
         {% endif %}
 
         {% assign archive_categories = page.categories %}
@@ -20,25 +21,20 @@ bodyClass: "page-news-post"
         {% endif %}
 
         {% if archive_categories.size > 0 %}
-        <div class="mb-4">
-          {% for category in archive_categories %}
-          {% assign category_slug = category | slugify %}
-          <a href="{{ '/categories/' | append: category_slug | append: '/' | relative_url }}" class="badge badge-secondary">{{ category }}</a>
-          {% endfor %}
+        <div class="mb-6 flex flex-wrap gap-2">
+          {% include taxonomy-pills.html items=archive_categories path="/news/category/" class="inline-block px-3 py-1 rounded-full text-xs font-semibold bg-secondary/15 text-primary hover:bg-secondary/25 transition-all" %}
         </div>
         {% endif %}
 
-        {% if page.image %}
-        {% assign img_url = page.img %}
-{% if img_url != "" %}
-DEBUG: {{ img_url }}
-<a href="{{ img_url }}" class="glightbox" data-gallery="featured-image">
-          <img src="{{ img_url }}" alt="{{ page.title }}" class="img-fluid mb-4">
-        </a>
-{% endif %}
-        {% endif %}
+        {% include post-image.html item=page gallery="post-gallery" caption=page.description wrapper_class="mb-8 mx-auto max-w-xl rounded-2xl overflow-hidden shadow-lg border border-[var(--border-color)]" image_class="w-full h-auto object-contain max-h-[360px] bg-[var(--card-bg)] transition-transform duration-500 hover:scale-[1.02]" %}
 
-        <div class="content">{{content}}</div>
+        {% assign normalized_content = content
+          | replace: '<h1', '<h2'
+          | replace: '</h1>', '</h2>'
+          | replace: 'alt=""', 'alt="AIGP news image"' %}
+        <div class="content prose prose-stone dark:prose-invert max-w-none text-[var(--text-color)] leading-relaxed">
+          {{ normalized_content }}
+        </div>
       </div>
     </div>
   </div>

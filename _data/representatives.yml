@@ -1,0 +1,53 @@
+representatives:
+  - year: "2026"
+    event: Asian Weiqi Championships
+    notes: Team listed in AIGP's public representation update.
+    source_url: /news/2026/04/30/results-from-aawc-and-aigp-league/
+    representative: Soumya Kundu, Suhas Sontakki, Bhanu Chandraprasad, Malhar Patel,
+      Ruba Vijayan
+  - year: "2025"
+    event: 20th Korea Prime Minister Cup
+    representative: Soumya Kanti Kundu
+    source_url: /news/2025/06/12/selection-tournament-to-represent-india-at-the-20th-korea-prime-minister-cup/
+    notes: Won the Indian selection tournament.
+  - notes: Team listed in AIGP's public representation update.
+    year: "2025"
+    event: Asian Weiqi Championships
+    source_url: news/2025/04/22/selection-tournament-to-represent-indias-team-at-the-3rd-asian-amateur-weiqi-championship/
+    representative: Soumya Kundu, Suhas Sontakki, Bhanu Chandraprasad, Pranay Raja,
+      Chinky Ramchandani
+  - year: "2024"
+    event: Asian Weiqi Championships
+    source_url: /news/2024/06/28/asian-weiqi-championship-2024-invitation/
+    representative: Soumya Kundu, Suhas Sontakki, Shreyash Bhanderi, Gokulan
+      Subramanian, Sarthak Wadhwani, Karan Rawat, Chinky Ramchandani, Saloni
+      Singh, Kunj Sharma
+    notes: Team listed in AIGP's public representation update.
+  - year: "2023"
+    event: Korea Prime Minister Cup
+    representative: Soumya Kanti Kundu
+    source_url: /news/2023/07/26/indian-representatives-2023/
+    notes: Public AIGP news recorded Soumya Kanti Kundu as India's KPMC
+      representative.
+  - year: "2023"
+    event: Asian Weiqi Championships
+    representative: Soumya Kundu, Shashwat Chandra, Karan Rawat, Sarthak Wadwani,
+      Supratic Gupta, Pranjal Srivastava
+    source_url: /news/2023/07/26/indian-representatives-2023/
+    notes: Team listed in AIGP's public representation update.
+  - year: "2022"
+    event: Korea Prime Minister Cup
+    representative: Shashwat Chandra
+    source_url: /news/2022/07/26/shashwat-chandra-represent-india-kpmc-2022/
+    notes: Won the KPMC Indian representative selection tournament.
+  - year: "2022"
+    event: World Amateur Go Championship
+    representative: Pranjal Srivastava
+    source_url: /news/2022/11/16/pranjal-srivastava-to-represent-india-in-the-2022-wagc/
+    notes: Won the WAGC Indian representation selection tournament.
+  - year: "2021"
+    event: Korea Prime Minister Cup
+    representative: Pranjal Srivastava
+    source_url: /news/2021/06/27/16yo-pranjal-srivastava-represent-india-16th-kpmc/
+    notes: Public AIGP news recorded Pranjal Srivastava as India's KPMC
+      representative.

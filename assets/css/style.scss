@@ -1,7 +1,7 @@
 ---
 ---
 
-@use "bootstrap-shim" as *;
+@use "theme" as *;
 
 // Libraries
 @use "libraries/hamburgers/hamburgers";
@@ -10,6 +10,7 @@
 @use "components/type";
 @use "components/page";
 @use "components/header";
+@use "components/design-system";
 @use "components/footer";
 @use "components/sub-footer";
 @use "components/logo";
@@ -35,25 +36,41 @@
   --text-color: #{$black};
   --heading-color: #{$black};
   --secondary-text-color: #{$steel};
-  --card-bg: #f3f1f2;
+  --card-bg: #fffdf8;
   --header-bg: #{$white};
-  --footer-bg: #{$primary};
+  --footer-bg: #{$chakra-blue};
   --link-color: #{$primary};
-  --border-color: #e9e2e4;
+  --border-color: #e7dccb;
   --call-bg: #{$white-offset};
+  --nav-gradient-start: #{$chakra-blue};
+  --nav-gradient-mid: #1b5d97;
+  --nav-gradient-end: #0f6f24;
+  --nav-gradient-dark-start: #{$chakra-blue-dark};
+  --nav-gradient-dark-mid: #102a5b;
+  --nav-gradient-dark-end: #073b14;
+  --header-accent: #{$primary};
+  --footer-accent: #{$secondary};
 }
 
 html.dark, [data-bs-theme="dark"] {
-  --bg-color: #121212;
-  --text-color: #e0e0e0;
+  --bg-color: #0d1117;
+  --text-color: #e7e2d6;
   --heading-color: #ffffff;
-  --secondary-text-color: #b0b0b0;
-  --card-bg: #1e1e1e;
-  --header-bg: #121212;
-  --footer-bg: #000000;
-  --link-color: #{$secondary};
-  --border-color: #333333;
-  --call-bg: #1e1e1e;
+  --secondary-text-color: #b9c0c8;
+  --card-bg: #171d24;
+  --header-bg: #0d1117;
+  --footer-bg: #{$chakra-blue-dark};
+  --link-color: #ff9a5f;
+  --border-color: #303844;
+  --call-bg: #12251b;
+  --nav-gradient-start: #12356f;
+  --nav-gradient-mid: #102a5b;
+  --nav-gradient-end: #073b14;
+  --nav-gradient-dark-start: #0d2757;
+  --nav-gradient-dark-mid: #0c214c;
+  --nav-gradient-dark-end: #052e10;
+  --header-accent: #ff8a4c;
+  --footer-accent: #49b85c;
 }
 
 body {
@@ -67,6 +84,11 @@ body {
     font-size: 16px;
     line-height: 1.3;
   }
+}
+
+::selection {
+  background: color-mix(in srgb, var(--official-blue) 24%, var(--saffron));
+  color: #ffffff;
 }
 
 a {
@@ -104,7 +126,7 @@ p, span, li, td, th {
   background-color: var(--card-bg) !important;
   color: var(--text-color) !important;
   border-color: var(--border-color) !important;
-  box-shadow: 0 12px 32px rgba(47, 47, 65, 0.18);
+  box-shadow: 0 12px 32px rgba(31, 79, 163, 0.14);
   h1, h2, h3, h4 {
     color: var(--heading-color) !important;
   }
@@ -123,22 +145,36 @@ p, span, li, td, th {
 }
 
 .header {
-  background: linear-gradient(110deg, #209cee 0%, #249bd1 100%) !important;
-  border-bottom: 1px solid var(--border-color) !important;
+  background: linear-gradient(105deg, var(--nav-gradient-start) 0%, var(--nav-gradient-mid) 56%, var(--nav-gradient-end) 100%) !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.14) !important;
+  box-shadow: 0 10px 28px rgba(13, 17, 23, 0.16);
+  position: sticky;
+  top: 0;
+
+  &::before {
+    background: var(--tricolor-line);
+    content: "";
+    height: 3px;
+    left: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+  }
+
   .logo img, .logo-mobile img {
     transition: filter 0.3s ease;
   }
 }
 
 html.dark .header {
-  background: linear-gradient(50deg, #1877b6 0%, #1b6fa0 100%) !important;
+  background: linear-gradient(105deg, var(--nav-gradient-dark-start) 0%, var(--nav-gradient-dark-mid) 56%, var(--nav-gradient-dark-end) 100%) !important;
   .logo img, .logo-mobile img {
     filter: none;
   }
 }
 
 .footer {
-  background: linear-gradient(110deg, #209cee 0%, #249bd1 100%) !important;
+  background: linear-gradient(105deg, var(--nav-gradient-start) 0%, var(--nav-gradient-mid) 56%, var(--nav-gradient-end) 100%) !important;
   color: $white !important;
   h1, h2, h3, h4, p, span {
     color: $white !important;
@@ -146,19 +182,30 @@ html.dark .header {
   a {
     color: $white !important;
     &:hover {
-      color: $secondary !important;
+      color: #ffd2b5 !important;
     }
   }
 }
 
 html.dark .footer {
-  background: linear-gradient(110deg, #1877b6 0%, #1b6fa0 100%) !important;
+  background: linear-gradient(105deg, var(--nav-gradient-dark-start) 0%, var(--nav-gradient-dark-mid) 56%, var(--nav-gradient-dark-end) 100%) !important;
 }
 
 .sub-footer {
   background-color: var(--footer-bg) !important;
   border-top: 1px solid rgba(255, 255, 255, 0.1);
   color: $white !important;
+  position: relative;
+
+  &::after {
+    background: var(--tricolor-line);
+    bottom: 0;
+    content: "";
+    height: 3px;
+    left: 0;
+    position: absolute;
+    right: 0;
+  }
 }
 
 .strip, .strip-white {
@@ -195,39 +242,24 @@ html.dark .footer {
   align-items: center;
 }
 
-.main-menu ul li a {
-  color: var(--text-color);
+.main-menu > ul > li > a,
+.main-menu > ul > li > .main-menu__link {
+  color: #ffffff;
+  font-weight: 700;
 }
 
-.main-menu ul li.active a {
-  color: #000000;
-  font-weight: 500;
+.main-menu > ul > li.active > a,
+.main-menu > ul > li.active > .main-menu__link {
+  color: #ffffff;
+  font-weight: 800;
 }
 
 // Mobile menu overrides
 @media (max-width: 991px) {
   .main-menu-mobile {
-    background-color: var(--bg-color) !important;
+    background: linear-gradient(145deg, var(--nav-gradient-start) 0%, var(--nav-gradient-mid) 54%, var(--nav-gradient-end) 100%) !important;
     li a {
-      color: var(--text-color) !important;
+      color: #ffffff !important;
     }
   }
-}
-
-
-
-// reCAPTCHA badge styling
-.grecaptcha-badge {
-  bottom: 25px !important;
-  right: 0px !important;
-  z-index: 10000 !important;
-  transform: scale(0.5) !important;
-  width: 70px !important;
-  overflow: hidden !important;
-  transition: width 0.3s ease !important;
-  box-shadow: none !important;
-}
-
-.grecaptcha-badge:hover {
-  width: 256px !important;
 }

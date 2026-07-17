@@ -1,4 +1,4 @@
-@use "bootstrap-shim" as *;
+@use "theme" as *;
 
 .footer {
   background: $footer-background-color;
@@ -10,7 +10,7 @@
     flex-direction: column;
     align-items: center;
     text-align: center;
-    @include media-breakpoint-up(sm) {
+    @include media-breakpoint-up(lg) {
       justify-content: space-between;
       flex-direction: row;
       align-items: center;
@@ -27,7 +27,7 @@
       max-height: 48px;
       width: auto;
     }
-    @include media-breakpoint-up(sm) {
+    @include media-breakpoint-up(lg) {
       margin: 0;
     }
   }
@@ -41,6 +41,7 @@
       font-size: 1rem;
       a {
         color: $footer-text-color;
+        font-weight: 700;
         text-decoration: none;
         padding: 12px 0;
         display: block;
@@ -56,7 +57,7 @@
       margin: 0;
       padding: 0;
       align-items: center;
-      justify-content: flex-end;
+      justify-content: center;
       li {
         list-style: none;
         margin-right: 10px;
@@ -66,9 +67,12 @@
         a {
           display: inline-block;
           height: 40px;
-          padding: 10px 8px 10px 8px;
+          padding: 10px 6px;
         }
       }
+    }
+    @include media-breakpoint-up(lg) {
+      justify-content: flex-end;
     }
   }
 }
