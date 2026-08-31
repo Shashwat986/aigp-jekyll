@@ -1,0 +1,15 @@
+---
+title: August Meetups
+date: 2026-08-30T05:39:12.161Z
+img: /assets/img/news/767130652_18555774505073783_2406321081643156498_n.jpeg
+description: Meetups in Kolkata and Bangalore
+---
+![](/assets/img/news/767130652_18555774505073783_2406321081643156498_n.jpeg)
+
+![](/assets/img/news/770608953_18555774538073783_511433374138149054_n.jpeg)
+
+![](/assets/img/news/770572734_18555774526073783_5433534261403031732_n.jpeg)
+
+![](/assets/img/news/whatsapp-image-2026-08-31-at-9.28.55-am.jpeg)
+
+![](/assets/img/news/769716330_18555774514073783_4580630351930829027_n.jpeg)
